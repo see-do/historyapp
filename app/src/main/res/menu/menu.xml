@@ -3,11 +3,11 @@
     <item
         android:id="@+id/action_writing"
         android:icon="@drawable/ic_menu_writing"
-        android:title="기록하기" />
+        android:title=" " />
     <item
         android:id="@+id/action_test"
         android:icon="@drawable/ic_menu_test"
-        android:title="과거시험" />
+        android:title=" " />
     <item
         android:id="@+id/action_home"
         android:icon="@drawable/ic_menu_home"
@@ -16,9 +16,9 @@
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_menu_search"
-        android:title="이야기 찾기" />
+        android:title="" />
     <item
         android:id="@+id/action_myPage"
         android:icon="@drawable/ic_menu_my"
-        android:title="MY" />
+        android:title="" />
 </menu>
