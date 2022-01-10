@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/writing"
+        android:id="@+id/action_writing"
         android:icon="@drawable/ic_menu_writing"
         android:title="기록하기" />
     <item
-        android:id="@+id/test"
+        android:id="@+id/action_test"
         android:icon="@drawable/ic_menu_test"
         android:title="과거시험" />
     <item
-        android:id="@+id/home"
-        android:icon="@drawable/ic_menu_home"
-        android:title="home"
+        android:id="@+id/action_home"
+        android:title=" "
         />
     <item
-        android:id="@+id/search"
+        android:id="@+id/action_search"
         android:icon="@drawable/ic_menu_search"
         android:title="이야기 찾기" />
     <item
-        android:id="@+id/myPage"
+        android:id="@+id/action_myPage"
         android:icon="@drawable/ic_menu_my"
         android:title="MY" />
 </menu>
