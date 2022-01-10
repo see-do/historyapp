@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
         setContentView(binding.root)
 
         binding.bnvMain.setOnNavigationItemSelectedListener(this)
+        binding.bnvMain.itemIconTintList = null
 
     }
 
@@ -41,6 +42,11 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
             R.id.action_myPage->{
                 var myPageFragment = MyPageFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container,myPageFragment).commit()
+                return true
+            }
+            R.id.action_home->{
+                var homeFragment = HomeFragment()
+                supportFragmentManager.beginTransaction().replace(R.id.fl_container,homeFragment).commit()
                 return true
             }
 
