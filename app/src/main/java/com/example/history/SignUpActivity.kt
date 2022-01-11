@@ -1,4 +1,6 @@
 package com.example.history
 
-class SignUpActivity {
+import androidx.appcompat.app.AppCompatActivity
+
+class SignUpActivity : AppCompatActivity() {
 }
