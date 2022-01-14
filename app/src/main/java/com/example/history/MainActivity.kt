@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
 
         binding.bnvMain.setOnNavigationItemSelectedListener(this)
         binding.bnvMain.itemIconTintList = null
+        binding.bnvMain.selectedItemId= R.id.action_home
+
 
     }
 
