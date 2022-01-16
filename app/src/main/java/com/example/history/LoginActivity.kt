@@ -14,7 +14,14 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.loginEnterBtn.setOnClickListener{
+            login()
+        }
+        binding.loginSignupTv.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
+    }
+
+    private fun login(){
+
     }
 }
