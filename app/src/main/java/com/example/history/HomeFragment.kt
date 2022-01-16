@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.history.databinding.FragmentHomeBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment: Fragment() {
     lateinit var binding: FragmentHomeBinding
+    private var storyDatas = ArrayList<Story>()
 
 
     val information = arrayListOf("전체","한국사","동양사","서양사")
@@ -28,6 +30,9 @@ class HomeFragment: Fragment() {
             tab,position->
             tab.text = information[position]
         }.attach()
+
+
+
 
 
 
