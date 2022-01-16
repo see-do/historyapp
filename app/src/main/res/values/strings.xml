@@ -8,5 +8,6 @@
     <string name="nickname">닉네임</string>
     <string name="login">로그인</string>
     <string name="next">다음</string>
+    <string name="confirm">확인</string>
 
 </resources>
