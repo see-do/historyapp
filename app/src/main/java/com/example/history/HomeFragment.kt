@@ -1,5 +1,6 @@
 package com.example.history
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +35,10 @@ class HomeFragment: Fragment() {
 
 
 
-
+        binding.homeLoginIv.setOnClickListener {
+            val intent = Intent(getActivity(), LoginActivity::class.java)
+            startActivity(intent)
+        }
 
 
         return binding.root

@@ -40,13 +40,14 @@
         app:layout_constraintTop_toBottomOf="@id/login_enter_tv"
         app:layout_constraintStart_toStartOf="@id/login_enter_tv"/>
     <EditText
-        android:id="@+id/login_id_pw"
+        android:id="@+id/login_pw_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="30dp"
         android:paddingBottom="15dp"
         android:textSize="14sp"
+        android:inputType="textPassword"
         android:hint="@string/password"
         app:layout_constraintTop_toBottomOf="@id/login_id_et"
         app:layout_constraintStart_toStartOf="@id/login_id_et"/>
@@ -61,8 +62,8 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/login_id_pw"
-        app:layout_constraintStart_toStartOf="@id/login_id_pw"/>
+        app:layout_constraintTop_toBottomOf="@id/login_pw_et"
+        app:layout_constraintStart_toStartOf="@id/login_pw_et"/>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

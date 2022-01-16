@@ -21,6 +21,7 @@
             android:src="@drawable/history_title_img"
             />
         <ImageView
+            android:id="@+id/home_login_iv"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="120dp"

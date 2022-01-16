@@ -33,19 +33,7 @@
         android:layout_marginTop="80dp"
         android:layout_marginBottom="40dp"
         app:layout_constraintTop_toBottomOf="@id/signup_register_tv"
-        app:layout_constraintBottom_toTopOf="@id/signup_next_btn"/>
-    <Button
-        android:id="@+id/signup_next_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_round"
-        android:layout_marginHorizontal="35dp"
-        android:layout_marginBottom="100dp"
-        android:text="@string/next"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

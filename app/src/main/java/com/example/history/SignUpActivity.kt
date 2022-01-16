@@ -8,38 +8,36 @@ import com.example.history.databinding.ActivitySignupBinding
 
 class SignUpActivity : AppCompatActivity() {
     lateinit var binding : ActivitySignupBinding
-    var count = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val transaction = supportFragmentManager.beginTransaction()
-            .replace(R.id.signup_frm, NicknameFragment())
+            .add(R.id.signup_frm, NicknameFragment())
         transaction.commit()
 
-        binding.signupNextBtn.setOnClickListener{
-            changeFragment()
+        binding.signupExitIv.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
         }
+
+
     }
-    private fun changeFragment(){
+    fun changeFragment(count : Int){
         when (count) {
             0 -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.signup_frm, IdFragment())
-                    .commit()
-                count++
+                    .commitAllowingStateLoss()
             }
             1 -> {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.signup_frm, PasswordFragment())
                     .commit()
-                count++
             }
             2 -> {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                count = 0
             }
         }
     }
