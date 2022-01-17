@@ -24,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         binding.loginPwEt.onFocusChangeListener = View.OnFocusChangeListener { p0, p1 ->
             if(p1){
 
@@ -41,11 +42,19 @@ class LoginActivity : AppCompatActivity() {
         binding.loginExitIv.setOnClickListener {
             exitLogin()
         }
+
     }
 
     private fun login(){
         if(binding.loginIdEt.text.toString().isEmpty() || binding.loginPwEt.text.toString().isEmpty()) {
             Toast.makeText(this,"아이디나 비밀번호 입력", Toast.LENGTH_SHORT)?.show()
+        }
+        else {
+            val pref = getSharedPreferences("auto_login", Activity.MODE_PRIVATE)
+            val editor = pref.edit()
+            editor.putString("id",binding.loginIdEt.text.toString())
+            editor.putString("pw",binding.loginPwEt.text.toString())
+            editor.apply()
         }
     }
     private fun signUp(){
