@@ -23,6 +23,8 @@
         android:textSize="12sp"
         android:hint="@string/id"
         android:paddingBottom="16dp"
+        android:maxLength="10"
+        android:inputType="text"
         app:layout_constraintTop_toBottomOf="@id/signup_id_tv"
         app:layout_constraintStart_toStartOf="parent"/>
     <ImageView

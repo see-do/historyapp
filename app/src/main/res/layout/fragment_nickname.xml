@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/nickname"
         android:textSize="12sp"
+        android:inputType="text"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="30dp"
         android:paddingBottom="16dp"

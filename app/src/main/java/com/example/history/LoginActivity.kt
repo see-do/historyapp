@@ -1,10 +1,18 @@
 package com.example.history
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
+import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.history.databinding.ActivityLoginBinding
@@ -16,6 +24,14 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.loginPwEt.onFocusChangeListener = View.OnFocusChangeListener { p0, p1 ->
+            if(p1){
+
+            } else{
+                hideKeyboard(binding.loginPwEt)
+            }
+        }
+
         binding.loginEnterBtn.setOnClickListener{
             login()
         }
@@ -25,19 +41,6 @@ class LoginActivity : AppCompatActivity() {
         binding.loginExitIv.setOnClickListener {
             exitLogin()
         }
-        binding.loginIdEt.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-                if(binding.loginIdEt.text.toString().isEmpty() || binding.loginIdEt.text.length > 10) {
-
-                }
-            }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
-            }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
-            }
-        })
     }
 
     private fun login(){
@@ -53,5 +56,11 @@ class LoginActivity : AppCompatActivity() {
     private fun exitLogin(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun hideKeyboard(editText: EditText){
+        (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).apply {
+            hideSoftInputFromWindow(editText.windowToken, 0)
+        }
     }
 }
