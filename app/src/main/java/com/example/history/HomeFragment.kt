@@ -12,7 +12,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class HomeFragment: Fragment() {
     lateinit var binding: FragmentHomeBinding
-    private var storyDatas = ArrayList<Story>()
 
 
     val information = arrayListOf("전체","한국사","동양사","서양사")
