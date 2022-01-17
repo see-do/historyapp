@@ -34,10 +34,15 @@ class NicknameFragment : Fragment() {
         }
         binding.signupNicknameNextBtn.setOnClickListener {
             if (binding.signupNicknameEt.text.toString().isEmpty()) {
-                binding.signupNicknameWarningIv.visibility = View.VISIBLE
-                binding.signupNicknameWarningTv.visibility = View.VISIBLE
+                showWarning("닉네임을 입력해주세요")
+                binding.signupNicknameWarningTv.text = "닉네임을 입력해주세요"
+            } else if (binding.signupNicknameEt.length() < 2){
+                showWarning("닉네임은 2글자 이상, 10글자 미만이어야합니다.")
             }
-            else {
+            /*else if 닉네임이 겹칠 때 {
+                binding.signupNicknameWarningTv.text = "이미 사용 중인 닉네임입니다."
+                showWarning()
+            } */else {
                 (context as SignUpActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.signup_frm, IdFragment())
                 .commitAllowingStateLoss()
@@ -49,5 +54,11 @@ class NicknameFragment : Fragment() {
         (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
             hideSoftInputFromWindow(editText.windowToken, 0)
         }
+    }
+
+    private fun showWarning(message : String){
+        binding.signupNicknameWarningIv.visibility = View.VISIBLE
+        binding.signupNicknameWarningTv.visibility = View.VISIBLE
+        binding.signupNicknameWarningTv.text = message
     }
 }

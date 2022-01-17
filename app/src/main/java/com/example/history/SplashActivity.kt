@@ -1,5 +1,6 @@
 package com.example.history
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -14,8 +15,15 @@ class SplashActivity:AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler().postDelayed({
-            startActivity(Intent(this,MainActivity::class.java))
-        },SPLASH_VIEW_TIME)
+            startActivity(Intent(this, MainActivity::class.java))
+        }, SPLASH_VIEW_TIME)
+        val pref = getSharedPreferences("auto_login", Activity.MODE_PRIVATE)
+        val id = pref.getString("id", null)
+        val pw = pref.getString("pw", null)
+
+    }
+
+    private fun autologin(){
 
     }
 }

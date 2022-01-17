@@ -20,18 +20,29 @@ class IdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentIdBinding.inflate(inflater, container, false)
+
         binding.signupIdNextBtn.setOnClickListener {
-            (context as SignUpActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.signup_frm, PasswordFragment())
-                .commitAllowingStateLoss()
+
+            if (binding.signupIdEt.text.toString().isEmpty()) {
+                showWarning("아이디를 입력해주세요")
+            } else if(binding.signupIdEt.length() < 4){
+                showWarning("아이디는 4글자 이상 15글자 미만이어야합니다.")
+            }/*else if 닉네임이 겹칠 때 {
+                binding.signupNicknameWarningTv.text = "이미 사용 중인 닉네임입니다."
+                showWarning()
+            } */else {
+                (context as SignUpActivity).supportFragmentManager.beginTransaction()
+                    .replace(R.id.signup_frm, PasswordFragment())
+                    .commitAllowingStateLoss()
+            }
         }
+
         binding.signupIdEt.onFocusChangeListener = View.OnFocusChangeListener{ p0, p1 ->
             if(p1){
 
             } else {
                 hideKeyboard(binding.signupIdEt)
             }
-
         }
         return binding.root
     }
@@ -39,5 +50,11 @@ class IdFragment : Fragment() {
         (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
             hideSoftInputFromWindow(editText.windowToken, 0)
         }
+    }
+
+    private fun showWarning(message : String){
+        binding.signupIdWarningTv.visibility = View.VISIBLE
+        binding.signupIdWarningIv.visibility = View.VISIBLE
+        binding.signupIdWarningTv.text = message
     }
 }
