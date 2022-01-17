@@ -35,6 +35,12 @@ class MyPageLikeStoryFragment: Fragment() {
 
 
 
+        val dividerItemDecoration =
+            DividerItemDecoration(binding.myPageStoryRecyclerView.context, LinearLayoutManager(activity).orientation)
+
+        binding.myPageStoryRecyclerView.addItemDecoration(dividerItemDecoration)
+
+
         return binding.root
     }
 

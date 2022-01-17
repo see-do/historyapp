@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.history.databinding.FragmentMypageLikestoryBinding
 
 class MyPageMyStoryFragment: Fragment() {
@@ -29,6 +31,12 @@ class MyPageMyStoryFragment: Fragment() {
         val myPageStoryRVAdapter = MyPageStoryRVAdapter(myPageStoryDatas)
         //리사이클러뷰에 어댑터를 연결
         binding.myPageStoryRecyclerView.adapter = myPageStoryRVAdapter
+
+
+        val dividerItemDecoration =
+            DividerItemDecoration(binding.myPageStoryRecyclerView.context, LinearLayoutManager(activity).orientation)
+
+        binding.myPageStoryRecyclerView.addItemDecoration(dividerItemDecoration)
 
 
         return binding.root
