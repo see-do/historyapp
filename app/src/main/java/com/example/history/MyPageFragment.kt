@@ -29,6 +29,11 @@ class MyPageFragment : Fragment() {
 
 
 
+        var myPageLoginFragment = MyPageLoginFragment()
+        childFragmentManager.beginTransaction().replace(R.id.myPage_profile_ly,myPageLoginFragment).commit()
+
+
+
         return binding.root
     }
 }
