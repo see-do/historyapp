@@ -12,6 +12,6 @@
     <color name="red">#FC4B3D</color>
     <color name="medium_grey">#A1A1A1</color>
     <color name="dark_grey">#535353</color>
-    <color name="card_unselected">#999999</color>
+    <color name="unselected">#999999</color>
 
 </resources>
