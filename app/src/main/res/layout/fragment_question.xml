@@ -59,7 +59,6 @@
         app:layout_constraintStart_toStartOf="@+id/question_next_iv"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="388dp"
-        android:layout_marginStart=""
         />
     <ImageView
         android:id="@+id/question_answer_x_iv"
