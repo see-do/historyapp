@@ -16,7 +16,7 @@
         android:textSize="21sp"
         />
     <LinearLayout
-        android:id="@+id/test_exit_ly"
+        android:id="@+id/question_exit_ly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,61 +38,48 @@
             />
     </LinearLayout>
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/question_question_tv"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="문제를 풀기 전,\n원하는 카테고리를 선택해주세요!"
-        android:textColor="@color/black"
         android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Q. 문제가 나오는 부분입니다!"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="255dp"
+        android:layout_marginStart="53dp"
+        android:textSize="21sp"
         />
+
     <ImageView
-        android:id="@+id/test_all_iv"
-        android:layout_width="170dp"
-        android:layout_height="200dp"
-        android:src="@drawable/test_all"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/question_answer_o_iv"
+        android:layout_width="93dp"
+        android:layout_height="93dp"
+        android:src="@drawable/test_answer_o"
+        app:layout_constraintStart_toStartOf="@+id/question_next_iv"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="388dp"
+        android:layout_marginStart=""
         />
     <ImageView
-        android:id="@+id/test_korean_history_iv"
-        android:layout_width="170dp"
-        android:layout_height="200dp"
-        android:src="@drawable/test_korean_history"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/question_answer_x_iv"
+        android:layout_width="93dp"
+        android:layout_height="93dp"
+        android:src="@drawable/test_answer_x"
+        app:layout_constraintEnd_toEndOf="@+id/question_next_iv"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="210dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="388dp"
         />
-
     <ImageView
-        android:id="@+id/test_oriental_iv"
-        android:layout_width="170dp"
-        android:layout_height="200dp"
-        android:src="@drawable/test_oriental_history"
-        app:layout_constraintTop_toBottomOf="@+id/test_all_iv"
-        app:layout_constraintStart_toStartOf="@+id/test_all_iv"
-        android:layout_marginTop="17dp"
+        android:id="@+id/question_next_iv"
+        android:layout_width="290dp"
+        android:layout_height="40dp"
+        android:src="@drawable/next_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="80dp"
         />
-
-    <ImageView
-        android:id="@+id/test_western_iv"
-        android:layout_width="170dp"
-        android:layout_height="200dp"
-        android:src="@drawable/test_western_history"
-        app:layout_constraintTop_toBottomOf="@+id/test_korean_history_iv"
-        app:layout_constraintStart_toStartOf="@+id/test_korean_history_iv"
-        android:layout_marginTop="17dp"
-        />
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
