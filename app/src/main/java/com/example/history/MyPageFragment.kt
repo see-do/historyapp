@@ -1,12 +1,17 @@
 package com.example.history
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.history.databinding.FragmentMypageBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import android.view.WindowManager
+
+
+
 
 class MyPageFragment : Fragment() {
 
@@ -31,6 +36,34 @@ class MyPageFragment : Fragment() {
 
         var myPageLoginFragment = MyPageLoginFragment()
         childFragmentManager.beginTransaction().replace(R.id.myPage_profile_ly,myPageLoginFragment).commit()
+
+        fun toast(message:String){
+            Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+        }
+
+
+
+
+
+        binding.myPageSettingIv.setOnClickListener {
+            val items = arrayOf("프로필 편집","잠금 화면 설정","로그아웃")
+           val builder = AlertDialog.Builder(activity)
+           // builder.setTitle(" ")
+               builder.setItems(items){
+                   dialog,which->toast("${items[which]}is selected")
+               }
+
+            val alertDialog = builder.create()
+            val window = alertDialog.window
+            window?.setGravity(Gravity.BOTTOM)
+
+            alertDialog.show()
+
+
+        }
+
+
+
 
 
 
