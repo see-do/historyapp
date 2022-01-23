@@ -2,13 +2,12 @@ package com.example.history
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.history.databinding.ItemHashtagBinding
 
 
 
-class HashTagRVAdapter(private val hashtagList : List<Hashtag>) : RecyclerView.Adapter<HashTagRVAdapter.ViewHolder>(){
+class HashtagRVAdapter(private val hashtagList : List<Hashtag>) : RecyclerView.Adapter<HashtagRVAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemHashtagBinding
