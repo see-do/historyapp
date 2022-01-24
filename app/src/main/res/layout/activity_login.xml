@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageButton
@@ -12,6 +11,7 @@
         android:scaleType="fitCenter"
         android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
+        android:contentDescription="@string/back"
         android:src="@drawable/left_arrow"
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent"
@@ -76,20 +76,20 @@
             android:id="@+id/login_signup_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="회원가입"
+            android:text="@string/signup"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
         <TextView
             android:id="@+id/login_divider_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  |  "
+            android:text="@string/straight_divider"
             app:layout_constraintStart_toEndOf="@id/login_signup_tv"
             app:layout_constraintTop_toTopOf="parent"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="비밀번호를 잊으셨나요?"
+            android:text="@string/forget_password"
             app:layout_constraintStart_toEndOf="@id/login_divider_tv"
             app:layout_constraintTop_toTopOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">HiStory</string>
+    <string name="write">기록하기</string>
+    <string name="warning">주의</string>
     <string name="do_enter">입장하기</string>
     <string name="enter">입장</string>
     <string name="id">아이디</string>
@@ -9,5 +11,30 @@
     <string name="login">로그인</string>
     <string name="next">다음</string>
     <string name="confirm">확인</string>
+    <string name="story">이야기</string>
+    <string name="find_story">이야기 찾기</string>
+    <string name="align">정렬</string>
+    <string name="title">제목</string>
+    <string name="topic">주제</string>
+    <string name="back">뒤로가기</string>
+    <string name="korean">한국사</string>
+    <string name="oriental">동양사</string>
+    <string name="western">서양사</string>
+    <string name="hashtag">해시태그</string>
+    <string name="signup">회원가입</string>
+    <string name="straight_divider">  |  </string>
+    <string name="slash_divider">   /   </string>
+
+    <string name="let_find_story">이야기를 찾아볼까요?</string>
+    <string name="forget_password">비밀번호를 잊으셨나요?</string>
+    <string name="put_nickname">사용하실 닉네임을 입력해주세요</string>
+    <string name="put_id">사용하실 아이디를 입력해주세요</string>
+    <string name="put_password">사용하실 비밀번호를 입력해주세요</string>
+    <string name="already_use_id">이미 사용 중인 아이디입니다</string>
+    <string name="already_use_nickname">이미 사용 중인 닉네임입니다</string>
+    <string name="length_password">비밀번호는 6 &#45; 9글자여야합니다</string>
+    <string name="check_password">비밀번호를 확인해주세요</string>
+    <string name="diff_password">비밀번호가 일치하지 않습니다</string>
+
 
 </resources>

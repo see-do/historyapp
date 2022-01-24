@@ -8,6 +8,7 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:scaleType="fitCenter"
+        android:contentDescription="@string/back"
         android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
         android:src="@drawable/left_arrow"

@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentManager
 import com.example.history.databinding.FragmentNicknameBinding
 
 class NicknameFragment : Fragment() {
-    lateinit var SignUpActivity : LoginActivity
+
     lateinit var binding: FragmentNicknameBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +23,7 @@ class NicknameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNicknameBinding.inflate(inflater, container, false)
-        var SignUpActivity = LoginActivity()
+
         binding.signupNicknameEt.onFocusChangeListener = View.OnFocusChangeListener{ p0, p1 ->
             if(p1){
 
