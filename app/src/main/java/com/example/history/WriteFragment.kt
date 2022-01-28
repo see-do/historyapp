@@ -1,6 +1,7 @@
 package com.example.history
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,10 @@ import com.example.history.databinding.FragmentWriteBinding
 import android.content.Context
 import android.content.Intent
 import android.provider.MediaStore
+import android.service.voice.VoiceInteractionSession
+import android.util.Log
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.EditText
 
 
@@ -28,13 +32,22 @@ class WriteFragment : Fragment() {
         binding = FragmentWriteBinding.inflate(inflater, container, false)
         binding.writeHashtagRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.writeHashtagRv.adapter = HashtagRVAdapter(hashtagList)
-
+        binding.writeConfirmBtn.setOnClickListener {
+            val dialogBuilder = AlertDialog.Builder(requireContext())
+            dialogBuilder.setMessage("hohohoh")
+        }
         binding.writeImgRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.writeImgRv.adapter = ImageRVAdapter(imageList)
 
+        binding.writeTitleEt.onFocusChangeListener = View.OnFocusChangeListener{ p0, p1 ->
+            if(p1){
+            } else {
+                hideKeyboard(binding.writeTitleEt)
+            }
+        }
+
         binding.writeHashtagEt.onFocusChangeListener = View.OnFocusChangeListener{ p0, p1 ->
             if(p1){
-
             } else {
                 if(binding.writeHashtagEt.text.isNotEmpty()){
                     addHashTag()
@@ -51,11 +64,14 @@ class WriteFragment : Fragment() {
     }
     // Consider change into flexbox
     private fun addHashTag(){
-        val text = binding.writeHashtagEt.text.toString()
+        //Log.d("공백","${binding.writeHashtagEt.text}")
+        val text = binding.writeHashtagEt.text.toString().trim()
+
         hashtagList.add(Hashtag("#${text}"))
         binding.writeHashtagEt.setText("")
         binding.writeHashtagRv.adapter?.notifyDataSetChanged()
     }
+
     private fun addImage(){
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -63,7 +79,6 @@ class WriteFragment : Fragment() {
         startActivityForResult(intent, REQUEST_GET_IMAGE)
     }
 
-    @Override
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode == Activity.RESULT_OK){
@@ -75,6 +90,7 @@ class WriteFragment : Fragment() {
             }
         }
     }
+
 
     private fun hideKeyboard(editText: EditText){
         (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {

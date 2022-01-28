@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.history.databinding.ItemImgBinding
 
 
-class ImageRVAdapter(private val imageList : List<Image>) : RecyclerView.Adapter<ImageRVAdapter.ViewHolder>(){
+class ImageRVAdapter(private var imageList : ArrayList<Image>) : RecyclerView.Adapter<ImageRVAdapter.ViewHolder>(){
+
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemImgBinding
@@ -17,6 +18,9 @@ class ImageRVAdapter(private val imageList : List<Image>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder : ViewHolder, position : Int){
         holder.bind(imageList[position])
+        holder.binding.writeImgDelIv.setOnClickListener {
+            removeImg(position)
+        }
     }
 
     override fun getItemCount(): Int = imageList.size
@@ -24,6 +28,11 @@ class ImageRVAdapter(private val imageList : List<Image>) : RecyclerView.Adapter
         fun bind(image : Image){
             binding.writeImgIv?.setImageBitmap(image.image)
         }
+    }
+
+    fun removeImg(position: Int){
+        imageList.removeAt(position)
+        notifyDataSetChanged()
     }
 
 }

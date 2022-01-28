@@ -22,8 +22,8 @@
     <string name="western">서양사</string>
     <string name="hashtag">해시태그</string>
     <string name="signup">회원가입</string>
-    <string name="straight_divider">  |  </string>
-    <string name="slash_divider">   /   </string>
+    <string name="straight_divider">&#160;&#160;|&#160;&#160;</string>
+    <string name="slash_divider">&#160;&#160;&#160;/&#160;&#160;&#160;</string>
 
     <string name="let_find_story">이야기를 찾아볼까요?</string>
     <string name="forget_password">비밀번호를 잊으셨나요?</string>

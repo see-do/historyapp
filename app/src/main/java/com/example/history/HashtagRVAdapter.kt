@@ -7,7 +7,7 @@ import com.example.history.databinding.ItemHashtagBinding
 
 
 
-class HashtagRVAdapter(private val hashtagList : List<Hashtag>) : RecyclerView.Adapter<HashtagRVAdapter.ViewHolder>(){
+class HashtagRVAdapter(private val hashtagList : ArrayList<Hashtag>) : RecyclerView.Adapter<HashtagRVAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemHashtagBinding
@@ -17,6 +17,9 @@ class HashtagRVAdapter(private val hashtagList : List<Hashtag>) : RecyclerView.A
 
     override fun onBindViewHolder(holder : ViewHolder, position : Int){
         holder.bind(hashtagList[position])
+        holder.binding.itemHashtagTv.setOnClickListener {
+            removeHashtag(position)
+        }
     //holder.bind(hashtagList[position])
     }
 
@@ -25,6 +28,10 @@ class HashtagRVAdapter(private val hashtagList : List<Hashtag>) : RecyclerView.A
         fun bind(hashtag : Hashtag){
             binding.itemHashtagTv.text = hashtag.hashtag
         }
+    }
+    fun removeHashtag(position: Int){
+        hashtagList.removeAt(position)
+        notifyDataSetChanged()
     }
 
 }
