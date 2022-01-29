@@ -21,6 +21,8 @@
         android:hint="@string/nickname"
         android:textSize="12sp"
         android:inputType="text"
+        android:textCursorDrawable="@drawable/text_cursor"
+        android:backgroundTint="@color/primary_color"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="30dp"
         android:paddingBottom="16dp"

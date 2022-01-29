@@ -25,6 +25,8 @@
         android:paddingBottom="16dp"
         android:maxLength="10"
         android:inputType="text"
+        android:textCursorDrawable="@drawable/text_cursor"
+        android:backgroundTint="@color/primary_color"
         app:layout_constraintTop_toBottomOf="@id/signup_id_tv"
         app:layout_constraintStart_toStartOf="parent"/>
     <ImageView

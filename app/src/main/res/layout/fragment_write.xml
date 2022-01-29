@@ -64,6 +64,7 @@
             android:textSize="12sp"
             android:textStyle="bold"
             android:maxLength="30"
+            android:textCursorDrawable="@drawable/text_cursor"
             android:backgroundTint="@color/primary_color"
             android:imeOptions="actionDone"
             android:layout_marginStart="39dp"
