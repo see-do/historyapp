@@ -37,6 +37,8 @@
         android:paddingBottom="15dp"
         android:textSize="14sp"
         android:inputType="text"
+        android:textCursorDrawable="@drawable/text_cursor"
+        android:backgroundTint="@color/primary_color"
         android:hint="@string/id"
         app:layout_constraintTop_toBottomOf="@id/login_enter_tv"
         app:layout_constraintStart_toStartOf="@id/login_enter_tv"/>
@@ -49,6 +51,8 @@
         android:paddingBottom="15dp"
         android:textSize="14sp"
         android:inputType="textPassword"
+        android:textCursorDrawable="@drawable/text_cursor"
+        android:backgroundTint="@color/primary_color"
         android:hint="@string/password"
         app:layout_constraintTop_toBottomOf="@id/login_id_et"
         app:layout_constraintStart_toStartOf="@id/login_id_et"/>

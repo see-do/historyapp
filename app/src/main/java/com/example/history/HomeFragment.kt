@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.history.databinding.FragmentHomeBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -15,7 +16,6 @@ class HomeFragment: Fragment() {
 
 
     val information = arrayListOf("전체","한국사","동양사","서양사")
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,8 +31,11 @@ class HomeFragment: Fragment() {
             tab.text = information[position]
         }.attach()
 
-
-
+        val bannerAdapter = BannerViewPagerAdapter(this)
+        bannerAdapter.addFragment(BannerFragment(R.drawable.total_banner))
+        bannerAdapter.addFragment(BannerFragment(R.drawable.img))
+        binding.homeBannerVp.adapter = bannerAdapter
+        binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         binding.homeLoginIv.setOnClickListener {
             val intent = Intent(getActivity(), LoginActivity::class.java)

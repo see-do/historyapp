@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <TextView
         android:id="@+id/search_search_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,6 +18,7 @@
         android:textSize="21sp"
         />
     <FrameLayout
+        android:id="@+id/search_search_lo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -31,6 +33,7 @@
             android:textSize="14sp"
             android:inputType="text"
             android:hint="@string/let_find_story"
+            android:imeOptions="actionSearch"
             android:drawablePadding="13dp"
             android:backgroundTint="@color/primary_color"
             android:layout_marginHorizontal="28dp"/>
@@ -45,10 +48,14 @@
             android:contentDescription="@string/align"
             android:src="@drawable/ic_setting_dark" />
     </FrameLayout>
-
-
-
-
-
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_story_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="220dp"
+        tools:listitem="@layout/item_mypage_story"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/search_search_lo"
+        app:layout_constraintStart_toStartOf="parent"/>
+    
 </androidx.constraintlayout.widget.ConstraintLayout>
