@@ -1,17 +1,12 @@
 package com.example.history
 
-import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.annotation.RequiresPermission
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.get
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.history.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -45,9 +40,9 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
                     }
                     R.id.action_test -> {
                         Log.d("das","dasd")
-                        var testFragment = TestFragment()
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, testFragment).commit()
+                        val intent = Intent(applicationContext, TestActivity::class.java)
+                        startActivity(intent)
+
                     }
                     R.id.action_search -> {
                         var searchFragment = SearchFragment()
@@ -87,9 +82,8 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
                 }
                 R.id.action_test -> {
                     Log.d("das","dasd")
-                        var testFragment = TestFragment()
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, testFragment).commit()
+                    val intent = Intent(applicationContext, TestActivity::class.java)
+                    startActivity(intent)
                         return true
 
                 }
