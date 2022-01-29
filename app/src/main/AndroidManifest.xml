@@ -18,6 +18,10 @@
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".TestActivity"/>
         <activity android:name=".QuestionActivity"/>
+        <activity android:name=".LockActivity"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            />
         <activity android:name=".SplashActivity"
             android:exported="true"
          >
