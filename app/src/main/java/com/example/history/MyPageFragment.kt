@@ -45,7 +45,7 @@ class MyPageFragment : Fragment() {
 
 
 
-        binding.myPageSettingIv.setOnClickListener {
+        binding.myPageSettingLy.setOnClickListener {
             val items = arrayOf("프로필 편집","잠금 화면 설정","로그아웃")
            val builder = AlertDialog.Builder(activity)
            // builder.setTitle(" ")
