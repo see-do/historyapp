@@ -33,7 +33,9 @@ class HomeFragment: Fragment() {
 
         val bannerAdapter = BannerViewPagerAdapter(this)
         bannerAdapter.addFragment(BannerFragment(R.drawable.total_banner))
-        bannerAdapter.addFragment(BannerFragment(R.drawable.img))
+        bannerAdapter.addFragment(BannerFragment(R.drawable.korean_banner))
+        bannerAdapter.addFragment(BannerFragment(R.drawable.western_banner))
+        bannerAdapter.addFragment(BannerFragment(R.drawable.oriental_banner))
         binding.homeBannerVp.adapter = bannerAdapter
         binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
