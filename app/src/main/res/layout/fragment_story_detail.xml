@@ -33,7 +33,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="140dp"
-        android:layout_marginHorizontal="28dp"
         android:scrollbars="none"
         app:layout_constraintTop_toBottomOf="@id/story_exit_lo"
         app:layout_constraintStart_toStartOf="parent">
@@ -42,11 +41,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/story_user_lo"
+            android:id="@+id/story_writer_lo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="28dp">
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/story_profile_iv"
+                android:id="@+id/story_writer_profile_iv"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/mypage_profile_img_ex1"
@@ -54,10 +54,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 />
             <TextView
-                android:id="@+id/story_nickname_tv"
+                android:id="@+id/story_writer_nickname_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="14sp"
-                app:layout_constraintStart_toEndOf="@+id/story_profile_iv"
+                app:layout_constraintStart_toEndOf="@+id/story_writer_profile_iv"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="닉네임"
                 android:layout_marginTop="13dp"
@@ -79,18 +79,21 @@
                 android:id="@+id/story_title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="24dp"
                 android:maxWidth="200dp"
                 android:layout_marginTop="23dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:text="아아아아아아아아아아아아"
-                app:layout_constraintTop_toBottomOf="@id/story_user_lo"
+                app:layout_constraintTop_toBottomOf="@id/story_writer_lo"
                 app:layout_constraintStart_toStartOf="parent"/>
             <HorizontalScrollView
                 android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
-                android:layout_height="300dp">
+                android:layout_height="300dp"
+                android:layout_marginHorizontal="28dp">
                 <ImageView
                     android:layout_width="300dp"
                     android:layout_height="300dp"
@@ -101,14 +104,73 @@
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="어쩌구저쩌구\n\n\n\n\n\n\n\n\n\nn\n\n\n\n"/>
+                android:layout_marginHorizontal="28dp"
+                android:text="어쩌구저쩌구"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/story_hashtag_rv"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="28dp"
                 android:orientation="horizontal"
                 tools:listitem="@layout/item_hashtag"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                android:layout_marginTop="21dp"/>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="22dp"
+                android:orientation="horizontal">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/story_user_profile_iv"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/mypage_profile_img_ex1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+                <EditText
+                    android:id="@+id/story_comment_et"
+                    android:layout_width="173dp"
+                    android:layout_height="wrap_content"
+                    android:hint="댓글을 입력해보세요."
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="22dp"
+                    android:textSize="11sp"
+                    android:textColor="@color/black"
+                    />
+                <ImageView
+                    android:layout_width="23dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_comment"/>
+                <ImageView
+                    android:id="@+id/story_like_iv"
+                    android:layout_width="23dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="21dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_story_detail_like" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="23dp"
+                android:background="@color/divider"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/story_comment_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/item_comment"/>
         </LinearLayout>
 
 

@@ -12,6 +12,7 @@
     <color name="red">#FC4B3D</color>
     <color name="medium_grey">#A1A1A1</color>
     <color name="dark_grey">#535353</color>
+    <color name="divider">#D4D4D4</color>
     <color name="unselected">#999999</color>
 
 </resources>
