@@ -3,34 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable-v24/button_lessround.xml" value="0.16447368421052633" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable-v24/cardview_selected.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.16447368421052633" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/button_hashtag_detail.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/button_round.xml" value="0.16447368421052633" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/button_search.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/button_setting.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/button_white.xml" value="0.16447368421052633" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/cardview_primary.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/cardview_unselected.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.16447368421052633" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/ic_setting.xml" value="0.16447368421052633" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/layout_shadow.xml" value="0.16447368421052633" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/round_button.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/selector_radio_button.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/text_cursor.xml" value="0.10482456140350878" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/font/roboto_regular.xml" value="0.209375" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_lock.xml" value="0.15087719298245614" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_login.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_question.xml" value="0.15087719298245614" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_signup.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_splash.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/banner_total.xml" value="0.18478260869565216" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/banner_western.xml" value="0.18478260869565216" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_id.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_koreanhistory.xml" value="0.19882246376811594" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_mypage.xml" value="0.1" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_mypage_likestory.xml" value="0.15087719298245614" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_mypage_login.xml" value="0.38333333333333336" />
@@ -38,28 +20,50 @@
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_mypage_my_story.xml" value="0.15087719298245614" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_nickname.xml" value="0.1" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_orientalhistory.xml" value="0.15087719298245614" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_password.xml" value="0.1" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_password.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_question.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_search.xml" value="0.22" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_story_detail.xml" value="0.19012605042016806" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_search.xml" value="0.1" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_story_detail.xml" value="0.15087719298245614" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_test.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_write.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/item_comment.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_write.xml" value="0.23825887743413515" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/item_hashtag.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/item_img.xml" value="0.7923497267759563" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/item_mypage_story.xml" value="0.15087719298245614" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/item_story.xml" value="0.19882246376811594" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/item_story_detail.xml" value="0.1162280701754386" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.17962962962962964" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/drawable/ic_launcher_background.xml" value="0.17962962962962964" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/drawable/mypage__profile_img_ex2.xml" value="0.15885416666666666" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_lock.xml" value="0.22" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_question.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_question_answer.xml" value="0.22" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_setting_logout.xml" value="0.15715579710144928" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_splash.xml" value="0.22" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_test.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/dialog01.xml" value="0.6" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_all.xml" value="0.1" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_koreanhistory.xml" value="0.1" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_mypage.xml" value="0.22" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_mypage_likestory.xml" value="0.22" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_mypage_login.xml" value="0.3041556145004421" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_mypage_logout.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_mypage_my_story.xml" value="0.1621376811594203" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_orientalhistory.xml" value="0.1" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_question.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_search.xml" value="0.1" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_test.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_write.xml" value="0.1" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/item_hashtag.xml" value="0.12239583333333333" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/item_mypage_story.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/item_story.xml" value="0.22" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/lock_setting_layout.xml" value="0.22" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/profile_setting_layout.xml" value="0.161231884057971" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/setting_logout_layout.xml" value="0.161231884057971" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/menu/menu.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/menu/menu2.xml" value="0.12239583333333333" />
       </map>
     </option>
-  </component>
-  <component name="ProjectPlainTextFileTypeManager">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/history/BannerViewPagerAdapter.kt" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
@@ -70,7 +74,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.3333333333333333" />
+        <option name="scale" value="0.13333333333333333" />
       </ProjectState>
     </option>
   </component>

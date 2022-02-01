@@ -1,7 +1,9 @@
 package com.example.history
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -9,8 +11,8 @@ import androidx.fragment.app.Fragment
 import com.example.history.databinding.FragmentMypageBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import android.view.WindowManager
-
-
+import android.widget.TextView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
 class MyPageFragment : Fragment() {
@@ -23,44 +25,76 @@ class MyPageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding =  FragmentMypageBinding.inflate(inflater,container,false)
+        binding = FragmentMypageBinding.inflate(inflater, container, false)
 
         val myPageAdapter = MyPageViewPagerAdapter(this)
         binding.myPageMenuVp.adapter = myPageAdapter
-        TabLayoutMediator(binding.myPageMenuTb,binding.myPageMenuVp){
-                tab,position->
+        TabLayoutMediator(binding.myPageMenuTb, binding.myPageMenuVp) { tab, position ->
             tab.text = information[position]
         }.attach()
 
 
-
         var myPageLoginFragment = MyPageLoginFragment()
-        childFragmentManager.beginTransaction().replace(R.id.myPage_profile_ly,myPageLoginFragment).commit()
+        childFragmentManager.beginTransaction().replace(R.id.myPage_profile_ly, myPageLoginFragment)
+            .commit()
 
-        fun toast(message:String){
+        fun toast(message: String) {
             Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
         }
 
+//        binding.myPageSettingLy.setOnClickListener {
+//            val items = arrayOf("프로필 편집","잠금 화면 설정","로그아웃")
+//            val builder = AlertDialog.Builder(activity)
+//            builder.setItems(items){
+//                    dialog,which->toast("${items[which]}is selected")
+//            }
+//
+//            val alertDialog = builder.create()
+//            val window = alertDialog.window
+//            window?.setGravity(Gravity.BOTTOM)
+//
+//            alertDialog.show()
+//
+
+//        }
+        val builder = AlertDialog.Builder(activity)
+        val dialogView = layoutInflater.inflate(R.layout.dialog01, null)
+        builder.setView(dialogView)
 
 
 
+        val alertDialog = builder.create()
+        val window = alertDialog.window
+        window?.setGravity(Gravity.BOTTOM)
 
-        binding.myPageSettingLy.setOnClickListener {
-            val items = arrayOf("프로필 편집","잠금 화면 설정","로그아웃")
-           val builder = AlertDialog.Builder(activity)
-           // builder.setTitle(" ")
-               builder.setItems(items){
-                   dialog,which->toast("${items[which]}is selected")
-               }
+        builder.setView(dialogView)
 
-            val alertDialog = builder.create()
-            val window = alertDialog.window
-            window?.setGravity(Gravity.BOTTOM)
-
+        fun showDialog(){
             alertDialog.show()
+            alertDialog.findViewById<TextView>(R.id.dialog01_profile).setOnClickListener{
+                val intent = Intent(activity,ProfileEditorActivity::class.java)
+                startActivity(intent)
+            }
+            alertDialog.findViewById<TextView>(R.id.dialog01_lock_setting).setOnClickListener{
+                val intent = Intent(activity,LockSettingActivity::class.java)
+                startActivity(intent)
+            }
+            alertDialog.findViewById<TextView>(R.id.dialog01_logout).setOnClickListener{
+                val intent = Intent(activity,SettingLogoutActivity::class.java)
+                startActivity(intent)
+            }
 
 
         }
+
+
+        binding.myPageSettingLy.setOnClickListener {
+           showDialog()
+        }
+
+
+
+
 
 
 
@@ -69,4 +103,6 @@ class MyPageFragment : Fragment() {
 
         return binding.root
     }
+
+
 }
