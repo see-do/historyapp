@@ -30,11 +30,20 @@ class OrientalHistoryFragment : Fragment() {
         //더미데이터랑 어댑터 연결
         val storyRVAdapter = StoryRVAdapter(storyDatas)
         //리사이클러뷰에 어댑터를 연결
+        storyRVAdapter.myItemClickListener(object : StoryRVAdapter.MyItemClickListener{
+            override fun onItemClick(story: Story) {
+                changeFragment(story)
+            }
+        })
         binding.homeStoryRecyclerView.adapter = storyRVAdapter
 
 
         return binding.root
     }
 
+    fun changeFragment(story: Story) {
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_container, StoryDetailFragment()).commitAllowingStateLoss()
+    }
 
 }

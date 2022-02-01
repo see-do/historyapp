@@ -31,7 +31,7 @@ class WriteFragment : Fragment() {
     ): View? {
         binding = FragmentWriteBinding.inflate(inflater, container, false)
         binding.writeHashtagRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.writeHashtagRv.adapter = HashtagRVAdapter(hashtagList)
+        binding.writeHashtagRv.adapter = HashtagRVAdapter(hashtagList, 0)
         binding.writeConfirmBtn.setOnClickListener {
             val dialogBuilder = AlertDialog.Builder(requireContext())
             dialogBuilder.setMessage("hohohoh")
@@ -86,7 +86,7 @@ class WriteFragment : Fragment() {
             if(requestCode == REQUEST_GET_IMAGE){
                 val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
                 imageList.add(Image(bitmap))
-                binding.writeImgRv.adapter?.notifyDataSetChanged()
+                binding.writeImgRv.adapter?.notifyItemInserted(imageList.lastIndex)
             }
         }
     }

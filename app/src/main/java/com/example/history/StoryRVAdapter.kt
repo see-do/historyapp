@@ -1,13 +1,23 @@
 package com.example.history
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.history.databinding.ItemStoryBinding
 
 class StoryRVAdapter(private val storyList:ArrayList<Story>) :RecyclerView.Adapter<StoryRVAdapter.ViewHolder>(){
 
+    interface MyItemClickListener{
+        fun onItemClick(story : Story)
+    }
+    private lateinit var mItemClickListener : MyItemClickListener
 
+    fun myItemClickListener(itemClickListener: MyItemClickListener){
+        mItemClickListener = itemClickListener
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemStoryBinding = ItemStoryBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
@@ -16,6 +26,9 @@ class StoryRVAdapter(private val storyList:ArrayList<Story>) :RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(storyList[position])
+        holder.binding.itemStoryLo.setOnClickListener {
+            mItemClickListener.onItemClick(storyList[position])
+        }
 
     }
 
