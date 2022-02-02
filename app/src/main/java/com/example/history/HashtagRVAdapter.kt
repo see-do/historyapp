@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.history.databinding.ItemHashtagBinding
 
@@ -34,7 +35,7 @@ class HashtagRVAdapter(private val hashtagList : ArrayList<Hashtag>, private val
         fun change(code : Int){
             if (code == 1){
                 binding.itemHashtagIv.setImageResource(R.drawable.button_hashtag_detail)
-                binding.itemHashtagTv.setTextColor(Color.BLACK)
+                binding.itemHashtagTv.setTextColor(Color.parseColor("#27316A"))
             }
         }
     }

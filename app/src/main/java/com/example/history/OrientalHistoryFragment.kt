@@ -43,7 +43,7 @@ class OrientalHistoryFragment : Fragment() {
 
     fun changeFragment(story: Story) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_container, StoryDetailFragment()).commitAllowingStateLoss()
+            .replace(R.id.fl_container, StoryDetailFragment(story)).commitAllowingStateLoss()
     }
 
 }

@@ -21,10 +21,10 @@ class WesternHistoryFragment: Fragment() {
 
         //데이터 리스트 생성 더미데이터
         storyDatas.apply {
-            add(Story("클레오파트라는 정말 흑인이었을까?",R.drawable.story_cover_img_ex1,12,12))
-            add(Story("클레오파트라는 정말 흑인이었을까?",R.drawable.story_cover_img_ex2,12,12))
-            add(Story("클레오파트라는 정말 흑인이었을까?",R.drawable.story_cover_img_ex3,12,12))
-            add(Story("클레오파트라는 정말 흑인이었을까?",R.drawable.story_cover_img_ex4,12,12))
+            add(Story("클레오파트라는 정말 흑인이었을까?1",R.drawable.story_cover_img_ex1,12,12))
+            add(Story("클레오파트라는 정말 흑인이었을까?2",R.drawable.story_cover_img_ex2,12,12))
+            add(Story("클레오파트라는 정말 흑인이었을까?3",R.drawable.story_cover_img_ex3,12,12))
+            add(Story("클레오파트라는 정말 흑인이었을까?4",R.drawable.story_cover_img_ex4,12,12))
         }
 
         //더미데이터랑 어댑터 연결
@@ -43,7 +43,7 @@ class WesternHistoryFragment: Fragment() {
 
     fun changeFragment(story: Story) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_container, StoryDetailFragment()).commitAllowingStateLoss()
+            .replace(R.id.fl_container, StoryDetailFragment(story)).commitAllowingStateLoss()
     }
 
 
