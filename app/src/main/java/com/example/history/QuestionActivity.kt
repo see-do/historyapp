@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.history.databinding.ActivityQuestionBinding
-import com.example.history.databinding.ActivityTestBinding
 
 class QuestionActivity: AppCompatActivity(){
     private var mBinding: ActivityQuestionBinding?=null
@@ -17,7 +16,7 @@ class QuestionActivity: AppCompatActivity(){
         setContentView(binding.root)
 
         binding.questionExitLy.setOnClickListener{
-            val intent = Intent(applicationContext,MainActivity::class.java)
+            val intent = Intent(applicationContext,TestActivity::class.java)
             startActivity(intent)
         }
 

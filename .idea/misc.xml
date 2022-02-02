@@ -33,14 +33,20 @@
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.17962962962962964" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/drawable/ic_launcher_background.xml" value="0.17962962962962964" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/drawable/mypage__profile_img_ex2.xml" value="0.15885416666666666" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/drawable/switch_thumb.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/drawable/switch_thumb_selector.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/drawable/switch_track_off.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/drawable/switch_track_on.xml" value="0.15520833333333334" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/drawable/switch_track_selector.xml" value="0.15520833333333334" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_lock.xml" value="0.22" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_lock_setting.xml" value="0.1" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_question.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_question_answer.xml" value="0.22" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_setting_logout.xml" value="0.15715579710144928" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_splash.xml" value="0.22" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/activity_test.xml" value="0.17074275362318841" />
-        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/dialog01.xml" value="0.6" />
+        <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/dialog01.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_all.xml" value="0.1" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/hyewo/AndroidStudioProjects/HiStory/app/src/main/res/layout/fragment_koreanhistory.xml" value="0.1" />

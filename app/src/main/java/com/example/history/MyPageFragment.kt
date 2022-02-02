@@ -75,10 +75,10 @@ class MyPageFragment : Fragment() {
                 val intent = Intent(activity,ProfileEditorActivity::class.java)
                 startActivity(intent)
             }
-            alertDialog.findViewById<TextView>(R.id.dialog01_lock_setting).setOnClickListener{
-                val intent = Intent(activity,LockSettingActivity::class.java)
-                startActivity(intent)
-            }
+//            alertDialog.findViewById<TextView>(R.id.dialog01_lock_setting).setOnClickListener{
+//                val intent = Intent(activity,LockSettingActivity::class.java)
+//                startActivity(intent)
+//            }
             alertDialog.findViewById<TextView>(R.id.dialog01_logout).setOnClickListener{
                 val intent = Intent(activity,SettingLogoutActivity::class.java)
                 startActivity(intent)
