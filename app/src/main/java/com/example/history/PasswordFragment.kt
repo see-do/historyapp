@@ -43,6 +43,11 @@ class PasswordFragment : Fragment() {
                 hideKeyboard(binding.signupPwdCheckEt)
             }
         }
+        binding.signupPwdTerm2Tv.setOnClickListener {
+            (context as SignUpActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.signup_frm, TermFragment())
+                .commit()
+        }
 
         return binding.root
     }

@@ -3,6 +3,7 @@ package com.example.history
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.history.databinding.ActivitySignupBinding
 
@@ -21,24 +22,6 @@ class SignUpActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
 
+    }
 
-    }
-    fun changeFragment(count : Int){
-        when (count) {
-            0 -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.signup_frm, IdFragment())
-                    .commitAllowingStateLoss()
-            }
-            1 -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.signup_frm, PasswordFragment())
-                    .commit()
-            }
-            2 -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
-        }
-    }
 }

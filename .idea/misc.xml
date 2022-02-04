@@ -8,7 +8,7 @@
         <entry key="..\:/Users/Administrator/Documents/GitHub/historyapp/app/src/main/res/layout/item_comment.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/drawable/round_button.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/font/roboto_regular.xml" value="0.209375" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_signup.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_splash.xml" value="0.13333333333333333" />
@@ -23,10 +23,11 @@
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_mypage_my_story.xml" value="0.15087719298245614" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_nickname.xml" value="0.1" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_orientalhistory.xml" value="0.15087719298245614" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_password.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_password.xml" value="0.22" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_question.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_search.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_story_detail.xml" value="0.15087719298245614" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_search.xml" value="0.22" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_story_detail.xml" value="0.40130151843817785" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_term.xml" value="0.3419593345656192" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_test.xml" value="0.1" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_write.xml" value="0.23825887743413515" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/item_hashtag.xml" value="0.4466666666666667" />
