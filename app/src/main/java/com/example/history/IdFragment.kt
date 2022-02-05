@@ -2,6 +2,7 @@ package com.example.history
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +21,8 @@ class IdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentIdBinding.inflate(inflater, container, false)
-
+        var result = arguments?.getString("nickname")
+        Log.d("nickname","$result")
         binding.signupIdNextBtn.setOnClickListener {
 
             if (binding.signupIdEt.text.toString().isEmpty()) {
@@ -31,8 +33,11 @@ class IdFragment : Fragment() {
                 binding.signupNicknameWarningTv.text = "이미 사용 중인 닉네임입니다."
                 showWarning()
             } */else {
+                var passwordFragment = PasswordFragment()
+                var bundle = Bundle()
+                passwordFragment.arguments = bundle
                 (context as SignUpActivity).supportFragmentManager.beginTransaction()
-                    .replace(R.id.signup_frm, PasswordFragment())
+                    .replace(R.id.signup_frm, passwordFragment)
                     .commitAllowingStateLoss()
             }
         }

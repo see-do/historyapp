@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,8 @@ class PasswordFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPasswordBinding.inflate(inflater, container, false)
-
+        var result = arguments?.getString("nickname")
+        Log.d("nickname","$result")
         binding.signupPwdConfirmBtn.setOnClickListener {
             if (binding.signupPwdEt.text.toString().isEmpty()) {
                 showWarning("비밀번호를 입력해주세요",0)

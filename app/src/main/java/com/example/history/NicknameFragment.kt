@@ -1,6 +1,7 @@
 package com.example.history
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,7 +16,6 @@ import androidx.fragment.app.FragmentManager
 import com.example.history.databinding.FragmentNicknameBinding
 
 class NicknameFragment : Fragment() {
-
     lateinit var binding: FragmentNicknameBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +32,7 @@ class NicknameFragment : Fragment() {
             }
 
         }
+
         binding.signupNicknameNextBtn.setOnClickListener {
             if (binding.signupNicknameEt.text.toString().isEmpty()) {
                 showWarning("닉네임을 입력해주세요")
@@ -43,9 +44,14 @@ class NicknameFragment : Fragment() {
                 binding.signupNicknameWarningTv.text = "이미 사용 중인 닉네임입니다."
                 showWarning()
             } */else {
+                var idFragment = IdFragment()
+                var bundle = Bundle()
+                bundle.putString("nickname",binding.signupNicknameEt.text.toString())
+                idFragment.arguments = bundle
+
                 (context as SignUpActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.signup_frm, IdFragment())
-                .commitAllowingStateLoss()
+                .replace(R.id.signup_frm, idFragment)
+                .commit()
             }
         }
         return binding.root
