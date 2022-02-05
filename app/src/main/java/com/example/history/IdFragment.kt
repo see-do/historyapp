@@ -21,8 +21,8 @@ class IdFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentIdBinding.inflate(inflater, container, false)
-        var result = arguments?.getString("nickname")
-        Log.d("nickname","$result")
+        var nickname = arguments?.getString("nickname")
+        Log.d("nickname","$nickname")
         binding.signupIdNextBtn.setOnClickListener {
 
             if (binding.signupIdEt.text.toString().isEmpty()) {
@@ -35,6 +35,8 @@ class IdFragment : Fragment() {
             } */else {
                 var passwordFragment = PasswordFragment()
                 var bundle = Bundle()
+                bundle.putString("nickname", nickname)
+                bundle.putString("id", binding.signupIdEt.text.toString())
                 passwordFragment.arguments = bundle
                 (context as SignUpActivity).supportFragmentManager.beginTransaction()
                     .replace(R.id.signup_frm, passwordFragment)

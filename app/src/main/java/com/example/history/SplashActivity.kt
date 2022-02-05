@@ -17,13 +17,17 @@ class SplashActivity:AppCompatActivity() {
         Handler().postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
         }, SPLASH_VIEW_TIME)
-        val pref = getSharedPreferences("auto_login", Activity.MODE_PRIVATE)
-        val id = pref.getString("id", null)
-        val pw = pref.getString("pw", null)
+        val spf = getSharedPreferences("auto_login", Activity.MODE_PRIVATE)
+        val id = spf.getString("id", null)
+        val password = spf.getString("password", null)
 
+        if(id != null && password != null) {
+            autologin(id, password)
+        }
     }
 
-    private fun autologin(){
-
+    private fun autologin(id:String, password:String){
+        val authService = AuthService()
+        authService.login(id, password)
     }
 }

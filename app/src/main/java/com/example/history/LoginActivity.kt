@@ -50,10 +50,10 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this,"아이디나 비밀번호 입력", Toast.LENGTH_SHORT)?.show()
         }
         else {
-            val pref = getSharedPreferences("auto_login", Activity.MODE_PRIVATE)
-            val editor = pref.edit()
+            val spf = getSharedPreferences("auto_login", Activity.MODE_PRIVATE)
+            val editor = spf.edit()
             editor.putString("id",binding.loginIdEt.text.toString())
-            editor.putString("pw",binding.loginPwEt.text.toString())
+            editor.putString("password",binding.loginPwEt.text.toString())
             editor.apply()
         }
     }

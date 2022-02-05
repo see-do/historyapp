@@ -78,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@id/write_title_lo"
         app:layout_constraintStart_toStartOf="@id/write_write_tv">
         <TextView
-            android:id="@+id/write_theme_tv"
+            android:id="@+id/write_category_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/topic"
@@ -87,11 +87,13 @@
             android:textStyle="bold"
             android:textColor="@color/black" />
         <RadioGroup
+            android:id="@+id/write_category_rb"
             android:orientation="horizontal"
             android:layout_marginStart="39dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RadioButton
+                android:id="@+id/write_category_korean_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/korean"
@@ -107,6 +109,7 @@
                 android:textColor="@color/dark_grey"
                 android:textSize="16sp"/>
             <RadioButton
+                android:id="@+id/write_category_oriental_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/oriental"
@@ -122,6 +125,7 @@
                 android:textColor="@color/dark_grey"
                 android:textSize="16sp"/>
             <RadioButton
+                android:id="@+id/write_category_western_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/western"
@@ -137,6 +141,7 @@
                 android:textColor="@color/dark_grey"
                 android:textSize="16sp"/>
             <RadioButton
+                android:id="@+id/write_category_etc_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="기타"

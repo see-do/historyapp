@@ -17,6 +17,7 @@ import android.util.Log
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 
 
 class WriteFragment : Fragment() {
@@ -32,10 +33,21 @@ class WriteFragment : Fragment() {
         binding = FragmentWriteBinding.inflate(inflater, container, false)
         binding.writeHashtagRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.writeHashtagRv.adapter = HashtagRVAdapter(hashtagList, 0)
-        binding.writeConfirmBtn.setOnClickListener {
-            val dialogBuilder = AlertDialog.Builder(requireContext())
-            dialogBuilder.setMessage("hohohoh")
+        var category = ""
+        Log.d("category","$category")
+        binding.writeCategoryKoreanRb.setOnClickListener {
+            category = "korean"
+            Log.d("category", "$category")
         }
+        binding.writeConfirmBtn.setOnClickListener {
+            if(binding.writeTitleEt.text.isEmpty()){
+
+            }
+            (context as MainActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.fl_container, HomeFragment())
+                .commit()
+        }
+
         binding.writeImgRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.writeImgRv.adapter = ImageRVAdapter(imageList)
 

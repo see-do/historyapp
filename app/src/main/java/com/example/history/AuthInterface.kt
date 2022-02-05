@@ -5,7 +5,10 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface AuthInterface {
-//    @POST()
-//    fun signUp(@Body user : User) : Call<AuthResponse>
+    @POST()
+    fun signUp(@Body nickname:String, id:String, password:String)
+
+    @POST()
+    fun login(@Body id:String, password:String)
 
 }

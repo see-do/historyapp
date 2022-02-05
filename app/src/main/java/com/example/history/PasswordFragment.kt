@@ -24,8 +24,11 @@ class PasswordFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPasswordBinding.inflate(inflater, container, false)
-        var result = arguments?.getString("nickname")
-        Log.d("nickname","$result")
+        var nickname = arguments?.getString("nickname")
+        var id = arguments?.getString("id")
+        Log.d("nickname","$nickname")
+        Log.d("nickname","$id")
+
         binding.signupPwdConfirmBtn.setOnClickListener {
             if (binding.signupPwdEt.text.toString().isEmpty()) {
                 showWarning("비밀번호를 입력해주세요",0)
@@ -34,6 +37,9 @@ class PasswordFragment : Fragment() {
             } else if (binding.signupPwdCheckEt.text.toString() != binding.signupPwdEt.text.toString()){
                 showWarning("비밀번호가 일치하지 않습니다.",1)
             } else {
+                val authService = AuthService()
+                authService.signUp(nickname, id, binding.signupPwdEt.text.toString())
+
                 val intent = Intent(activity, LoginActivity::class.java)
                 startActivity(intent)
             }

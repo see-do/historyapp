@@ -6,5 +6,4 @@ data class Story(
     var likeNumber: Int?=null,
     var commentNumber: Int?=null,
     var detail: ArrayList<String>?=null
-
 )
