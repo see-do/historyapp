@@ -21,9 +21,9 @@ class SplashActivity:AppCompatActivity() {
         val id = spf.getString("id", null)
         val password = spf.getString("password", null)
 
-        if(id != null && password != null) {
-            autologin(id, password)
-        }
+//        if(id != null && password != null) {
+//            autologin(id, password)
+//        }
     }
 
     private fun autologin(id:String, password:String){
