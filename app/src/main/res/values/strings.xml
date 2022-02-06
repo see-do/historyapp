@@ -21,7 +21,10 @@
     <string name="korean">한국사</string>
     <string name="oriental">동양사</string>
     <string name="western">서양사</string>
+    <string name="etc">기타</string>
     <string name="hashtag">해시태그</string>
+    <string name="add_hashtag">+ 해시태그 추가</string>
+    <string name="add_image">사진 첨부</string>
     <string name="signup">회원가입</string>
     <string name="straight_divider">&#160;&#160;|&#160;&#160;</string>
     <string name="slash_divider">&#160;&#160;&#160;/&#160;&#160;&#160;</string>
@@ -38,6 +41,10 @@
     <string name="length_password">비밀번호는 6 &#45; 9글자여야합니다</string>
     <string name="check_password">비밀번호를 확인해주세요</string>
     <string name="diff_password">비밀번호가 일치하지 않습니다</string>
+    <string name="write_title">제목을 작성해주세요</string>
+    <string name="write_category">주제를 선택해주세요</string>
+
+    <string name="plus">+</string>
 
 
 </resources>

@@ -36,7 +36,6 @@ class NicknameFragment : Fragment() {
         binding.signupNicknameNextBtn.setOnClickListener {
             if (binding.signupNicknameEt.text.toString().isEmpty()) {
                 showWarning("닉네임을 입력해주세요")
-                binding.signupNicknameWarningTv.text = "닉네임을 입력해주세요"
             } else if (binding.signupNicknameEt.length() < 2){
                 showWarning("닉네임은 2글자 이상, 10글자 미만이어야합니다.")
             }

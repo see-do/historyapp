@@ -24,25 +24,25 @@ class PasswordFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPasswordBinding.inflate(inflater, container, false)
-        var nickname = arguments?.getString("nickname")
-        var id = arguments?.getString("id")
+        val nickname = arguments?.getString("nickname")
+        val id = arguments?.getString("id")
         Log.d("nickname","$nickname")
         Log.d("nickname","$id")
 
         binding.signupPwdConfirmBtn.setOnClickListener {
-            if (binding.signupPwdEt.text.toString().isEmpty()) {
-                showWarning("비밀번호를 입력해주세요",0)
-            } else if(binding.signupPwdEt.length() < 4){
-                showWarning("비밀번호는 4글자 이상 10글자 미만이어야합니다.",0)
-            } else if (binding.signupPwdCheckEt.text.toString() != binding.signupPwdEt.text.toString()){
-                showWarning("비밀번호가 일치하지 않습니다.",1)
-            } else {
-                val authService = AuthService()
-                authService.signUp(nickname, id, binding.signupPwdEt.text.toString())
+            when {
+                binding.signupPwdEt.text.toString().isEmpty() -> showWarning("비밀번호를 입력해주세요",0)
+                binding.signupPwdEt.length() < 4 -> showWarning("비밀번호는 4글자 이상 10글자 미만이어야합니다.",0)
+                binding.signupPwdCheckEt.text.toString() != binding.signupPwdEt.text.toString() -> showWarning("비밀번호가 일치하지 않습니다.",1)
+                else ->{
+                    //val authService = AuthService()
+                    //authService.signUp(nickname, id, binding.signupPwdEt.text.toString())
 
-                val intent = Intent(activity, LoginActivity::class.java)
-                startActivity(intent)
+                    val intent = Intent(activity, LoginActivity::class.java)
+                    startActivity(intent)
+                }
             }
+
         }
         binding.signupPwdCheckEt.onFocusChangeListener = View.OnFocusChangeListener{ p0, p1 ->
             if(p1){

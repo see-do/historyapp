@@ -1,7 +1,6 @@
 package com.example.history
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +11,10 @@ import com.example.history.databinding.FragmentWriteBinding
 import android.content.Context
 import android.content.Intent
 import android.provider.MediaStore
-import android.service.voice.VoiceInteractionSession
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
+import retrofit2.Retrofit
 
 
 class WriteFragment : Fragment() {
@@ -35,30 +32,43 @@ class WriteFragment : Fragment() {
         binding.writeHashtagRv.adapter = HashtagRVAdapter(hashtagList, 0)
         var category = ""
         Log.d("category","$category")
-        binding.writeCategoryKoreanRb.setOnClickListener {
-            category = "korean"
-            Log.d("category", "$category")
-        }
-        binding.writeConfirmBtn.setOnClickListener {
-            if(binding.writeTitleEt.text.isEmpty()){
-
+        binding.writeCategoryRb.setOnCheckedChangeListener { _, id ->
+            when (id){
+                R.id.write_category_korean_rb -> category = "korean"
+                R.id.write_category_western_rb -> category = "western"
+                R.id.write_category_oriental_rb -> category = "oriental"
+                R.id.write_category_etc_rb -> category = "etc"
             }
-            (context as MainActivity).supportFragmentManager.beginTransaction()
-                .replace(R.id.fl_container, HomeFragment())
-                .commit()
+            hideWarning(binding.writeCategoryWarningIv,binding.writeCategoryWarningTv)
+        }
+
+        binding.writeConfirmBtn.setOnClickListener {
+            when{
+                binding.writeTitleEt.text.isEmpty() -> showWarning(binding.writeTitleWarningIv, binding.writeTitleWarningTv)
+                category == "" -> showWarning(binding.writeCategoryWarningIv, binding.writeCategoryWarningTv)
+                else -> {
+                    //val storyService = StoryService()
+                    //storyService.writeStory()
+                    Log.d("category", "$category")
+                    (context as MainActivity).supportFragmentManager.beginTransaction()
+                        .replace(R.id.fl_container, HomeFragment())
+                        .commit()
+                }
+            }
         }
 
         binding.writeImgRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.writeImgRv.adapter = ImageRVAdapter(imageList)
 
-        binding.writeTitleEt.onFocusChangeListener = View.OnFocusChangeListener{ p0, p1 ->
+        binding.writeTitleEt.onFocusChangeListener = View.OnFocusChangeListener{ _, p1 ->
             if(p1){
             } else {
+                hideWarning(binding.writeTitleWarningIv,binding.writeTitleWarningTv)
                 hideKeyboard(binding.writeTitleEt)
             }
         }
 
-        binding.writeHashtagEt.onFocusChangeListener = View.OnFocusChangeListener{ p0, p1 ->
+        binding.writeHashtagEt.onFocusChangeListener = View.OnFocusChangeListener{ _, p1 ->
             if(p1){
             } else {
                 if(binding.writeHashtagEt.text.isNotEmpty()){
@@ -74,7 +84,7 @@ class WriteFragment : Fragment() {
 
         return binding.root
     }
-    // Consider change into flexbox
+
     private fun addHashTag(){
         //Log.d("공백","${binding.writeHashtagEt.text}")
         val text = binding.writeHashtagEt.text.toString().trim()
@@ -108,6 +118,15 @@ class WriteFragment : Fragment() {
         (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
             hideSoftInputFromWindow(editText.windowToken, 0)
         }
+    }
+
+    private fun showWarning(iv : ImageView, tv: TextView){
+        iv.visibility = View.VISIBLE
+        tv.visibility = View.VISIBLE
+    }
+    private fun hideWarning(iv : ImageView, tv: TextView){
+        iv.visibility = View.GONE
+        tv.visibility = View.GONE
     }
 
 }

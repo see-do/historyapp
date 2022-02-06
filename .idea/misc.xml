@@ -14,6 +14,7 @@
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/activity_splash.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/banner_total.xml" value="0.18478260869565216" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/banner_western.xml" value="0.18478260869565216" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/dialog01.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_id.xml" value="0.1" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_mypage.xml" value="0.1" />
@@ -29,7 +30,7 @@
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_story_detail.xml" value="0.40130151843817785" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_term.xml" value="0.3419593345656192" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_test.xml" value="0.1" />
-        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_write.xml" value="0.23825887743413515" />
+        <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/fragment_write.xml" value="0.5391304347826087" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/item_hashtag.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/item_img.xml" value="0.7923497267759563" />
         <entry key="..\:/Users/dandy/Documents/GitHub/historyapp/app/src/main/res/layout/item_mypage_story.xml" value="0.15087719298245614" />

@@ -1,6 +1,9 @@
 package com.example.history
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +31,7 @@ class StoryDetailFragment(story : Story) : Fragment() {
             add(Hashtag("#dad4"))
             add(Hashtag("#dad5"))
         }
+
         binding.storyHashtagRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.storyHashtagRv.adapter = HashtagRVAdapter(hashtagList, 1)
         commentList.apply{
@@ -40,7 +44,9 @@ class StoryDetailFragment(story : Story) : Fragment() {
         binding.storyTitleTv.text = story.title
         binding.storyCommentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.storyCommentRv.adapter = CommentRVAdapter(commentList)
+        binding.storySettingIv.setOnClickListener {
 
+        }
         binding.storyExitIv.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
                 .replace(R.id.fl_container, HomeFragment())
