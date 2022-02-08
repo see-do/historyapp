@@ -10,13 +10,13 @@ interface StoryInterface {
     fun getStory()
 
     @Multipart
-    @POST()
+    @POST("/common/story")
     fun writeStory(
-        @Part userId : String,
-        @Part category : String,
-        @Part title : String,
-        @Part contents : String,
-        @Part hashtagList : ArrayList<Hashtag?>,
         @Part imageList : MultipartBody.Part?,
-    )
+        @Part("userId") userId : String,
+        @Part("category") category : String,
+        @Part("title") title : String,
+        @Part("contents") contents : String,
+        @Part("hashTags") hashtagList : ArrayList<Hashtag?>
+    ) : Call<StoryResponse>
 }

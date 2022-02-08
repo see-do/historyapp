@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
@@ -17,7 +18,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.history.databinding.ActivityLoginBinding
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), AuthView {
     lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,16 +46,37 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    override fun onAuthFailure() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAuthLoading() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAuthSuccess(body: Boolean) {
+        Log.d("login","login")
+        if(!body){
+            Toast.makeText(this,"아이디나 비밀번호 입력", Toast.LENGTH_SHORT)?.show()
+        }
+    }
+
     private fun login(){
         if(binding.loginIdEt.text.toString().isEmpty() || binding.loginPwEt.text.toString().isEmpty()) {
             Toast.makeText(this,"아이디나 비밀번호 입력", Toast.LENGTH_SHORT)?.show()
         }
         else {
+            Log.d("break","break")
+            val authService = AuthService()
+            authService.setAuthView(this)
+            Log.d("break","break")
+            authService.login(binding.loginIdEt.text.toString(), binding.loginPwEt.text.toString())
             val spf = getSharedPreferences("auto_login", Activity.MODE_PRIVATE)
             val editor = spf.edit()
             editor.putString("id",binding.loginIdEt.text.toString())
             editor.putString("password",binding.loginPwEt.text.toString())
             editor.apply()
+            exitLogin()
         }
     }
     private fun signUp(){

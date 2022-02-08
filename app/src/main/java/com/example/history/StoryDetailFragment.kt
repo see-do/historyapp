@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -57,7 +58,7 @@ class StoryDetailFragment(story : Story) : Fragment() {
         binding.storyTitleTv.text = story.title
         binding.storyCommentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.storyCommentRv.adapter = CommentRVAdapter(commentList)
-        binding.storySettingIv.setOnClickListener {
+        binding.storySettingLo.setOnClickListener {
             alertDialog.show()
             alertDialog.findViewById<TextView>(R.id.dialog_report_tv).setOnClickListener {
                 report()
@@ -73,12 +74,14 @@ class StoryDetailFragment(story : Story) : Fragment() {
         return binding.root
     }
     private fun report(){
-        val intent = Intent(Intent.ACTION_SEND).apply{
-            type = "text/plain"
-            Uri.parse("mailto:")
-            putExtra(Intent.EXTRA_EMAIL, "gyeondeo@gmail.com")
-            putExtra(Intent.EXTRA_TEXT,"신고 게시글 제목, 사유를 적어주세요")
+        val addressList = "gyeondeo@gmail.com"
+        val intent = Intent(Intent.ACTION_SEND, Uri.fromParts("mailto", "example@gasd.com", null)).apply {
+            type = "message/rfc822"
+            putExtra(Intent.EXTRA_EMAIL, addressList)
+            putExtra(Intent.EXTRA_TEXT, "신고 게시글 제목:\n사유:")
         }
+            //Uri.parse("mailto:")
+
         startActivity(Intent.createChooser(intent,"메일 전송하기"))
 
     }

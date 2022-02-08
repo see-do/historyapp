@@ -11,10 +11,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.history.databinding.FragmentIdBinding
+import retrofit2.Retrofit
 
 
-class IdFragment : Fragment() {
+class IdFragment : Fragment(), AuthView {
     lateinit var binding : FragmentIdBinding
+    var existFlag = true
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,16 +25,21 @@ class IdFragment : Fragment() {
         binding = FragmentIdBinding.inflate(inflater, container, false)
         var nickname = arguments?.getString("nickname")
         Log.d("nickname","$nickname")
-        binding.signupIdNextBtn.setOnClickListener {
 
-            if (binding.signupIdEt.text.toString().isEmpty()) {
+        binding.signupCheckTv.setOnClickListener {
+            checkExist()
+        }
+
+        binding.signupIdNextBtn.setOnClickListener {
+            Log.d("onResponse","$existFlag")
+
+            if(existFlag){
+                showWarning("중복체크 버튼을 눌러주세요")
+            } else if (binding.signupIdEt.text.toString().isEmpty()) {
                 showWarning("아이디를 입력해주세요")
-            } else if(binding.signupIdEt.length() < 4){
+            } else if(binding.signupIdEt.length() < 4) {
                 showWarning("아이디는 4글자 이상 15글자 미만이어야합니다.")
-            }/*else if 닉네임이 겹칠 때 {
-                binding.signupNicknameWarningTv.text = "이미 사용 중인 닉네임입니다."
-                showWarning()
-            } */else {
+            } else {
                 var passwordFragment = PasswordFragment()
                 var bundle = Bundle()
                 bundle.putString("nickname", nickname)
@@ -64,4 +71,32 @@ class IdFragment : Fragment() {
         binding.signupIdWarningIv.visibility = View.VISIBLE
         binding.signupIdWarningTv.text = message
     }
+
+    override fun onAuthFailure() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAuthLoading() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAuthSuccess(body: Boolean) {
+        Log.d("onExist_Success","$body")
+        existFlag = body
+        when(existFlag){
+            false ->{
+                binding.signupIdWarningIv.visibility = View.GONE
+                binding.signupIdWarningTv.visibility = View.GONE
+            }
+            true ->{
+                showWarning("중복입니다")
+            }
+        }
+    }
+    private fun checkExist(){
+        val authService = AuthService()
+        authService.setAuthView(this)
+        authService.userIdExist(binding.signupIdEt.text.toString())
+    }
+
 }

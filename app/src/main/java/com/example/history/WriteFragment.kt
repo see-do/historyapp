@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.history.databinding.FragmentWriteBinding
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
@@ -49,6 +51,10 @@ class WriteFragment : Fragment() {
                 else -> {
                     //val storyService = StoryService()
                     //storyService.writeStory()
+//                    val storyService = StoryService()
+//                    storyService.writeStory()
+
+//                    val path = getRealPathFromURI(requireContext(), urii)
                     Log.d("category", "$category")
                     (context as MainActivity).supportFragmentManager.beginTransaction()
                         .replace(R.id.fl_container, HomeFragment())
@@ -128,5 +134,65 @@ class WriteFragment : Fragment() {
         iv.visibility = View.GONE
         tv.visibility = View.GONE
     }
+
+//    fun getImageUri(inContext: Context?, inImage: Bitmap?): Uri? {
+//        val bytes = ByteArrayOutputStream()
+//        if (inImage != null) {
+//            inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+//        }
+//        val path = MediaStore.Images.Media.insertImage(inContext?.getContentResolver(), inImage, "Title" + " - " + Calendar.getInstance().getTime(), null)
+//        return Uri.parse(path)
+//    }
+//
+//
+//    fun getRealPathFromURI(context: Context?, uri: Uri?): String? {
+//
+//        // DocumentProvider
+//        if (DocumentsContract.isDocumentUri(context, uri)) {
+//
+//            if (isExternalStorageDocument(uri)) {
+//                val docId = DocumentsContract.getDocumentId(uri)
+//                val split: Array<String?> = docId.split(":".toRegex()).toTypedArray()
+//                val type = split[0]
+//                return if ("primary".equals(type, ignoreCase = true)) {
+//                    (Environment.getExternalStorageDirectory().toString() + "/"
+//                            + split[1])
+//                } else {
+//                    val SDcardpath = getRemovableSDCardPath(context)?.split("/Android".toRegex())!!.toTypedArray()[0]
+//                    SDcardpath + "/" + split[1]
+//                }
+//            } else if (isDownloadsDocument(uri)) {
+//                val id = DocumentsContract.getDocumentId(uri)
+//                val contentUri = ContentUris.withAppendedId(
+//                    Uri.parse("content://downloads/public_downloads"),
+//                    java.lang.Long.valueOf(id))
+//                return getDataColumn(context, contentUri, null, null)
+//            } else if (isMediaDocument(uri)) {
+//                val docId = DocumentsContract.getDocumentId(uri)
+//                val split: Array<String?> = docId.split(":".toRegex()).toTypedArray()
+//                val type = split[0]
+//                var contentUri: Uri? = null
+//                if ("image" == type) {
+//                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+//                } else if ("video" == type) {
+//                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+//                } else if ("audio" == type) {
+//                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+//                }
+//                val selection = "_id=?"
+//                val selectionArgs = arrayOf(split[1])
+//                return getDataColumn(context, contentUri, selection,
+//                    selectionArgs)
+//            }
+//        } else if (uri != null) {
+//            if ("content".equals(uri.getScheme(), ignoreCase = true)) {
+//                // Return the remote address
+//                return if (isGooglePhotosUri(uri)) uri.getLastPathSegment() else getDataColumn(context, uri, null, null)
+//            } else if ("file".equals(uri.getScheme(), ignoreCase = true)) {
+//                return uri.getPath()
+//            }
+//        }
+//        return null
+//    }
 
 }

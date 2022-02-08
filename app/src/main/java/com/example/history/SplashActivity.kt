@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 
 class SplashActivity:AppCompatActivity() {
@@ -20,7 +21,7 @@ class SplashActivity:AppCompatActivity() {
         val spf = getSharedPreferences("auto_login", Activity.MODE_PRIVATE)
         val id = spf.getString("id", null)
         val password = spf.getString("password", null)
-
+        Log.d("auto","auto_login")
 //        if(id != null && password != null) {
 //            autologin(id, password)
 //        }

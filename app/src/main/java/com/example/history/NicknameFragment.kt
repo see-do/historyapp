@@ -34,6 +34,8 @@ class NicknameFragment : Fragment() {
         }
 
         binding.signupNicknameNextBtn.setOnClickListener {
+            val authService = AuthService()
+            authService.nickNameExist(binding.signupNicknameEt.text.toString())
             if (binding.signupNicknameEt.text.toString().isEmpty()) {
                 showWarning("닉네임을 입력해주세요")
             } else if (binding.signupNicknameEt.length() < 2){
