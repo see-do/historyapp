@@ -12,7 +12,7 @@ interface StoryInterface {
     @Multipart
     @POST("/common/story")
     fun writeStory(
-        @Part imageList : MultipartBody.Part?,
+        @Part imageList : ArrayList<MultipartBody.Part?>,
         @Part("userId") userId : String,
         @Part("category") category : String,
         @Part("title") title : String,

@@ -19,14 +19,13 @@ class StoryService {
         //storyService.getStory().
     }
 
-    fun writeStory(){
+    fun writeStory(pathList : ArrayList<MultipartBody.Part?>){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
-        val file = File("/storage/emulated/0/Download/filename.pdf")
-        val requestFile = RequestBody.create(MediaType.parse("application/jpeg"), file)
-        val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
+//        val requestFile = RequestBody.create(MediaType.parse("application/jpeg"), file)
+//        val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
-        storyService.writeStory(body,"duck","korean","duck","duck",
+        storyService.writeStory(pathList,"duck","korean","duck","duck",
             arrayListOf(Hashtag("duck"))).enqueue(object : Callback<StoryResponse>{
             override fun onResponse(call: Call<StoryResponse>, response: Response<StoryResponse>) {
                 Log.d("write_onResponse","test")

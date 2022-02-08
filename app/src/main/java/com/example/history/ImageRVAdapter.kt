@@ -32,6 +32,7 @@ class ImageRVAdapter(private var imageList : ArrayList<Image>) : RecyclerView.Ad
 
     fun removeImg(position: Int){
         imageList.removeAt(position)
+
         notifyDataSetChanged()
     }
 
