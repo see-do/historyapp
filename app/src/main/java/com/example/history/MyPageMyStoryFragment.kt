@@ -22,9 +22,9 @@ class MyPageMyStoryFragment: Fragment() {
 
         //데이터 리스트 생성 더미데이터
         myPageStoryDatas.apply {
-            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex1,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
-            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex2,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
-            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex3,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
+            add(MyPageStory("제에에에목","",12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
+            add(MyPageStory("제에에에목","",12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
+            add(MyPageStory("제에에에목","",12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
         }
 
         //더미데이터랑 어댑터 연결
