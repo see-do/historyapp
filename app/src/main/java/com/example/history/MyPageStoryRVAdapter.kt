@@ -1,13 +1,21 @@
 package com.example.history
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.history.databinding.ItemMypageStoryBinding
 import com.example.history.databinding.ItemStoryBinding
 
 class MyPageStoryRVAdapter (private val myPageStoryList:ArrayList<MyPageStory>) : RecyclerView.Adapter<MyPageStoryRVAdapter.ViewHolder>(){
 
+    lateinit var context:Context
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        context = recyclerView.context
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemMypageStoryBinding = ItemMypageStoryBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -32,7 +40,9 @@ class MyPageStoryRVAdapter (private val myPageStoryList:ArrayList<MyPageStory>) 
             binding.itemMyPageStoryNickNameTv.text=myPageStory.nickName
             binding.itemMyPageStoryLikeTv.text= myPageStory.likeNumber.toString()
             binding.itemMyPageStoryCommentTv.text=myPageStory.commentNumber.toString()
-            binding.itemMyPageStoryProfileImgIv.setImageResource(myPageStory.profileImg!!)
+            Glide.with(context)
+                .load(myPageStory.profileImg)
+                .into(binding.itemMyPageStoryProfileImgIv)
         }
     }
 
