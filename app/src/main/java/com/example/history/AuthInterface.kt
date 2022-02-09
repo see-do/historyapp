@@ -14,6 +14,6 @@ interface AuthInterface {
     fun signUp(@Body user : User) : Call<AuthResponse>
 
     @POST("/user/login")
-    fun login(@Body user : User) : Call<ExistResponse>
+    fun login(@Body user : User) : Call<LoginResponse>
 
 }

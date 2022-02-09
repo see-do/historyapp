@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:text="@string/check_exist"
             android:clickable="true"
-            android:textColor="@color/check_exist"
+            android:textColor="@color/blue"
             android:layout_gravity="end|center_vertical" />
     </FrameLayout>
 

@@ -1,7 +1,7 @@
 package com.example.history
 
-interface AuthView {
+interface ExistView {
     fun onAuthLoading()
-    fun onAuthSuccess(tokenBody: TokenBody)
+    fun onAuthSuccess(body : Boolean)
     fun onAuthFailure()
 }

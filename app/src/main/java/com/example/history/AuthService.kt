@@ -6,12 +6,14 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.net.URLDecoder
-import java.net.URLEncoder
 
 class AuthService {
+    private lateinit var existView: ExistView
     private lateinit var authView: AuthView
 
+    fun setExistView(existView: ExistView){
+        this.existView = existView
+    }
     fun setAuthView(authView: AuthView){
         this.authView = authView
     }
@@ -39,7 +41,7 @@ class AuthService {
             override fun onResponse(call: Call<ExistResponse>, response: Response<ExistResponse>){
                 Log.d("userId_onResponse", response.body()?.body.toString())
                 val resp = response.body()
-                authView.onAuthSuccess(resp!!.body)
+                existView.onAuthSuccess(resp!!.body)
                 Log.d("onExist_retrofit","$resp")
             }
             override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
@@ -65,11 +67,13 @@ class AuthService {
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val authService = retrofit.create(AuthInterface::class.java)
         Log.d("break","break")
-        authService.login(User("duck",null, "duck")).enqueue(object : Callback<ExistResponse>{
-            override fun onResponse(call: Call<ExistResponse>, response: Response<ExistResponse>) {
-                Log.d("login_onResponse", response.toString())
+        authService.login(User("sangho1",null, "1234")).enqueue(object : Callback<LoginResponse>{
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                val resp = response.body()
+                authView.onAuthSuccess(resp!!.body)
+                Log.d("login_onResponse", response.body().toString())
             }
-            override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.d("login_onFailure", t.message.toString())
             }
         })

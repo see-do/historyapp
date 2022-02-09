@@ -1,17 +1,10 @@
 package com.example.history
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import android.view.KeyEvent
-import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
@@ -54,11 +47,13 @@ class LoginActivity : AppCompatActivity(), AuthView {
         TODO("Not yet implemented")
     }
 
-    override fun onAuthSuccess(body: Boolean) {
+    override fun onAuthSuccess(tokenBody: TokenBody) {
         Log.d("login","login")
-        if(!body){
-            Toast.makeText(this,"아이디나 비밀번호 입력", Toast.LENGTH_SHORT)?.show()
-        }
+        val token = tokenBody
+        val accessToken = token.accessToken
+        val refreshToken = token.refreshToken
+        Log.d("onAuthSuccess","$accessToken")
+        Log.d("onAuthSuccess","$refreshToken")
     }
 
     private fun login(){

@@ -10,3 +10,13 @@ data class AuthResponse(
     @SerializedName("message") val message : String,
     @SerializedName("path") val path : String
 )
+data class TokenBody(
+    @SerializedName("grantType") val grantType : String,
+    @SerializedName("accessToken") val accessToken : String,
+    @SerializedName("refreshToken") val refreshToken : String,
+    @SerializedName("accessTokenExpiresIn") val accessTokenExpiresIn : String
+)
+data class LoginResponse(
+    @SerializedName("status") val status : String,
+    @SerializedName("body") val body : TokenBody
+)

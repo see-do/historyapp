@@ -1,7 +1,6 @@
 package com.example.history
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,13 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.history.databinding.FragmentNicknameBinding
 
-class NicknameFragment : Fragment(), AuthView {
+class NicknameFragment : Fragment(), ExistView {
     lateinit var binding: FragmentNicknameBinding
     private var existFlag = true
     override fun onCreateView(
@@ -94,7 +90,7 @@ class NicknameFragment : Fragment(), AuthView {
     }
     private fun checkExist(){
         val authService = AuthService()
-        authService.setAuthView(this)
+        authService.setExistView(this)
         authService.nickNameExist(binding.signupNicknameEt.text.toString())
     }
 }

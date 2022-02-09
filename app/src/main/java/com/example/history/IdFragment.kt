@@ -8,13 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.history.databinding.FragmentIdBinding
-import retrofit2.Retrofit
 
 
-class IdFragment : Fragment(), AuthView {
+class IdFragment : Fragment(), ExistView {
     lateinit var binding : FragmentIdBinding
     var existFlag = true
     override fun onCreateView(
@@ -94,7 +92,7 @@ class IdFragment : Fragment(), AuthView {
     }
     private fun checkExist(){
         val authService = AuthService()
-        authService.setAuthView(this)
+        authService.setExistView(this)
         authService.userIdExist(binding.signupIdEt.text.toString())
     }
 
