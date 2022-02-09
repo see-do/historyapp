@@ -10,7 +10,7 @@ import com.example.history.databinding.ItemHashtagBinding
 
 
 
-class HashtagRVAdapter(private val hashtagList : ArrayList<Hashtag>, private val code : Int) : RecyclerView.Adapter<HashtagRVAdapter.ViewHolder>(){
+class HashtagRVAdapter(private val hashtagList : ArrayList<String>, private val code : Int) : RecyclerView.Adapter<HashtagRVAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemHashtagBinding
@@ -29,8 +29,8 @@ class HashtagRVAdapter(private val hashtagList : ArrayList<Hashtag>, private val
 
     override fun getItemCount(): Int = hashtagList.size
     inner class ViewHolder(val binding : ItemHashtagBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(hashtag : Hashtag){
-            binding.itemHashtagTv.text = hashtag.hashtag
+        fun bind(hashtag : String){
+            binding.itemHashtagTv.text = hashtag
         }
         fun change(code : Int){
             if (code == 1){

@@ -26,13 +26,12 @@ class IdFragment : Fragment(), AuthView {
         var nickname = arguments?.getString("nickname")
         Log.d("nickname","$nickname")
 
-        binding.signupCheckTv.setOnClickListener {
+        binding.signupIdCheckTv.setOnClickListener {
             checkExist()
         }
 
         binding.signupIdNextBtn.setOnClickListener {
             Log.d("onResponse","$existFlag")
-
             if(existFlag){
                 showWarning("중복체크 버튼을 눌러주세요")
             } else if (binding.signupIdEt.text.toString().isEmpty()) {

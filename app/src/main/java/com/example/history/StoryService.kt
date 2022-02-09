@@ -16,23 +16,29 @@ class StoryService {
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
 
-        //storyService.getStory().
     }
 
-    fun writeStory(pathList : ArrayList<MultipartBody.Part?>){
+    fun writeStory(pathList : MultipartBody.Part?){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
-//        val requestFile = RequestBody.create(MediaType.parse("application/jpeg"), file)
-//        val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
-        storyService.writeStory(pathList,"duck","korean","duck","duck",
-            arrayListOf(Hashtag("duck"))).enqueue(object : Callback<StoryResponse>{
+        val userId = RequestBody.create(MediaType.parse("text/plain"),"duck")
+        var hmap = HashMap<String, RequestBody>()
+        hmap.put("userId", userId)
+        hmap.put("category", userId)
+        hmap.put("title", userId)
+        hmap.put("contents", userId)
+        hmap.put("hashTags", userId)
+
+        storyService.writeStory(pathList,hmap).enqueue(object : Callback<StoryResponse>{
             override fun onResponse(call: Call<StoryResponse>, response: Response<StoryResponse>) {
-                Log.d("write_onResponse","test")
+                Log.d("write_onResponse","$response")
             }
             override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
                 TODO("Not yet implemented")
             }
             })
     }
+
+
 }

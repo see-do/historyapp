@@ -1,5 +1,6 @@
 package com.example.history
 
+import androidx.annotation.RequiresPermission
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -12,11 +13,7 @@ interface StoryInterface {
     @Multipart
     @POST("/common/story")
     fun writeStory(
-        @Part imageList : ArrayList<MultipartBody.Part?>,
-        @Part("userId") userId : String,
-        @Part("category") category : String,
-        @Part("title") title : String,
-        @Part("contents") contents : String,
-        @Part("hashTags") hashtagList : ArrayList<Hashtag?>
+        @Part imageList : MultipartBody.Part?,
+        @PartMap postData : HashMap<String, RequestBody>
     ) : Call<StoryResponse>
 }

@@ -18,7 +18,7 @@ class AuthService {
     fun nickNameExist(nickname: String?){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val authService = retrofit.create(AuthInterface::class.java)
-        authService.nickNameExist("nick").enqueue(object : Callback<ExistResponse>{
+        authService.nickNameExist(nickname).enqueue(object : Callback<ExistResponse>{
             override fun onResponse(call: Call<ExistResponse>, response: Response<ExistResponse>) {
                 Log.d("nickName_onResponse", response.toString())
                 val resp = response.body()
@@ -32,7 +32,7 @@ class AuthService {
         })
     }
 
-    fun userIdExist(userId : String){
+    fun userIdExist(userId : String?){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val authService = retrofit.create(AuthInterface::class.java)
         authService.userIdExist(userId).enqueue(object : Callback<ExistResponse>{
@@ -65,7 +65,7 @@ class AuthService {
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val authService = retrofit.create(AuthInterface::class.java)
         Log.d("break","break")
-        authService.login(User("duck",null,"duck")).enqueue(object : Callback<ExistResponse>{
+        authService.login(User("duck",null, "duck")).enqueue(object : Callback<ExistResponse>{
             override fun onResponse(call: Call<ExistResponse>, response: Response<ExistResponse>) {
                 Log.d("login_onResponse", response.toString())
             }

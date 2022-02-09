@@ -15,8 +15,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.history.databinding.FragmentNicknameBinding
 
-class NicknameFragment : Fragment() {
+class NicknameFragment : Fragment(), AuthView {
     lateinit var binding: FragmentNicknameBinding
+    private var existFlag = true
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,18 +34,19 @@ class NicknameFragment : Fragment() {
 
         }
 
+        binding.signupNicknameCheckTv.setOnClickListener {
+            checkExist()
+        }
+
         binding.signupNicknameNextBtn.setOnClickListener {
-            val authService = AuthService()
-            authService.nickNameExist(binding.signupNicknameEt.text.toString())
+//            if(existFlag){
+//                showWarning("중복체크 버튼을 눌러주세요")
+//            } else
             if (binding.signupNicknameEt.text.toString().isEmpty()) {
                 showWarning("닉네임을 입력해주세요")
             } else if (binding.signupNicknameEt.length() < 2){
                 showWarning("닉네임은 2글자 이상, 10글자 미만이어야합니다.")
-            }
-            /*else if 닉네임이 겹칠 때 {
-                binding.signupNicknameWarningTv.text = "이미 사용 중인 닉네임입니다."
-                showWarning()
-            } */else {
+            } else {
                 var idFragment = IdFragment()
                 var bundle = Bundle()
                 bundle.putString("nickname",binding.signupNicknameEt.text.toString())
@@ -67,5 +69,32 @@ class NicknameFragment : Fragment() {
         binding.signupNicknameWarningIv.visibility = View.VISIBLE
         binding.signupNicknameWarningTv.visibility = View.VISIBLE
         binding.signupNicknameWarningTv.text = message
+    }
+
+    override fun onAuthFailure() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAuthLoading() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAuthSuccess(body: Boolean) {
+        Log.d("onExist_Success","$body")
+        existFlag = body
+        when(existFlag){
+            false ->{
+                binding.signupNicknameWarningIv.visibility = View.GONE
+                binding.signupNicknameWarningTv.visibility = View.GONE
+            }
+            true ->{
+                showWarning("중복입니다")
+            }
+        }
+    }
+    private fun checkExist(){
+        val authService = AuthService()
+        authService.setAuthView(this)
+        authService.nickNameExist(binding.signupNicknameEt.text.toString())
     }
 }

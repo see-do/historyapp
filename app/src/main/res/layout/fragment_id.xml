@@ -14,12 +14,18 @@
         android:layout_marginStart="40dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-    <EditText
-        android:id="@+id/signup_id_et"
+    <FrameLayout
+        android:id="@+id/signup_id_fl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/signup_id_tv"
+        app:layout_constraintStart_toStartOf="parent">
+    <EditText
+        android:id="@+id/signup_id_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:textSize="12sp"
         android:hint="@string/id"
         android:paddingBottom="16dp"
@@ -27,8 +33,18 @@
         android:inputType="text"
         android:textCursorDrawable="@drawable/text_cursor"
         android:backgroundTint="@color/primary_color"
-        app:layout_constraintTop_toBottomOf="@id/signup_id_tv"
-        app:layout_constraintStart_toStartOf="parent"/>
+        />
+        <TextView
+            android:id="@+id/signup_id_check_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check_exist"
+            android:clickable="true"
+            android:textColor="@color/check_exist"
+            android:layout_gravity="end|center_vertical"
+
+           />
+    </FrameLayout>
     <ImageView
         android:id="@+id/signup_id_warning_iv"
         android:layout_width="13dp"
@@ -52,14 +68,8 @@
         android:layout_marginStart="3dp"
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@id/signup_id_warning_iv"
-        app:layout_constraintTop_toBottomOf="@id/signup_id_et" />
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/signup_check_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="@id/signup_id_et"
-        app:layout_constraintTop_toBottomOf="@id/signup_id_et" />
+        app:layout_constraintTop_toBottomOf="@id/signup_id_fl" />
+
     <Button
         android:id="@+id/signup_id_next_btn"
         android:layout_width="match_parent"

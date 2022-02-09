@@ -20,7 +20,7 @@ import com.example.history.databinding.FragmentStoryDetailBinding
 
 class StoryDetailFragment(story : Story) : Fragment() {
     lateinit var binding : FragmentStoryDetailBinding
-    private var hashtagList = arrayListOf<Hashtag>()
+    private var hashtagList = arrayListOf<String>()
     private var commentList = arrayListOf<String>()
      var story = story
     override fun onCreateView(
@@ -30,11 +30,11 @@ class StoryDetailFragment(story : Story) : Fragment() {
     ): View? {
         binding = FragmentStoryDetailBinding.inflate(inflater, container, false)
         hashtagList.apply{
-            add(Hashtag("#dad1"))
-            add(Hashtag("#dad2"))
-            add(Hashtag("#dad3"))
-            add(Hashtag("#dad4"))
-            add(Hashtag("#dad5"))
+            add("#dad1")
+            add("#dad2")
+            add("#dad3")
+            add("#dad4")
+            add("#dad5")
         }
 
         binding.storyHashtagRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

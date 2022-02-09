@@ -28,11 +28,12 @@ import java.io.IOException
 
 class WriteFragment : Fragment() {
     lateinit var binding : FragmentWriteBinding
-    private var hashtagList = arrayListOf<Hashtag>()
+    private var hashtagList = arrayListOf<String>()
     private var imageList = arrayListOf<Image>()
     private val REQUEST_GET_IMAGE = 105
     private var uriList = arrayListOf<Uri>()
-    private var pathList = arrayListOf<MultipartBody.Part?>()
+    private var pathList = listOf<MultipartBody.Part?>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,21 +59,25 @@ class WriteFragment : Fragment() {
                 binding.writeTitleEt.text.isEmpty() -> showWarning(binding.writeTitleWarningIv, binding.writeTitleWarningTv)
                 category == "" -> showWarning(binding.writeCategoryWarningIv, binding.writeCategoryWarningTv)
                 else -> {
-
+                        Log.d("hashTag","$hashtagList")
                         Log.d("pathFind","$uriList")
+                    val storyService = StoryService()
+                    if(uriList.isNotEmpty()) {
                         val file = File(absolutePath(uriList[0]))
-                        Log.d("pathFind_List","$file")
+                        Log.d("pathFind_List", "$file")
                         val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
                         val body =
                             MultipartBody.Part.createFormData("image", file.name, requestFile)
-                        pathList.add(body)
 
-                        Log.d("pathFind_List","$pathList")
+                        storyService.writeStory(body)
+                    } else {
+                        storyService.writeStory(null)
+                    }
 
 
-                    Log.d("pathFind","$pathList")
-                    val storyService = StoryService()
-                    storyService.writeStory(pathList)
+                    //pathList.apply { body }
+
+
 
 
                     Log.d("category", "$category")
@@ -98,7 +103,9 @@ class WriteFragment : Fragment() {
         binding.writeHashtagEt.onFocusChangeListener = View.OnFocusChangeListener{ _, p1 ->
             if(p1){
             } else {
-                if(binding.writeHashtagEt.text.isNotEmpty()){
+                if(hashtagList.size == 10){
+
+                } else if(binding.writeHashtagEt.text.isNotEmpty()){
                     addHashTag()
                 }
                 hideKeyboard(binding.writeHashtagEt)
@@ -115,7 +122,7 @@ class WriteFragment : Fragment() {
     private fun addHashTag(){
         //Log.d("공백","${binding.writeHashtagEt.text}")
         val text = binding.writeHashtagEt.text.toString().trim()
-        hashtagList.add(Hashtag("#${text}"))
+        hashtagList.add("#${text}")
         binding.writeHashtagEt.setText("")
         binding.writeHashtagRv.adapter?.notifyDataSetChanged()
     }
