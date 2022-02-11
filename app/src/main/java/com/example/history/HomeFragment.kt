@@ -1,5 +1,6 @@
 package com.example.history
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,14 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.history.databinding.FragmentHomeBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import java.util.*
 
 class HomeFragment: Fragment() {
     lateinit var binding: FragmentHomeBinding
-
-
+    private var token : String? = null
     val information = arrayListOf("전체","한국사","동양사","서양사")
 
     override fun onCreateView(
@@ -24,35 +26,20 @@ class HomeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =  FragmentHomeBinding.inflate(inflater,container,false)
-
+//        token = arguments?.getString("token")
+//        if(token != null){
+//            binding.homeLoginTv.visibility = View.VISIBLE
+//            binding.homeLoginIv.visibility = View.GONE
+//        }
         val homeAdapter = HomeViewPagerAdapter(this)
         binding.homeMenuVp.adapter = homeAdapter
         TabLayoutMediator(binding.homeMenuTb,binding.homeMenuVp){
             tab,position->
             tab.text = information[position]
         }.attach()
-        val jwt = requireContext().getSharedPreferences("accessToken", AppCompatActivity.MODE_PRIVATE)
-        val editor = jwt.edit()
-        val dd = jwt.getString("accessToken", null)
-        Log.d("onAuthSuccess","$dd")
-        if(dd != null){
-            Log.d("checkSPF","$dd")
-            binding.homeLoginIv.visibility = View.GONE
-            binding.homeLoginTv.visibility = View.VISIBLE
-        }
-        binding.homeLoginTv.setOnClickListener {
-            editor?.remove("accessToken")
-            editor?.commit()
-            binding.homeLoginIv.visibility = View.VISIBLE
-            binding.homeLoginTv.visibility = View.GONE
-        }
 
 
         val bannerAdapter = BannerViewPagerAdapter(this)
-        bannerAdapter.addFragment(BannerFragment(R.drawable.total_banner))
-        bannerAdapter.addFragment(BannerFragment(R.drawable.korean_banner))
-        bannerAdapter.addFragment(BannerFragment(R.drawable.western_banner))
-        bannerAdapter.addFragment(BannerFragment(R.drawable.oriental_banner))
         binding.homeBannerVp.adapter = bannerAdapter
         binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
@@ -60,8 +47,35 @@ class HomeFragment: Fragment() {
             val intent = Intent(getActivity(), LoginActivity::class.java)
             startActivity(intent)
         }
+        binding.homeLoginTv.setOnClickListener {
+            logout()
+            binding.homeLoginTv.visibility = View.GONE
+            binding.homeLoginIv.visibility = View.VISIBLE
+        }
+
 
 
         return binding.root
     }
+    fun getUser(context : Context) : String?{
+        val spf = context.getSharedPreferences("accessToken",AppCompatActivity.MODE_PRIVATE)
+        return spf.getString("accessToken", null)
+    }
+    private fun logout() {
+        token = null
+    }
+
+    override fun onResume() {
+        Log.d("whoa","wda")
+
+        super.onResume()
+        token = arguments?.getString("token",null)
+        Log.d("whoa3","$token")
+        if(token != null){
+            binding.homeLoginIv.visibility = View.GONE
+            binding.homeLoginTv.visibility = View.VISIBLE
+            Log.d("what","dhdodaos")
+        }
+    }
+
 }

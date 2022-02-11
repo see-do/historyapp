@@ -14,6 +14,7 @@ import com.example.history.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity(), AuthView {
     lateinit var binding: ActivityLoginBinding
+    var token : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -58,7 +59,6 @@ class LoginActivity : AppCompatActivity(), AuthView {
         editor.putString("accessToken",accessToken)
         editor.putString("refreshToken",refreshToken)
         editor.commit()
-
         Log.d("onAuthSuccess","$accessToken")
         Log.d("onAuthSuccess","$refreshToken")
     }
@@ -78,6 +78,9 @@ class LoginActivity : AppCompatActivity(), AuthView {
             editor.putString("id",binding.loginIdEt.text.toString())
             editor.putString("password",binding.loginPwEt.text.toString())
             editor.apply()
+            val currentUser = getSharedPreferences("accessToken", MODE_PRIVATE)
+            token = currentUser.getString("accessToken",null)
+            Log.d("whoa","$token")
             exitLogin()
         }
     }
@@ -88,6 +91,8 @@ class LoginActivity : AppCompatActivity(), AuthView {
 
     private fun exitLogin(){
         val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("token", token)
+        Log.d("whoa4","$token")
         startActivity(intent)
     }
 

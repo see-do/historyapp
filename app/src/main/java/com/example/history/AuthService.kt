@@ -68,7 +68,7 @@ class AuthService {
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val authService = retrofit.create(AuthInterface::class.java)
         Log.d("break","break")
-        authService.login(User("sangho1",null, "1234")).enqueue(object : Callback<LoginResponse>{
+        authService.login(User("sangho",null, "1234")).enqueue(object : Callback<LoginResponse>{
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 val resp = response.body()
                 authView.onAuthSuccess(resp!!.body)
