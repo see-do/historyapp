@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.history.databinding.ActivitySignupBinding
 
@@ -20,6 +21,12 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.signupExitIv.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
+        }
+        val fragment = supportFragmentManager.findFragmentByTag("term")
+        if (fragment != null && fragment.isVisible) {
+            Log.d("check","check")
+            binding.signupExitIv.visibility = View.GONE
+            binding.signupTermIv.visibility = View.VISIBLE
         }
 
     }

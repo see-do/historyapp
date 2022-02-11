@@ -15,6 +15,19 @@
         android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+    <ImageButton
+        android:id="@+id/signup_term_iv"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="fitCenter"
+        android:contentDescription="@string/back"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"
+        android:visibility="gone"
+        android:src="@drawable/left_arrow"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
     <TextView
         android:id="@+id/signup_register_tv"
         android:layout_width="wrap_content"

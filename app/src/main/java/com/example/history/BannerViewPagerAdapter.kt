@@ -11,6 +11,6 @@ class BannerViewPagerAdapter (fragment: Fragment) : FragmentStateAdapter(fragmen
 
     fun addFragment(fragment: Fragment){
         fragmentList.add(fragment)
-        notifyItemInserted(fragmentList.size - 1)
+        notifyItemInserted(fragmentList.size-1)
     }
 }

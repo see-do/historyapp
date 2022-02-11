@@ -1,7 +1,6 @@
 package com.example.history
 
 import com.google.gson.annotations.SerializedName
-import java.sql.Timestamp
 
 data class LikedResponse (
     @SerializedName("storyIdx") val storyIdx : Int,

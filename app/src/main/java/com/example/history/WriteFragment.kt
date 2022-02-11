@@ -15,8 +15,12 @@ import android.net.Uri
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.JsonArray
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -55,6 +59,9 @@ class WriteFragment : Fragment() {
         }
 
         binding.writeConfirmBtn.setOnClickListener {
+            val spf = context?.getSharedPreferences("accessToken", AppCompatActivity.MODE_PRIVATE)
+            val accessToken = spf?.getString("accessToken", null)
+            Log.d("accessToken","$accessToken")
             when{
                 binding.writeTitleEt.text.isEmpty() -> showWarning(binding.writeTitleWarningIv, binding.writeTitleWarningTv)
                 category == "" -> showWarning(binding.writeCategoryWarningIv, binding.writeCategoryWarningTv)
@@ -73,10 +80,12 @@ class WriteFragment : Fragment() {
                     } else {
                         storyService.writeStory(null)
                     }
-
-
-                    //pathList.apply { body }
-
+                    val spf = requireContext().getSharedPreferences("story", AppCompatActivity.MODE_PRIVATE)
+                    val token = spf.edit()
+                    token.putString("title",binding.writeTitleEt.text.toString())
+                    token.putString("story",binding.writeStoryEt.text.toString())
+                    token.commit()
+                    Log.d("title","${binding.writeTitleEt.text}")
 
 
 
@@ -108,9 +117,20 @@ class WriteFragment : Fragment() {
                 } else if(binding.writeHashtagEt.text.isNotEmpty()){
                     addHashTag()
                 }
-                hideKeyboard(binding.writeHashtagEt)
+
+
             }
         }
+        binding.writeHashtagEt.setOnEditorActionListener(object : TextView.OnEditorActionListener{
+            override fun onEditorAction(p0: TextView?, p1: Int, p2: KeyEvent?): Boolean {
+                if (p1 == EditorInfo.IME_ACTION_DONE){
+                    hideKeyboard(binding.writeHashtagEt)
+                    addHashTag()
+                    return true
+                }
+                return false
+            }
+        })
 
         binding.writeImgLo.setOnClickListener {
             addImage()
@@ -118,6 +138,7 @@ class WriteFragment : Fragment() {
 
         return binding.root
     }
+
 
     private fun addHashTag(){
         //Log.d("공백","${binding.writeHashtagEt.text}")

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.history.databinding.ItemCommentBinding
-import com.example.history.databinding.ItemImgBinding
 
 
 class CommentRVAdapter(private var commentList : ArrayList<String>) : RecyclerView.Adapter<CommentRVAdapter.ViewHolder>(){

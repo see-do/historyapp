@@ -1,13 +1,10 @@
 package com.example.history
 
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.history.databinding.ItemHashtagBinding
-
 
 
 class HashtagRVAdapter(private val hashtagList : ArrayList<String>, private val code : Int) : RecyclerView.Adapter<HashtagRVAdapter.ViewHolder>(){

@@ -1,18 +1,17 @@
 package com.example.history
 
 import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.history.databinding.FragmentMypageBinding
 import com.google.android.material.tabs.TabLayoutMediator
-import android.view.WindowManager
-import android.widget.TextView
-import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
 class MyPageFragment : Fragment() {

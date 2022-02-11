@@ -2,11 +2,12 @@ package com.example.history
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.history.databinding.FragmentHomeBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -30,6 +31,22 @@ class HomeFragment: Fragment() {
             tab,position->
             tab.text = information[position]
         }.attach()
+        val jwt = requireContext().getSharedPreferences("accessToken", AppCompatActivity.MODE_PRIVATE)
+        val editor = jwt.edit()
+        val dd = jwt.getString("accessToken", null)
+        Log.d("onAuthSuccess","$dd")
+        if(dd != null){
+            Log.d("checkSPF","$dd")
+            binding.homeLoginIv.visibility = View.GONE
+            binding.homeLoginTv.visibility = View.VISIBLE
+        }
+        binding.homeLoginTv.setOnClickListener {
+            editor?.remove("accessToken")
+            editor?.commit()
+            binding.homeLoginIv.visibility = View.VISIBLE
+            binding.homeLoginTv.visibility = View.GONE
+        }
+
 
         val bannerAdapter = BannerViewPagerAdapter(this)
         bannerAdapter.addFragment(BannerFragment(R.drawable.total_banner))

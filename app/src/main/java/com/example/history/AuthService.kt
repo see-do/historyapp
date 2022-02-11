@@ -1,5 +1,6 @@
 package com.example.history
 
+import android.media.session.MediaSession
 import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
@@ -71,6 +72,7 @@ class AuthService {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 val resp = response.body()
                 authView.onAuthSuccess(resp!!.body)
+//                authView.onAuthSuccess(TokenBody("test","test2","test3","dasd"))
                 Log.d("login_onResponse", response.body().toString())
             }
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {

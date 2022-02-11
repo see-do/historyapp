@@ -271,6 +271,7 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:maxLength="20"
+
                 android:paddingHorizontal="8dp"
                 android:background="@drawable/cardview_selected"/>
         </androidx.cardview.widget.CardView>

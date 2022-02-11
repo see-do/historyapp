@@ -1,12 +1,10 @@
 package com.example.history
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.history.databinding.ActivityLockBinding
-import com.example.history.databinding.ActivityTestBinding
 
 class LockActivity:AppCompatActivity() {
     private var mBinding: ActivityLockBinding?=null

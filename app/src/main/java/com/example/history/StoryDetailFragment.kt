@@ -29,14 +29,6 @@ class StoryDetailFragment(story : Story) : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStoryDetailBinding.inflate(inflater, container, false)
-        hashtagList.apply{
-            add("#dad1")
-            add("#dad2")
-            add("#dad3")
-            add("#dad4")
-            add("#dad5")
-        }
-
         binding.storyHashtagRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.storyHashtagRv.adapter = HashtagRVAdapter(hashtagList, 1)
         commentList.apply{

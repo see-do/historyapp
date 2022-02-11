@@ -2,6 +2,7 @@ package com.example.history
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -52,6 +53,12 @@ class LoginActivity : AppCompatActivity(), AuthView {
         val token = tokenBody
         val accessToken = token.accessToken
         val refreshToken = token.refreshToken
+        val spf = getSharedPreferences("accessToken", MODE_PRIVATE)
+        val editor = spf.edit()
+        editor.putString("accessToken",accessToken)
+        editor.putString("refreshToken",refreshToken)
+        editor.commit()
+
         Log.d("onAuthSuccess","$accessToken")
         Log.d("onAuthSuccess","$refreshToken")
     }
