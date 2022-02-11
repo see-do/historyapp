@@ -26,11 +26,11 @@ class HomeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =  FragmentHomeBinding.inflate(inflater,container,false)
-//        token = arguments?.getString("token")
-//        if(token != null){
-//            binding.homeLoginTv.visibility = View.VISIBLE
-//            binding.homeLoginIv.visibility = View.GONE
-//        }
+        token = arguments?.getString("token")
+        if(token != null){
+            binding.homeLoginTv.visibility = View.VISIBLE
+            binding.homeLoginIv.visibility = View.GONE
+        }
         val homeAdapter = HomeViewPagerAdapter(this)
         binding.homeMenuVp.adapter = homeAdapter
         TabLayoutMediator(binding.homeMenuTb,binding.homeMenuVp){
@@ -44,13 +44,21 @@ class HomeFragment: Fragment() {
         binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         binding.homeLoginIv.setOnClickListener {
-            val intent = Intent(getActivity(), LoginActivity::class.java)
+            val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)
         }
         binding.homeLoginTv.setOnClickListener {
             logout()
+            val spf = activity?.getSharedPreferences("token",AppCompatActivity.MODE_PRIVATE)
+            val editor = spf!!.edit()
+            editor.remove("accessToken")
+            editor.remove("refreshToken")
+            editor.commit()
             binding.homeLoginTv.visibility = View.GONE
             binding.homeLoginIv.visibility = View.VISIBLE
+            val test = spf?.getString("token",null)
+            Log.d("ttest","$test")
+            val dummy = context?.getSharedPreferences("token",AppCompatActivity.MODE_PRIVATE)
         }
 
 
@@ -65,17 +73,5 @@ class HomeFragment: Fragment() {
         token = null
     }
 
-    override fun onResume() {
-        Log.d("whoa","wda")
-
-        super.onResume()
-        token = arguments?.getString("token",null)
-        Log.d("whoa3","$token")
-        if(token != null){
-            binding.homeLoginIv.visibility = View.GONE
-            binding.homeLoginTv.visibility = View.VISIBLE
-            Log.d("what","dhdodaos")
-        }
-    }
 
 }

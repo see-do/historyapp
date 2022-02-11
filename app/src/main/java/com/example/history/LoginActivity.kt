@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity(), AuthView {
         val token = tokenBody
         val accessToken = token.accessToken
         val refreshToken = token.refreshToken
-        val spf = getSharedPreferences("accessToken", MODE_PRIVATE)
+        val spf = getSharedPreferences("token", MODE_PRIVATE)
         val editor = spf.edit()
         editor.putString("accessToken",accessToken)
         editor.putString("refreshToken",refreshToken)
@@ -68,17 +68,15 @@ class LoginActivity : AppCompatActivity(), AuthView {
             Toast.makeText(this,"아이디나 비밀번호 입력", Toast.LENGTH_SHORT)?.show()
         }
         else {
-            Log.d("break","break")
             val authService = AuthService()
             authService.setAuthView(this)
-            Log.d("break","break")
             authService.login(binding.loginIdEt.text.toString(), binding.loginPwEt.text.toString())
             val spf = getSharedPreferences("auto_login", Activity.MODE_PRIVATE)
             val editor = spf.edit()
             editor.putString("id",binding.loginIdEt.text.toString())
             editor.putString("password",binding.loginPwEt.text.toString())
             editor.apply()
-            val currentUser = getSharedPreferences("accessToken", MODE_PRIVATE)
+            val currentUser = getSharedPreferences("token", MODE_PRIVATE)
             token = currentUser.getString("accessToken",null)
             Log.d("whoa","$token")
             exitLogin()
@@ -92,7 +90,6 @@ class LoginActivity : AppCompatActivity(), AuthView {
     private fun exitLogin(){
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("token", token)
-        Log.d("whoa4","$token")
         startActivity(intent)
     }
 

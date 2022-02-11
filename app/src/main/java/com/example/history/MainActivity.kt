@@ -116,7 +116,6 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
         super.onResume()
         val intent = intent
         val token = intent.getStringExtra("token")
-        Log.d("whoa5", "${token}")
         val bundle = Bundle()
         bundle.putString("token",token)
         var homeFragment = HomeFragment()
