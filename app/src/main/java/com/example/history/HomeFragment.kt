@@ -26,7 +26,8 @@ class HomeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =  FragmentHomeBinding.inflate(inflater,container,false)
-
+        val storyService = StoryService()
+        storyService.getStory()
         token = arguments?.getString("token")
         if(token != null){
             binding.homeLoginTv.visibility = View.VISIBLE

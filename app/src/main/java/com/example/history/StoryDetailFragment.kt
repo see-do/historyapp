@@ -1,6 +1,7 @@
 package com.example.history
 
 import android.app.AlertDialog
+import android.app.AppComponentFactory
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -12,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,7 +52,13 @@ class StoryDetailFragment(story : Story) : Fragment() {
         binding.storyTitleTv.text = story.title
         binding.storyCommentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.storyCommentRv.adapter = CommentRVAdapter(commentList)
+
         binding.storySettingLo.setOnClickListener {
+            val storyService = StoryService()
+            val spf = activity?.getSharedPreferences("token",AppCompatActivity.MODE_PRIVATE)
+            val token = spf?.getString("accessToken",null)
+            Log.d("dele","$token")
+            storyService.deleteStory(token!!,1)
             alertDialog.show()
             alertDialog.findViewById<TextView>(R.id.dialog_report_tv).setOnClickListener {
                 report()

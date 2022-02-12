@@ -70,13 +70,17 @@ class WriteFragment : Fragment() {
                         Log.d("pathFind","$uriList")
                     val storyService = StoryService()
                     if(uriList.isNotEmpty()) {
-                        val file = File(absolutePath(uriList[0]))
-                        Log.d("pathFind_List", "$file")
-                        val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
-                        val body =
-                            MultipartBody.Part.createFormData("image", file.name, requestFile)
-
-                        storyService.writeStory(body)
+                        for(path in uriList) {
+                            val file = File(absolutePath(path))
+                            Log.d("pathFind_List", "$file")
+                            val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
+                            val body =
+                                MultipartBody.Part.createFormData("image", file.name, requestFile)
+                            pathList.apply {
+                                body
+                            }
+                        }
+                        storyService.writeStory(pathList)
                     } else {
                         storyService.writeStory(null)
                     }

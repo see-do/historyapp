@@ -7,13 +7,19 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface StoryInterface {
-    @GET()
-    fun getStory()
+    @GET("/common/story/1")
+    fun getStoryAll() : Call<StoryGetResponse>
 
     @Multipart
     @POST("/common/story")
     fun writeStory(
-        @Part imageList : MultipartBody.Part?,
+        @Part imageList : List<MultipartBody.Part?>?,
         @PartMap postData : HashMap<String, RequestBody>
     ) : Call<StoryResponse>
+
+    @DELETE("common/story/delete/{storyIdx}")
+    fun deleteStory(
+        @Header("Authorization") Authorization : String,
+        @Path("storyIdx") storyIdx : Int
+    ) : Call<DeleteResponse>
 }

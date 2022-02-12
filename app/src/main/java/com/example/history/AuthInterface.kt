@@ -5,8 +5,8 @@ import retrofit2.http.*
 import retrofit2.http.Body
 
 interface AuthInterface {
-    @GET("/user/sign/nickNameExist/{nickName}")
-    fun nickNameExist(@Path("nickName")nickName:String?) : Call<ExistResponse>
+    @GET("/user/sign/{userID}/nickNameExist")
+    fun nickNameExist(@Path("userID") userID:String?) : Call<ExistResponse>
 
     @GET("/user/sign/{userId}/exist")
     fun userIdExist(@Path("userId")userId:String?) : Call<ExistResponse>

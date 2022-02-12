@@ -35,9 +35,9 @@ class NicknameFragment : Fragment(), ExistView {
         }
 
         binding.signupNicknameNextBtn.setOnClickListener {
-//            if(existFlag){
-//                showWarning("중복체크 버튼을 눌러주세요")
-//            } else
+            if(existFlag){
+                showWarning("중복체크 버튼을 눌러주세요")
+            } else
             if (binding.signupNicknameEt.text.toString().isEmpty()) {
                 showWarning("닉네임을 입력해주세요")
             } else if (binding.signupNicknameEt.length() < 2){
@@ -80,14 +80,16 @@ class NicknameFragment : Fragment(), ExistView {
         existFlag = body
         when(existFlag){
             false ->{
-                binding.signupNicknameWarningIv.visibility = View.GONE
-                binding.signupNicknameWarningTv.visibility = View.GONE
+                binding.signupNicknameWarningTv.visibility = View.INVISIBLE
+                binding.signupNicknameWarningIv.visibility = View.INVISIBLE
+                binding.signupNicknameCheckExistTv.visibility = View.VISIBLE
             }
             true ->{
                 showWarning("중복입니다")
             }
         }
     }
+
     private fun checkExist(){
         val authService = AuthService()
         authService.setExistView(this)

@@ -25,6 +25,7 @@ class AuthService {
             override fun onResponse(call: Call<ExistResponse>, response: Response<ExistResponse>) {
                 Log.d("nickName_onResponse", response.toString())
                 val resp = response.body()
+                existView.onAuthSuccess(resp!!.body)
                 Log.d("nickName","${resp.toString()}")
             }
             override fun onFailure(call: Call<ExistResponse>, t: Throwable) {

@@ -69,7 +69,17 @@
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@id/signup_id_warning_iv"
         app:layout_constraintTop_toBottomOf="@id/signup_id_fl" />
-
+    <TextView
+        android:id="@+id/signup_id_checkExist_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/available_id"
+        android:textColor="@color/blue"
+        android:textSize="11sp"
+        android:layout_marginTop="5dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@id/signup_id_warning_iv"
+        app:layout_constraintTop_toBottomOf="@id/signup_id_fl" />
     <Button
         android:id="@+id/signup_id_next_btn"
         android:layout_width="match_parent"

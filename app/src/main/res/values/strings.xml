@@ -34,7 +34,9 @@
     <string name="let_find_story">이야기를 찾아볼까요?</string>
     <string name="forget_password">비밀번호를 잊으셨나요?</string>
     <string name="put_nickname">사용하실 닉네임을 입력해주세요</string>
+    <string name="available_nickname">사용 가능한 닉네임입니다.</string>
     <string name="put_id">사용하실 아이디를 입력해주세요</string>
+    <string name="available_id">사용 가능한 아이디입니다.</string>
     <string name="put_password">사용하실 비밀번호를 입력해주세요</string>
     <string name="already_use_id">이미 사용 중인 아이디입니다</string>
     <string name="already_use_nickname">이미 사용 중인 닉네임입니다</string>

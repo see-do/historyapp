@@ -68,6 +68,17 @@
         android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@id/signup_nickname_warning_iv"
         app:layout_constraintTop_toBottomOf="@id/signup_nickname_fl" />
+    <TextView
+        android:id="@+id/signup_nickname_checkExist_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/available_nickname"
+        android:textColor="@color/blue"
+        android:textSize="11sp"
+        android:layout_marginTop="5dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@id/signup_nickname_warning_iv"
+        app:layout_constraintTop_toBottomOf="@id/signup_nickname_fl" />
 
     <Button
         android:id="@+id/signup_nickname_next_btn"

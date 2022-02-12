@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.history.databinding.FragmentIdBinding
 
@@ -82,8 +83,9 @@ class IdFragment : Fragment(), ExistView {
         existFlag = body
         when(existFlag){
             false ->{
-                binding.signupIdWarningIv.visibility = View.GONE
-                binding.signupIdWarningTv.visibility = View.GONE
+                binding.signupIdWarningTv.visibility = View.INVISIBLE
+                binding.signupIdWarningIv.visibility = View.INVISIBLE
+                binding.signupIdCheckExistTv.visibility = View.VISIBLE
             }
             true ->{
                 showWarning("중복입니다")

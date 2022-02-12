@@ -57,13 +57,13 @@
             <TextView
                 android:id="@+id/story_writer_nickname_tv"
                 android:layout_width="wrap_content"
-                android:layout_height="14sp"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@+id/story_writer_profile_iv"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="닉네임"
-                android:layout_marginTop="13dp"
+                android:layout_marginTop="11dp"
                 android:layout_marginStart="16dp"
-                android:textSize="12sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 />
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -12,13 +12,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 
 class StoryService {
-    fun getStory() {
-        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
-        val storyService = retrofit.create(StoryInterface::class.java)
 
-    }
-
-    fun writeStory(pathList : MultipartBody.Part?){
+    fun writeStory(pathList : List<MultipartBody.Part?>?){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
 
@@ -38,6 +33,32 @@ class StoryService {
                 TODO("Not yet implemented")
             }
             })
+    }
+    fun deleteStory(token: String, storyIdx : Int){
+        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
+        val storyService = retrofit.create(StoryInterface::class.java)
+
+        storyService.deleteStory("Bearer $token", 1).enqueue(object : Callback<DeleteResponse>{
+            override fun onResponse(call: Call<DeleteResponse>, response: Response<DeleteResponse>) {
+                Log.d("delete_Onresponse","$response")
+            }
+            override fun onFailure(call: Call<DeleteResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+    fun getStory(){
+        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
+        val storyService = retrofit.create(StoryInterface::class.java)
+
+        storyService.getStoryAll().enqueue(object : Callback<StoryGetResponse>{
+            override fun onResponse(call: Call<StoryGetResponse>, response: Response<StoryGetResponse>) {
+                Log.d("get_OnResponse","$response")
+            }
+            override fun onFailure(call: Call<StoryGetResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 
 
