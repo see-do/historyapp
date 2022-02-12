@@ -8,7 +8,13 @@ import retrofit2.http.*
 
 interface StoryInterface {
     @GET("/common/story/1")
-    fun getStoryAll() : Call<StoryGetResponse>
+    fun getStory() : Call<GetOneStoryResponse>
+
+    @GET("/common/stories/recent/all")
+    fun getStoryAllOrderByRecent() : Call<GetAllStoryResponse>
+
+    @GET("/common/stories/liking/all")
+    fun getStoryAllOrderByLike() : Call<GetAllStoryResponse>
 
     @Multipart
     @POST("/common/story")

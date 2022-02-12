@@ -12,7 +12,15 @@ data class StoryResponse(
     @SerializedName("message") val message : String,
     @SerializedName("path") val path : String
 )
-data class StoryGetResponse(
+data class GetOneStoryResponse(
+    @SerializedName("status") val status: String,
+    @SerializedName("body") val body: OneStory?
+)
+data class GetAllStoryResponse(
+    @SerializedName("status") val status: String,
+    @SerializedName("body") val body : List<OneStory?>?
+)
+data class OneStory(
     @SerializedName("id") val id : Int,
     @SerializedName("createdDate") val createdDate : String,
     @SerializedName("lastModifedDate") val lastModifedDate : String,

@@ -51,12 +51,38 @@ class StoryService {
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
 
-        storyService.getStoryAll().enqueue(object : Callback<StoryGetResponse>{
-            override fun onResponse(call: Call<StoryGetResponse>, response: Response<StoryGetResponse>) {
+        storyService.getStory().enqueue(object : Callback<GetOneStoryResponse>{
+            override fun onResponse(call: Call<GetOneStoryResponse>, response: Response<GetOneStoryResponse>) {
                 Log.d("get_OnResponse","$response")
             }
-            override fun onFailure(call: Call<StoryGetResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GetOneStoryResponse>, t: Throwable) {
                 TODO("Not yet implemented")
+            }
+        })
+    }
+    fun getStoryAllOrderByRecent(){
+        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
+        val storyService = retrofit.create(StoryInterface::class.java)
+
+        storyService.getStoryAllOrderByRecent().enqueue(object : Callback<GetAllStoryResponse>{
+            override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
+                Log.d("getRecent_OnResponse","$response")
+            }
+            override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
+                Log.d("getRecent_OnFailure","$t")
+            }
+        })
+    }
+    fun getStoryAllOrderByLike(){
+        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
+        val storyService = retrofit.create(StoryInterface::class.java)
+
+        storyService.getStoryAllOrderByLike().enqueue(object : Callback<GetAllStoryResponse>{
+            override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
+                Log.d("getLike_OnResponse","$response")
+            }
+            override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
+                Log.d("getLike_OnFailure","$t")
             }
         })
     }
