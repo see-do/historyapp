@@ -2,11 +2,13 @@ package com.example.history
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,19 +17,32 @@ import com.example.history.databinding.FragmentSearchBinding
 class SearchFragment : Fragment() {
     lateinit var binding : FragmentSearchBinding
     private var storyDatas = ArrayList<MyPageStory>()
+    var flag = 0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
-
+        binding.searchChangeIv.setOnClickListener {
+            flag = 1
+        }
         binding.searchSearchEt.onFocusChangeListener = View.OnFocusChangeListener{ p0, p1 ->
             if(p1){
             } else {
                 if(binding.searchSearchEt.text.isNotEmpty()){
                     binding.searchSearchTv.text = "'${binding.searchSearchEt.text.trim()}'와 일치하는 이야기"
                 }
+                val spf = activity?.getSharedPreferences("token", AppCompatActivity.MODE_PRIVATE)
+                val token = spf?.getString("accessToken",null)
+                Log.d("search2","$token")
+                val searchService = SearchService()
+                when (flag){
+                    0->searchService.searchContents(token!!, binding.searchSearchEt.text.toString().trim())
+                    else->searchService.searchTitle(token!!, binding.searchSearchEt.text.toString().trim())
+                }
+
+
                 hideKeyboard(binding.searchSearchEt)
             }
         }

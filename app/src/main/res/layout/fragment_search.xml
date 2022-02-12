@@ -39,6 +39,7 @@
             android:layout_marginHorizontal="28dp"/>
 
         <ImageView
+            android:id="@+id/search_change_iv"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:scaleType="fitCenter"

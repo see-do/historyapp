@@ -15,6 +15,7 @@ import com.example.history.databinding.ActivityLoginBinding
 class LoginActivity : AppCompatActivity(), AuthView {
     lateinit var binding: ActivityLoginBinding
     var token : String? = null
+    public val auth = "com.example.history"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)

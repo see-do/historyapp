@@ -2,6 +2,7 @@ package com.example.history
 
 import retrofit2.Call
 import retrofit2.http.*
+import retrofit2.http.Body
 
 interface AuthInterface {
     @GET("/user/sign/nickNameExist/{nickName}")
