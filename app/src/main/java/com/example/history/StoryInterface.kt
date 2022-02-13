@@ -11,10 +11,20 @@ interface StoryInterface {
     fun getStory() : Call<GetOneStoryResponse>
 
     @GET("/common/stories/recent/all")
-    fun getStoryAllOrderByRecent() : Call<GetAllStoryResponse>
+    fun getStoriesAllOrderByRecent() : Call<GetAllStoryResponse>
 
     @GET("/common/stories/liking/all")
-    fun getStoryAllOrderByLike() : Call<GetAllStoryResponse>
+    fun getStoriesAllOrderByLike() : Call<GetAllStoryResponse>
+
+    @GET("/common/stories/recent/{category}")
+    fun getStoriesCategoryOrderByRecent(
+        @Path("category") category: String
+    ) : Call<GetAllStoryResponse>
+
+    @GET("/common/stories/liking/{category}")
+    fun getStoriesCategoryOrderByLike(
+        @Path("category") category: String
+    ) : Call<GetAllStoryResponse>
 
     @Multipart
     @POST("/common/story")

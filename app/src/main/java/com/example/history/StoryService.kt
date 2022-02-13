@@ -60,11 +60,11 @@ class StoryService {
             }
         })
     }
-    fun getStoryAllOrderByRecent(){
+    fun getStoriesAllOrderByRecent(){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
 
-        storyService.getStoryAllOrderByRecent().enqueue(object : Callback<GetAllStoryResponse>{
+        storyService.getStoriesAllOrderByRecent().enqueue(object : Callback<GetAllStoryResponse>{
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
                 Log.d("getRecent_OnResponse","$response")
             }
@@ -73,11 +73,11 @@ class StoryService {
             }
         })
     }
-    fun getStoryAllOrderByLike(){
+    fun getStoriesAllOrderByLike(){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
 
-        storyService.getStoryAllOrderByLike().enqueue(object : Callback<GetAllStoryResponse>{
+        storyService.getStoriesAllOrderByLike().enqueue(object : Callback<GetAllStoryResponse>{
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
                 Log.d("getLike_OnResponse","$response")
             }
@@ -86,6 +86,31 @@ class StoryService {
             }
         })
     }
-
+    fun getStoriesCategoryOrderByLike(){
+        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
+        val storyService = retrofit.create(StoryInterface::class.java)
+        //카테고리 수정 필요
+        storyService.getStoriesCategoryOrderByLike("KOREAN").enqueue(object : Callback<GetAllStoryResponse>{
+            override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
+                Log.d("getLike_OnResponse","$response")
+            }
+            override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
+                Log.d("getLike_OnFailure","$t")
+            }
+        })
+    }
+    fun getStoriesCategoryOrderByRecent(){
+        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
+        val storyService = retrofit.create(StoryInterface::class.java)
+        //카테고리 수정 필요
+        storyService.getStoriesCategoryOrderByRecent("KOREAN").enqueue(object : Callback<GetAllStoryResponse>{
+            override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
+                Log.d("getLike_OnResponse","$response")
+            }
+            override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
+                Log.d("getLike_OnFailure","$t")
+            }
+        })
+    }
 
 }

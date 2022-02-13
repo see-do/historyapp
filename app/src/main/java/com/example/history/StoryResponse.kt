@@ -12,10 +12,12 @@ data class StoryResponse(
     @SerializedName("message") val message : String,
     @SerializedName("path") val path : String
 )
+//nullable 수정 필요
 data class GetOneStoryResponse(
     @SerializedName("status") val status: String,
     @SerializedName("body") val body: OneStory?
 )
+//nullable 수정 필요
 data class GetAllStoryResponse(
     @SerializedName("status") val status: String,
     @SerializedName("body") val body : List<OneStory?>?

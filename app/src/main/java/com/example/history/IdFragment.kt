@@ -2,6 +2,8 @@ package com.example.history
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +11,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.history.databinding.FragmentIdBinding
+import org.w3c.dom.Text
 
 
 class IdFragment : Fragment(), ExistView {
@@ -28,7 +32,20 @@ class IdFragment : Fragment(), ExistView {
         binding.signupIdCheckTv.setOnClickListener {
             checkExist()
         }
+        binding.signupIdEt.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+                existFlag = true
+                binding.signupIdCheckExistTv.visibility = View.INVISIBLE
+            }
 
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+        })
         binding.signupIdNextBtn.setOnClickListener {
             Log.d("onResponse","$existFlag")
             if(existFlag){

@@ -58,5 +58,15 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/search_search_lo"
         app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:id="@+id/search_none_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="검색된 이야기가 없습니다."
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/search_search_lo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
     
 </androidx.constraintlayout.widget.ConstraintLayout>

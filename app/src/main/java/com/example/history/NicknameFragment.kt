@@ -2,6 +2,8 @@ package com.example.history
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +35,20 @@ class NicknameFragment : Fragment(), ExistView {
         binding.signupNicknameCheckTv.setOnClickListener {
             checkExist()
         }
+        binding.signupNicknameEt.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                existFlag = true
+                binding.signupNicknameCheckExistTv.visibility = View.INVISIBLE
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+        })
 
         binding.signupNicknameNextBtn.setOnClickListener {
             if(existFlag){
@@ -85,6 +101,9 @@ class NicknameFragment : Fragment(), ExistView {
                 binding.signupNicknameCheckExistTv.visibility = View.VISIBLE
             }
             true ->{
+                binding.signupNicknameWarningTv.visibility = View.VISIBLE
+                binding.signupNicknameWarningIv.visibility = View.VISIBLE
+                binding.signupNicknameCheckExistTv.visibility = View.INVISIBLE
                 showWarning("중복입니다")
             }
         }

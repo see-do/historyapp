@@ -27,9 +27,9 @@ class HomeFragment: Fragment() {
     ): View? {
         binding =  FragmentHomeBinding.inflate(inflater,container,false)
         val storyService = StoryService()
-        storyService.getStoryAllOrderByRecent()
-        storyService.getStory()
-        storyService.getStoryAllOrderByLike()
+        storyService.getStoriesAllOrderByLike()
+        storyService.getStoriesCategoryOrderByLike()
+        storyService.getStoriesCategoryOrderByRecent()
         token = arguments?.getString("token")
         if(token != null){
             binding.homeLoginTv.visibility = View.VISIBLE

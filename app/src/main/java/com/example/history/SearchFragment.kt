@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.history.databinding.FragmentSearchBinding
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), SearchView {
     lateinit var binding : FragmentSearchBinding
     private var storyDatas = ArrayList<MyPageStory>()
     var flag = 0
@@ -37,9 +37,10 @@ class SearchFragment : Fragment() {
                 val token = spf?.getString("accessToken",null)
                 Log.d("search2","$token")
                 val searchService = SearchService()
+                searchService.setSearchView(this)
                 when (flag){
-                    0->searchService.searchContents(token!!, binding.searchSearchEt.text.toString().trim())
-                    else->searchService.searchTitle(token!!, binding.searchSearchEt.text.toString().trim())
+                    0->searchService.searchContents(token, binding.searchSearchEt.text.toString().trim())
+                    else->searchService.searchTitle(token, binding.searchSearchEt.text.toString().trim())
                 }
 
 
@@ -61,6 +62,24 @@ class SearchFragment : Fragment() {
     private fun hideKeyboard(editText: EditText){
         (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
             hideSoftInputFromWindow(editText.windowToken, 0)
+        }
+    }
+
+    override fun onSearchFailure() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onSearchLoading() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onSearchSuccess(searchBody : List<Body?>?) {
+        if(searchBody != null){
+            binding.searchStoryRv.visibility = View.GONE
+            binding.searchNoneTv.visibility = View.VISIBLE
+        } else {
+            binding.searchStoryRv.visibility = View.VISIBLE
+            binding.searchNoneTv.visibility = View.GONE
         }
     }
 }
