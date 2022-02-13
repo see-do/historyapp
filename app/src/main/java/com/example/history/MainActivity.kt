@@ -1,6 +1,7 @@
 package com.example.history
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,8 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
     private var mBinding:ActivityMainBinding?=null
     private val binding get() = mBinding!!
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,8 +26,16 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
         binding.bnvMain.setOnNavigationItemSelectedListener(this)
         binding.bnvMain.itemIconTintList = null
         binding.bnvMain.selectedItemId= R.id.action_home
+        val intent = Intent(this, LockScreenService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            this.startForegroundService(intent)
+        } else {
+            this.startService(intent)
+        }
+
 
     }
+
 
     fun basicAlert(item : Int){
         val builder = AlertDialog.Builder(this)

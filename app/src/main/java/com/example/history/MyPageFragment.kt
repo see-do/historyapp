@@ -7,6 +7,8 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -74,10 +76,11 @@ class MyPageFragment : Fragment() {
                 val intent = Intent(activity,ProfileEditorActivity::class.java)
                 startActivity(intent)
             }
-//            alertDialog.findViewById<TextView>(R.id.dialog01_lock_setting).setOnClickListener{
-//                val intent = Intent(activity,LockSettingActivity::class.java)
-//                startActivity(intent)
-//            }
+            alertDialog.findViewById<TextView>(R.id.dialog01_lock_setting).setOnClickListener{
+                val intent = Intent(activity,LockSettingActivity::class.java)
+                startActivity(intent)
+            }
+
             alertDialog.findViewById<TextView>(R.id.dialog01_logout).setOnClickListener{
                 val intent = Intent(activity,SettingLogoutActivity::class.java)
                 startActivity(intent)
