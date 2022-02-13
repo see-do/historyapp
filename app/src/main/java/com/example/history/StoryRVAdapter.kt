@@ -6,15 +6,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.history.databinding.ItemStoryBinding
 
 class StoryRVAdapter(private val storyList:ArrayList<Story>) :RecyclerView.Adapter<StoryRVAdapter.ViewHolder>(){
 
+    lateinit var context:Context
     interface MyItemClickListener{
         fun onItemClick(story : Story)
     }
     private lateinit var mItemClickListener : MyItemClickListener
-
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        context = recyclerView.context
+    }
     fun myItemClickListener(itemClickListener: MyItemClickListener){
         mItemClickListener = itemClickListener
     }
@@ -42,7 +47,10 @@ class StoryRVAdapter(private val storyList:ArrayList<Story>) :RecyclerView.Adapt
             binding.itemStoryTitleTv.text=story.title
             binding.itemStoryLikeTv.text= story.likeNumber.toString()
             binding.itemStoryCommentTv.text=story.commentNumber.toString()
-            binding.itemStoryCoverImgIv.setImageResource(story.coverImg!!)
+            Glide.with(context)
+                .load(story.coverImg)
+                .into(binding.itemStoryCoverImgIv)
+
         }
     }
 

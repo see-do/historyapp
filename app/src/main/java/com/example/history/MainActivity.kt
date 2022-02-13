@@ -123,19 +123,6 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
             return false
     }
 
-    override fun onResume() {
-        super.onResume()
-        val intent = intent
-        val token = intent.getStringExtra("token")
-        val bundle = Bundle()
-        bundle.putString("token",token)
-        var homeFragment = HomeFragment()
-        homeFragment.arguments = bundle
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_container, homeFragment).commit()
-    }
-
-
 }
 
 

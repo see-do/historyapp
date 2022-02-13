@@ -52,8 +52,8 @@ class SearchFragment : Fragment(), SearchView {
 //            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex2,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
 //            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex3,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
 //        }
-        val searchStoryRVAdapter = MyPageStoryRVAdapter(storyDatas)
-        binding.searchStoryRv.adapter = searchStoryRVAdapter
+
+
         val dividerItemDecoration = DividerItemDecoration(binding.searchStoryRv.context, LinearLayoutManager(activity).orientation)
         binding.searchStoryRv.addItemDecoration(dividerItemDecoration)
         return binding.root
@@ -74,12 +74,21 @@ class SearchFragment : Fragment(), SearchView {
     }
 
     override fun onSearchSuccess(searchBody : List<Body?>?) {
+        Log.d("searchBody","$searchBody")
         if(searchBody != null){
-            binding.searchStoryRv.visibility = View.GONE
-            binding.searchNoneTv.visibility = View.VISIBLE
-        } else {
+            storyDatas.clear()
+            for(item in searchBody){
+                storyDatas.add(MyPageStory(item!!.title, R.drawable.mypage_profile_img_ex1,item.totalLike,item.totalComment,item.contents))
+                storyDatas.add(MyPageStory("dasd", R.drawable.mypage_profile_img_ex1,12,12,"fsf"))
+            }
+            val searchStoryRVAdapter = MyPageStoryRVAdapter(storyDatas)
+            binding.searchStoryRv.adapter = searchStoryRVAdapter
+
             binding.searchStoryRv.visibility = View.VISIBLE
             binding.searchNoneTv.visibility = View.GONE
+        } else {
+            binding.searchStoryRv.visibility = View.GONE
+            binding.searchNoneTv.visibility = View.VISIBLE
         }
     }
 }

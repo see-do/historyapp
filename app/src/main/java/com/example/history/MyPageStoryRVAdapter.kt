@@ -1,5 +1,6 @@
 package com.example.history
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -30,7 +31,8 @@ class MyPageStoryRVAdapter (private val myPageStoryList:ArrayList<MyPageStory>) 
 
     override fun getItemCount(): Int = myPageStoryList.size
 
-
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun addStories()
     //뷰홀더
 
     inner class ViewHolder(val binding: ItemMypageStoryBinding): RecyclerView.ViewHolder(binding.root){

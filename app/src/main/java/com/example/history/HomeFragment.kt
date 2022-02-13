@@ -15,7 +15,7 @@ import com.example.history.databinding.FragmentHomeBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*
 
-class HomeFragment: Fragment() {
+class HomeFragment: Fragment(){
     lateinit var binding: FragmentHomeBinding
     private var token : String? = null
     val information = arrayListOf("전체","한국사","동양사","서양사")
@@ -26,11 +26,9 @@ class HomeFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =  FragmentHomeBinding.inflate(inflater,container,false)
-        val storyService = StoryService()
-        storyService.getStoriesAllOrderByLike()
-        storyService.getStoriesCategoryOrderByLike()
-        storyService.getStoriesCategoryOrderByRecent()
-        token = arguments?.getString("token")
+
+        val spf = activity?.getSharedPreferences("token",AppCompatActivity.MODE_PRIVATE)
+        token = spf?.getString("accessToken", null)
         if(token != null){
             binding.homeLoginTv.visibility = View.VISIBLE
             binding.homeLoginIv.visibility = View.GONE

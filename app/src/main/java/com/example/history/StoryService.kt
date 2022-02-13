@@ -12,6 +12,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 
 class StoryService {
+    private lateinit var storyView : StoryView
+
+    fun setStoryView(storyView : StoryView){
+        this.storyView = storyView
+    }
 
     fun writeStory(pathList : List<MultipartBody.Part?>?){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
@@ -30,7 +35,7 @@ class StoryService {
                 Log.d("write_onResponse","$response")
             }
             override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                Log.d("write_onFail","$t")
             }
             })
     }
@@ -54,6 +59,7 @@ class StoryService {
         storyService.getStory().enqueue(object : Callback<GetOneStoryResponse>{
             override fun onResponse(call: Call<GetOneStoryResponse>, response: Response<GetOneStoryResponse>) {
                 Log.d("get_OnResponse","$response")
+
             }
             override fun onFailure(call: Call<GetOneStoryResponse>, t: Throwable) {
                 TODO("Not yet implemented")
@@ -67,6 +73,8 @@ class StoryService {
         storyService.getStoriesAllOrderByRecent().enqueue(object : Callback<GetAllStoryResponse>{
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
                 Log.d("getRecent_OnResponse","$response")
+                val resp = response.body()
+                storyView.onStorySuccess(resp!!.status, resp!!.body)
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
                 Log.d("getRecent_OnFailure","$t")

@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.history.databinding.FragmentStoryDetailBinding
 
 
@@ -24,7 +25,7 @@ class StoryDetailFragment(story : Story) : Fragment() {
     lateinit var binding : FragmentStoryDetailBinding
     private var hashtagList = arrayListOf<String>()
     private var commentList = arrayListOf<String>()
-     var story = story
+    var story = story
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,6 +51,8 @@ class StoryDetailFragment(story : Story) : Fragment() {
 
         builder.setView(dialogView)
         binding.storyTitleTv.text = story.title
+        Glide.with(requireContext()).load(story.coverImg).into(binding.storyImageIv)
+
         binding.storyCommentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.storyCommentRv.adapter = CommentRVAdapter(commentList)
 

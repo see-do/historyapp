@@ -20,30 +20,29 @@ data class GetOneStoryResponse(
 //nullable 수정 필요
 data class GetAllStoryResponse(
     @SerializedName("status") val status: String,
-    @SerializedName("body") val body : List<OneStory?>?
+    @SerializedName("body") val body : List<OneStory>
 )
 data class OneStory(
     @SerializedName("id") val id : Int,
     @SerializedName("createdDate") val createdDate : String,
     @SerializedName("lastModifedDate") val lastModifedDate : String,
     @SerializedName("postIdx") val postIdx : Int,
-    @SerializedName("user") val path : StoryGetUser,
+    @SerializedName("user") val path : StoryGetUser?,
     @SerializedName("category") val category : String,
     @SerializedName("title") val title : String,
     @SerializedName("contents") val contents : String,
     @SerializedName("totalLike") val totalLike : Int,
+    @SerializedName("totalClick") val totalClick : Int,
     @SerializedName("totalComment") val totalComment : Int,
-    @SerializedName("images") val images : StoryGetImage,
-    @SerializedName("hashTags") val hashTags : List<StoryGetHashtag>,
-    @SerializedName("likes") val likes : List<String?>
-
+    @SerializedName("images") val images : List<StoryGetImage>?,
+    @SerializedName("hashTags") val hashTags : String
 )
 data class StoryGetImage(
     @SerializedName("createdDate") val createdDate : String,
     @SerializedName("lastModifedDate") val lastModifedDate : String,
     @SerializedName("imgIdx") val imgIdx : Int,
     @SerializedName("post") val post : Int,
-    @SerializedName("imgUrl") val imageUrl : Uri?
+    @SerializedName("imgUrl") val imageUrl : String
 )
 data class StoryGetUser(
     @SerializedName("createdDate") val createdDate : String,
