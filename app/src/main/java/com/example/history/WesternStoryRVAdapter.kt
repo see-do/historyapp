@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.history.databinding.ItemStoryBinding
 
-class StoryRVAdapter(private val storyList:ArrayList<OneStory>) :RecyclerView.Adapter<StoryRVAdapter.ViewHolder>(){
+class WesternStoryRVAdapter(private val storyList:ArrayList<OneStory>) :RecyclerView.Adapter<WesternStoryRVAdapter.ViewHolder>(){
 
     lateinit var context:Context
     interface MyItemClickListener{
@@ -38,15 +38,17 @@ class StoryRVAdapter(private val storyList:ArrayList<OneStory>) :RecyclerView.Ad
 
     }
 
-    override fun getItemCount(): Int{
+    override fun getItemCount(): Int {
         Log.d("recycler","${storyList.size}")
-        return storyList.size}
+        return storyList.size
+    }
 
 
     //뷰홀더
 
     inner class ViewHolder(val binding:ItemStoryBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(story : OneStory){
+            Log.d("recycler","recycler")
             binding.itemStoryTitleTv.text=story.title
             binding.itemStoryLikeTv.text= story.totalLike.toString()
             binding.itemStoryCommentTv.text=story.totalComment.toString()

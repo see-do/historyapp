@@ -123,6 +123,7 @@
                     android:src="@drawable/oriental_banner"/>
             </HorizontalScrollView>
             <TextView
+                android:id="@+id/story_content_tv"
                 android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -152,6 +153,7 @@
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_like_small"/>
                 <TextView
+                    android:id="@+id/story_like_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="12"
@@ -165,6 +167,7 @@
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_comment"/>
                 <TextView
+                    android:id="@+id/story_comment_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="12"

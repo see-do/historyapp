@@ -21,7 +21,7 @@ import com.bumptech.glide.Glide
 import com.example.history.databinding.FragmentStoryDetailBinding
 
 
-class StoryDetailFragment(story : Story) : Fragment() {
+class StoryDetailFragment(story : OneStory) : Fragment() {
     lateinit var binding : FragmentStoryDetailBinding
     private var hashtagList = arrayListOf<String>()
     private var commentList = arrayListOf<String>()
@@ -51,7 +51,15 @@ class StoryDetailFragment(story : Story) : Fragment() {
 
         builder.setView(dialogView)
         binding.storyTitleTv.text = story.title
-        Glide.with(requireContext()).load(story.coverImg).into(binding.storyImageIv)
+        Glide.with(requireContext()).load(if(story.images.isNullOrEmpty()){
+            "https://history-app-story-image.s3.ap-northeast-2.amazonaws.com/static/35dd9731-2e90-41ba-a47b-79c36e9c3435history_logo.png"
+        } else {
+            story.images!![0].imageUrl
+        }).into(binding.storyImageIv)
+        binding.storyContentTv.text = story.contents
+        binding.storyLikeTv.text = story.totalLike.toString()
+        binding.storyCommentTv.text = story.totalComment.toString()
+
 
         binding.storyCommentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.storyCommentRv.adapter = CommentRVAdapter(commentList)

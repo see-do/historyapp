@@ -10,6 +10,7 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/history_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/history_logo"

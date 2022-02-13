@@ -74,7 +74,7 @@ class StoryService {
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
                 Log.d("getRecent_OnResponse","$response")
                 val resp = response.body()
-                storyView.onStorySuccess(resp!!.status, resp!!.body)
+                storyView.onStorySuccess(resp!!.status, resp.body)
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
                 Log.d("getRecent_OnFailure","$t")
@@ -107,13 +107,15 @@ class StoryService {
             }
         })
     }
-    fun getStoriesCategoryOrderByRecent(){
+    fun getStoriesCategoryOrderByRecent(category: String){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
         //카테고리 수정 필요
-        storyService.getStoriesCategoryOrderByRecent("KOREAN").enqueue(object : Callback<GetAllStoryResponse>{
+        storyService.getStoriesCategoryOrderByRecent(category).enqueue(object : Callback<GetAllStoryResponse>{
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
                 Log.d("getLike_OnResponse","$response")
+                val resp = response.body()
+                storyView.onStorySuccess(resp!!.status, resp.body)
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
                 Log.d("getLike_OnFailure","$t")
