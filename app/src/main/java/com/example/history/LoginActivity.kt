@@ -62,6 +62,7 @@ class LoginActivity : AppCompatActivity(), AuthView {
         editor.commit()
         Log.d("onAuthSuccess","$accessToken")
         Log.d("onAuthSuccess","$refreshToken")
+        exitLogin()
     }
 
     private fun login(){
@@ -80,7 +81,7 @@ class LoginActivity : AppCompatActivity(), AuthView {
             val currentUser = getSharedPreferences("token", MODE_PRIVATE)
             token = currentUser.getString("accessToken",null)
             Log.d("whoa","$token")
-            exitLogin()
+
         }
     }
     private fun signUp(){

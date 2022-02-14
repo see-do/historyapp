@@ -13,10 +13,10 @@ class SearchService {
     fun setSearchView(searchView: SearchView){
         this.searchView = searchView
     }
-    fun searchContents(token: String?, keyWord : String){
+    fun searchContents(keyWord : String){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val searchService = retrofit.create(SearchInterface::class.java)
-        searchService.searchContents("Bearer $token", keyWord).enqueue(object : Callback<SearchResponse>{
+        searchService.searchContents(keyWord).enqueue(object : Callback<SearchResponse>{
             override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
                 Log.d("search_onResponse", response.toString())
                 val resp = response.body()?.body
@@ -30,10 +30,10 @@ class SearchService {
 
         })
     }
-    fun searchTitle(token: String?, keyWord : String){
+    fun searchTitle(keyWord : String){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val searchService = retrofit.create(SearchInterface::class.java)
-        searchService.searchContents("Bearer $token", keyWord).enqueue(object : Callback<SearchResponse>{
+        searchService.searchContents(keyWord).enqueue(object : Callback<SearchResponse>{
             override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
                 Log.d("searchTitle_onResponse", response.toString())
                 val resp = response.body()

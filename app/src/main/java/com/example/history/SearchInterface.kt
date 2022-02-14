@@ -6,12 +6,10 @@ import retrofit2.http.*
 interface SearchInterface {
     @GET("/common/story/content/search")
     fun searchContents(
-        @Header("Authorization") token : String,
         @Query("keyword") keyword : String?) : Call<SearchResponse>
 
-    @GET("/common/story/content/search")
+    @GET("/common/story/title/search")
     fun searchTitle(
-        @Header("Authorization") token : String,
         @Query("keyword") keyword : String?) : Call<SearchResponse>
 
 }
