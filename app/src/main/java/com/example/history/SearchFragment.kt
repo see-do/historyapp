@@ -27,7 +27,11 @@ class SearchFragment : Fragment(), SearchView {
     ): View? {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         binding.searchChangeIv.setOnClickListener {
-            flag = 1
+            flag = when (flag){
+                0 -> 1
+                else -> 0
+            }
+            Log.d("searchTitle","change")
         }
 //        binding.searchSearchEt.onFocusChangeListener = View.OnFocusChangeListener{ p0, p1 ->
 //            if(p1){
@@ -74,13 +78,15 @@ class SearchFragment : Fragment(), SearchView {
 
     override fun onSearchSuccess(searchBody : List<Body>?) {
         Log.d("searchBody","$searchBody")
-        if(searchBody != null){
+        if(searchBody!!.isNotEmpty()){
             storyDatas.clear()
             for(story in searchBody){
                 storyDatas.add(
                     story
                 )
             }
+            binding.searchStoryRv.visibility = View.VISIBLE
+            binding.searchNoneTv.visibility = View.GONE
             val searchStoryRVAdapter = SearchStoryRVAdapter(storyDatas)
             binding.searchStoryRv.adapter = searchStoryRVAdapter
 
@@ -93,15 +99,12 @@ class SearchFragment : Fragment(), SearchView {
         if(binding.searchSearchEt.text.isNotEmpty()){
             binding.searchSearchTv.text = "'${binding.searchSearchEt.text.trim()}'와 일치하는 이야기"
         }
-        val spf = activity?.getSharedPreferences("token", AppCompatActivity.MODE_PRIVATE)
-        val token = spf?.getString("accessToken",null)
-        Log.d("search2","$token")
         val searchService = SearchService()
         searchService.setSearchView(this)
         searchService.searchContents(binding.searchSearchEt.text.toString().trim())
-//                when (flag){
-//                    0->searchService.searchContents(token, binding.searchSearchEt.text.toString().trim())
-//                    else->searchService.searchTitle(token, binding.searchSearchEt.text.toString().trim())
-//                }
+        when (flag){
+            0->searchService.searchContents(binding.searchSearchEt.text.toString().trim())
+            else->searchService.searchTitle(binding.searchSearchEt.text.toString().trim())
+        }
     }
 }

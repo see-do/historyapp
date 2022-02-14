@@ -38,4 +38,9 @@ interface StoryInterface {
         @Header("Authorization") Authorization : String,
         @Path("storyIdx") storyIdx : Int
     ) : Call<DeleteResponse>
+
+    @GET("common/story/comment/{postId}")
+    fun getComments(
+        @Path("postId") postId : Int
+    ) : Call<CommentResponse>
 }

@@ -18,7 +18,7 @@ class StoryService {
         this.storyView = storyView
     }
 
-    fun writeStory(pathList : List<MultipartBody.Part?>?){
+    fun writeStory(pathList : List<MultipartBody.Part?>?, category: String){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
 
@@ -110,7 +110,7 @@ class StoryService {
     fun getStoriesCategoryOrderByRecent(category: String){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
-        //카테고리 수정 필요
+
         storyService.getStoriesCategoryOrderByRecent(category).enqueue(object : Callback<GetAllStoryResponse>{
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
                 Log.d("getLike_OnResponse","$response")
@@ -118,6 +118,21 @@ class StoryService {
                 storyView.onStorySuccess(resp!!.status, resp.body)
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
+                Log.d("getLike_OnFailure","$t")
+            }
+        })
+    }
+    fun getComments(postId : Int){
+        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
+        val storyService = retrofit.create(StoryInterface::class.java)
+
+        storyService.getComments(postId).enqueue(object : Callback<CommentResponse>{
+            override fun onResponse(call: Call<CommentResponse>, response: Response<CommentResponse>) {
+                Log.d("getLike_OnResponse","$response")
+                val resp = response.body()
+
+            }
+            override fun onFailure(call: Call<CommentResponse>, t: Throwable) {
                 Log.d("getLike_OnFailure","$t")
             }
         })

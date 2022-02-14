@@ -49,8 +49,8 @@ data class StoryGetUser(
     @SerializedName("lastModifedDate") val lastModifedDate : String,
     @SerializedName("userIdx") val userIdx : Int,
     @SerializedName("userId") val userId : String,
-    @SerializedName("profileImgUrl") val profileImageUrl : Uri?,
-    @SerializedName("authority") val authority : String,
+    @SerializedName("profileImgUrl") val profileImageUrl : String?,
+    @SerializedName("authority") val authority : String
 )
 data class StoryGetHashtag(
     @SerializedName("createdDate") val createdDate : String,
@@ -63,4 +63,25 @@ data class StoryGetHashtag(
 data class DeleteResponse(
     @SerializedName("status") val status : String,
     @SerializedName("body") val body : Boolean
+)
+
+data class CommentResponse(
+    @SerializedName("status") val status : String,
+    @SerializedName("body") val body : CommentUser
+)
+data class Comment(
+    @SerializedName("createdDate") val createdDate : String,
+    @SerializedName("lastModifedDate") val lastModifedDate : String,
+    @SerializedName("commentIdx") val commentIdx : Int,
+    @SerializedName("user") val commentUser : CommentUser,
+    @SerializedName("contents") val contents : String
+)
+data class CommentUser(
+    @SerializedName("createdDate") val createdDate : String,
+    @SerializedName("lastModifedDate") val lastModifedDate : String,
+    @SerializedName("userIdx") val userIdx : Int,
+    @SerializedName("nickName") val nickName : String,
+    @SerializedName("userId") val userId : String,
+    @SerializedName("profileImgUrl") val profileImageUrl : String?,
+    @SerializedName("authority") val authority : String
 )

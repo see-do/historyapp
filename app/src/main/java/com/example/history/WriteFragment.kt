@@ -80,9 +80,9 @@ class WriteFragment : Fragment() {
                                 body
                             }
                         }
-                        storyService.writeStory(pathList)
+                        storyService.writeStory(pathList, category)
                     } else {
-                        storyService.writeStory(null)
+                        storyService.writeStory(pathList, category)
                     }
                     val spf = requireContext().getSharedPreferences("story", AppCompatActivity.MODE_PRIVATE)
                     val token = spf.edit()
@@ -121,8 +121,6 @@ class WriteFragment : Fragment() {
                 } else if(binding.writeHashtagEt.text.isNotEmpty()){
                     addHashTag()
                 }
-
-
             }
         }
         binding.writeHashtagEt.setOnEditorActionListener(object : TextView.OnEditorActionListener{
@@ -137,7 +135,11 @@ class WriteFragment : Fragment() {
         })
 
         binding.writeImgLo.setOnClickListener {
-            addImage()
+            if(imageList.size == 5) {
+
+            } else {
+                addImage()
+            }
         }
 
         return binding.root

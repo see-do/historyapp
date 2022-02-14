@@ -94,6 +94,9 @@ class StoryDetailFragment(story : OneStory) : Fragment() {
             //Uri.parse("mailto:")
 
         startActivity(Intent.createChooser(intent,"메일 전송하기"))
-
+    }
+    private fun getComment(){
+        val storyService = StoryService()
+        storyService.getComments(story.postIdx)
     }
 }
