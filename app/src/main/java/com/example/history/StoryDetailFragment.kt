@@ -21,10 +21,10 @@ import com.bumptech.glide.Glide
 import com.example.history.databinding.FragmentStoryDetailBinding
 
 
-class StoryDetailFragment(story : OneStory) : Fragment() {
+class StoryDetailFragment(story : OneStory) : Fragment(), CommentView {
     lateinit var binding : FragmentStoryDetailBinding
     private var hashtagList = arrayListOf<String>()
-    private var commentList = arrayListOf<String>()
+    private var commentList = arrayListOf<Comment>()
     var story = story
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,13 +34,7 @@ class StoryDetailFragment(story : OneStory) : Fragment() {
         binding = FragmentStoryDetailBinding.inflate(inflater, container, false)
         binding.storyHashtagRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.storyHashtagRv.adapter = HashtagRVAdapter(hashtagList, 1)
-        commentList.apply{
-            add("#dasd1")
-            add("#dasd2")
-            add("#dasd3")
-            add("#dasd4")
-            add("#dasd5")
-        }
+        getComment()
         val builder = AlertDialog.Builder(activity)
         val dialogView = layoutInflater.inflate(R.layout.dialog_report, null)
         builder.setView(dialogView)
@@ -61,8 +55,7 @@ class StoryDetailFragment(story : OneStory) : Fragment() {
         binding.storyCommentTv.text = story.totalComment.toString()
 
 
-        binding.storyCommentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding.storyCommentRv.adapter = CommentRVAdapter(commentList)
+
 
         binding.storySettingLo.setOnClickListener {
             val storyService = StoryService()
@@ -97,6 +90,28 @@ class StoryDetailFragment(story : OneStory) : Fragment() {
     }
     private fun getComment(){
         val storyService = StoryService()
+        storyService.setCommentView(this)
         storyService.getComments(story.postIdx)
+    }
+
+    override fun onCommentFailure() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onCommentLoading() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onCommentSuccess(status: String, body: List<Comment?>) {
+        if(body.isNotEmpty()){
+            for(comment in body){
+                commentList.add(
+                    comment!!
+                )
+            }
+            Log.d("Comment","$commentList")
+        }
+        binding.storyCommentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.storyCommentRv.adapter = CommentRVAdapter(commentList)
     }
 }

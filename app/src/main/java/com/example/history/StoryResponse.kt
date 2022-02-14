@@ -67,7 +67,7 @@ data class DeleteResponse(
 
 data class CommentResponse(
     @SerializedName("status") val status : String,
-    @SerializedName("body") val body : CommentUser
+    @SerializedName("body") val body : List<Comment?>
 )
 data class Comment(
     @SerializedName("createdDate") val createdDate : String,

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.history.databinding.ItemCommentBinding
 
 
-class CommentRVAdapter(private var commentList : ArrayList<String>) : RecyclerView.Adapter<CommentRVAdapter.ViewHolder>(){
+class CommentRVAdapter(private var commentList : ArrayList<Comment>) : RecyclerView.Adapter<CommentRVAdapter.ViewHolder>(){
 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -22,8 +22,8 @@ class CommentRVAdapter(private var commentList : ArrayList<String>) : RecyclerVi
 
     override fun getItemCount(): Int = commentList.size
     inner class ViewHolder(val binding : ItemCommentBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(comment : String){
-            binding.itemCommentCommentTv.text = comment
+        fun bind(comment : Comment){
+            binding.itemCommentCommentTv.text = comment.contents
         }
     }
 

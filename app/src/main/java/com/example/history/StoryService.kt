@@ -13,9 +13,13 @@ import java.io.File
 
 class StoryService {
     private lateinit var storyView : StoryView
+    private lateinit var commentView : CommentView
 
     fun setStoryView(storyView : StoryView){
         this.storyView = storyView
+    }
+    fun setCommentView(commentView: CommentView){
+        this.commentView = commentView
     }
 
     fun writeStory(pathList : List<MultipartBody.Part?>?, category: String){
@@ -130,6 +134,7 @@ class StoryService {
             override fun onResponse(call: Call<CommentResponse>, response: Response<CommentResponse>) {
                 Log.d("getLike_OnResponse","$response")
                 val resp = response.body()
+                commentView.onCommentSuccess(resp!!.status, resp.body)
 
             }
             override fun onFailure(call: Call<CommentResponse>, t: Throwable) {
