@@ -1,7 +1,12 @@
 package com.example.history
 
 import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
+import com.google.gson.internal.Streams.parse
 import okhttp3.MediaType
+import okhttp3.MediaType.parse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -9,7 +14,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.File
+
+import org.json.*
 
 class StoryService {
     private lateinit var storyView : StoryView
@@ -22,19 +28,15 @@ class StoryService {
         this.commentView = commentView
     }
 
-    fun writeStory(pathList : List<MultipartBody.Part?>?, category: String){
+    fun writeStory(token : String?, pathList : List<MultipartBody.Part>?, category: String){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
+        val token = "Bearer $token"
+        val jsonObject = JSONObject("{\"userId\":\"duck12\",\"category\":\"${category}\",\"title\":\"duck\",\"contents\":\"duck\",\"hashTags\":[\"duck\"]}").toString()
+        Log.d("write_","$jsonObject")
+        val test2 = RequestBody.create(parse("application/json"),jsonObject)
 
-        val userId = RequestBody.create(MediaType.parse("text/plain"),"duck")
-        var hmap = HashMap<String, RequestBody>()
-        hmap.put("userId", userId)
-        hmap.put("category", userId)
-        hmap.put("title", userId)
-        hmap.put("contents", userId)
-        hmap.put("hashTags", userId)
-
-        storyService.writeStory(pathList,hmap).enqueue(object : Callback<StoryResponse>{
+        storyService.writeStory(token,pathList,test2).enqueue(object : Callback<StoryResponse>{
             override fun onResponse(call: Call<StoryResponse>, response: Response<StoryResponse>) {
                 Log.d("write_onResponse","$response")
             }

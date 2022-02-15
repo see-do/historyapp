@@ -35,7 +35,7 @@ data class OneStory(
     @SerializedName("totalClick") val totalClick : Int,
     @SerializedName("totalComment") val totalComment : Int,
     @SerializedName("images") val images : List<StoryGetImage>?,
-    @SerializedName("hashTags") val hashTags : String
+    @SerializedName("hashTags") val hashTags : List<StoryGetHashtag>?
 )
 data class StoryGetImage(
     @SerializedName("createdDate") val createdDate : String,
@@ -84,4 +84,11 @@ data class CommentUser(
     @SerializedName("userId") val userId : String,
     @SerializedName("profileImgUrl") val profileImageUrl : String?,
     @SerializedName("authority") val authority : String
+)
+data class WriteStory(
+    @SerializedName("userId") val userId : String,
+    @SerializedName("category") val category : String,
+    @SerializedName("title") val title : String,
+    @SerializedName("contents") val contents : String,
+    @SerializedName("hashTags") val hashTags:  String
 )

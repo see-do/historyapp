@@ -7,6 +7,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class AuthService {
     private lateinit var existView: ExistView
@@ -66,10 +67,11 @@ class AuthService {
     }
 
     fun login(id:String, password:String){
-        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
+        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com")
+            .addConverterFactory(GsonConverterFactory.create()).build()
         val authService = retrofit.create(AuthInterface::class.java)
         Log.d("break","break")
-        authService.login(User("sangho",null, "1234")).enqueue(object : Callback<LoginResponse>{
+        authService.login(Login(id, password)).enqueue(object : Callback<LoginResponse>{
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 val resp = response.body()
                 authView.onAuthSuccess(resp!!.body)

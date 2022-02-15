@@ -5,3 +5,7 @@ data class User(
     var nickName : String?,
     var password : String?
 )
+data class Login(
+    var id : String,
+    var password: String
+)

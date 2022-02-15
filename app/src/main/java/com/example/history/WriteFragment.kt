@@ -36,7 +36,7 @@ class WriteFragment : Fragment() {
     private var imageList = arrayListOf<Image>()
     private val REQUEST_GET_IMAGE = 105
     private var uriList = arrayListOf<Uri>()
-    private var pathList = listOf<MultipartBody.Part?>()
+    private var pathList = arrayListOf<MultipartBody.Part>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,8 +50,8 @@ class WriteFragment : Fragment() {
         Log.d("category","$category")
         binding.writeCategoryRb.setOnCheckedChangeListener { _, id ->
             when (id){
-                R.id.write_category_korean_rb -> category = "korean"
-                R.id.write_category_western_rb -> category = "western"
+                R.id.write_category_korean_rb -> category = "KOREAN"
+                R.id.write_category_western_rb -> category = "WESTERN"
                 R.id.write_category_oriental_rb -> category = "oriental"
                 R.id.write_category_etc_rb -> category = "etc"
             }
@@ -59,7 +59,7 @@ class WriteFragment : Fragment() {
         }
 
         binding.writeConfirmBtn.setOnClickListener {
-            val spf = context?.getSharedPreferences("accessToken", AppCompatActivity.MODE_PRIVATE)
+            val spf = context?.getSharedPreferences("token", AppCompatActivity.MODE_PRIVATE)
             val accessToken = spf?.getString("accessToken", null)
             Log.d("accessToken","$accessToken")
             when{
@@ -75,14 +75,14 @@ class WriteFragment : Fragment() {
                             Log.d("pathFind_List", "$file")
                             val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
                             val body =
-                                MultipartBody.Part.createFormData("image", file.name, requestFile)
-                            pathList.apply {
-                                body
-                            }
+                                MultipartBody.Part.createFormData("imageList", file.name, requestFile)
+                            pathList.add(body)
                         }
-                        storyService.writeStory(pathList, category)
+                        Log.d("pathFind","$pathList")
+
+                        storyService.writeStory(accessToken,pathList, category)
                     } else {
-                        storyService.writeStory(pathList, category)
+                        storyService.writeStory(accessToken, pathList, category)
                     }
                     val spf = requireContext().getSharedPreferences("story", AppCompatActivity.MODE_PRIVATE)
                     val token = spf.edit()

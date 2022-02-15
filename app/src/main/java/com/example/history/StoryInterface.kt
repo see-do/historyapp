@@ -29,8 +29,9 @@ interface StoryInterface {
     @Multipart
     @POST("/common/story")
     fun writeStory(
-        @Part imageList : List<MultipartBody.Part?>?,
-        @PartMap postData : HashMap<String, RequestBody>
+        @Header("Authorization") Authorization: String,
+        @Part imageList : List<MultipartBody.Part>?,
+        @Part("postData") postData : RequestBody
     ) : Call<StoryResponse>
 
     @DELETE("common/story/delete/{storyIdx}")
