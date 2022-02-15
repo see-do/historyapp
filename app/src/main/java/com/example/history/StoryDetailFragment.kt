@@ -32,6 +32,7 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStoryDetailBinding.inflate(inflater, container, false)
+        getHashTag()
         binding.storyHashtagRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.storyHashtagRv.adapter = HashtagRVAdapter(hashtagList, 1)
         getComment()
@@ -93,7 +94,14 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView {
         storyService.setCommentView(this)
         storyService.getComments(story.postIdx)
     }
-
+    private fun getHashTag(){
+        if(story.hashTags!!.isNotEmpty()){
+            val list = story.hashTags
+            for(hashTag in list!!){
+                hashtagList.add(hashTag.tag)
+            }
+        }
+    }
     override fun onCommentFailure() {
         TODO("Not yet implemented")
     }

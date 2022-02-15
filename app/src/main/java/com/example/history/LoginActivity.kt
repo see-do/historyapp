@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.history.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity(), AuthView {
+    lateinit var mainActivity: MainActivity
     lateinit var binding: ActivityLoginBinding
     var token : String? = null
     public val auth = "com.example.history"
@@ -43,7 +44,7 @@ class LoginActivity : AppCompatActivity(), AuthView {
     }
 
     override fun onAuthFailure() {
-        TODO("Not yet implemented")
+        showToast()
     }
 
     override fun onAuthLoading() {
@@ -60,6 +61,11 @@ class LoginActivity : AppCompatActivity(), AuthView {
         editor.putString("accessToken",accessToken)
         editor.putString("refreshToken",refreshToken)
         editor.commit()
+        val userInfo = getSharedPreferences("user", MODE_PRIVATE)
+        val userEditor = userInfo.edit()
+        editor.putString("id",binding.loginIdEt.text.toString())
+        editor.commit()
+        Log.d("onAuthSuccess","${binding.loginIdEt.text}")
         Log.d("onAuthSuccess","$accessToken")
         Log.d("onAuthSuccess","$refreshToken")
         exitLogin()
@@ -95,9 +101,13 @@ class LoginActivity : AppCompatActivity(), AuthView {
         startActivity(intent)
     }
 
+    private fun showToast(){
+        Toast.makeText(this,"아이디나 비밀번호를 확인해주세요",Toast.LENGTH_SHORT).show()
+    }
     private fun hideKeyboard(editText: EditText){
         (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).apply {
             hideSoftInputFromWindow(editText.windowToken, 0)
         }
     }
+
 }

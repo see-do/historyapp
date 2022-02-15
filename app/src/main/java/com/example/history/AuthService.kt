@@ -74,9 +74,12 @@ class AuthService {
         authService.login(Login(id, password)).enqueue(object : Callback<LoginResponse>{
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 val resp = response.body()
+                if(response.code() == 401){
+                    authView.onAuthFailure()
+                } else{
                 authView.onAuthSuccess(resp!!.body)
 //                authView.onAuthSuccess(TokenBody("test","test2","test3","dasd"))
-                Log.d("login_onResponse", response.body().toString())
+                Log.d("login_onResponse", response.body().toString())}
             }
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.d("login_onFailure", t.message.toString())

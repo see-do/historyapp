@@ -68,11 +68,14 @@ class HomeFragment: Fragment(){
         token = null
         val spf = activity?.getSharedPreferences("token",AppCompatActivity.MODE_PRIVATE)
         val editor = spf!!.edit()
-        editor.remove("accessToken")
-        editor.remove("refreshToken")
+        editor.clear()
         editor.commit()
+        val userInfo = activity?.getSharedPreferences("user",AppCompatActivity.MODE_PRIVATE)
+        val userEditor = userInfo!!.edit()
+        userEditor.clear()
+        userEditor.commit()
         val test = spf?.getString("token",null)
-        Log.d("ttest","$test")
+        Log.d("tlltest","$test")
     }
 
 
