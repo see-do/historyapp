@@ -19,24 +19,42 @@ import org.json.*
 
 class StoryService {
     private lateinit var storyView : StoryView
-    private lateinit var commentView : CommentView
+
+    private lateinit var deleteView : DeleteView
 
     fun setStoryView(storyView : StoryView){
         this.storyView = storyView
     }
-    fun setCommentView(commentView: CommentView){
-        this.commentView = commentView
+
+    fun setDeleteView(deleteView : DeleteView){
+        this.deleteView = deleteView
     }
 
-    fun writeStory(token : String?, pathList : List<MultipartBody.Part>?, category: String){
+    fun writeStory(token : String?, pathList : List<MultipartBody.Part?>, id : String, title: String,
+                   category: String, contents: String, hashtagList : List<String>?){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
         val token = "Bearer $token"
-        val jsonObject = JSONObject("{\"userId\":\"duck12\",\"category\":\"${category}\",\"title\":\"duck\",\"contents\":\"duck\",\"hashTags\":[\"duck\"]}").toString()
+        var jsonArray = arrayListOf<String>()
+        if((hashtagList?.isNotEmpty())!!){
+            for(hashtag in hashtagList){
+                jsonArray.add("\"$hashtag\"")
+            }
+        }
+        val body = RequestBody.create(MultipartBody.FORM,"")
+        val emptyPart = MultipartBody.Part.createFormData("imageList","",body)
+        val emptyList = arrayListOf<MultipartBody.Part>()
+        emptyList.add(emptyPart)
+        Log.d("jsonArray","$jsonArray")
+        val jsonObject = JSONObject("{\"userId\":\"${id}\",\"category\":\"${category}\",\"title\":\"${title}\",\"contents\":\"${contents}\",\"hashTags\":${jsonArray}}").toString()
         Log.d("write_","$jsonObject")
-        val test2 = RequestBody.create(parse("application/json"),jsonObject)
-
-        storyService.writeStory(token,pathList,test2).enqueue(object : Callback<StoryResponse>{
+        val jsonBody = RequestBody.create(parse("application/json"),jsonObject)
+        Log.d("pathFind","$pathList")
+        storyService.writeStory(token, if(pathList.isEmpty()){
+            emptyList
+        } else{
+              pathList
+              }, jsonBody).enqueue(object : Callback<StoryResponse>{
             override fun onResponse(call: Call<StoryResponse>, response: Response<StoryResponse>) {
                 Log.d("write_onResponse","$response")
             }
@@ -49,9 +67,14 @@ class StoryService {
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
 
-        storyService.deleteStory("Bearer $token", 1).enqueue(object : Callback<DeleteResponse>{
+        storyService.deleteStory("Bearer $token", storyIdx).enqueue(object : Callback<DeleteResponse>{
             override fun onResponse(call: Call<DeleteResponse>, response: Response<DeleteResponse>) {
-                Log.d("delete_Onresponse","$response")
+                val resp = response.body()
+                if(resp!!.body){
+                    deleteView.onDeleteSuccess(resp.body)
+                } else {
+                    deleteView.onDeleteFailure()
+                }
             }
             override fun onFailure(call: Call<DeleteResponse>, t: Throwable) {
                 TODO("Not yet implemented")
@@ -128,21 +151,6 @@ class StoryService {
             }
         })
     }
-    fun getComments(postId : Int){
-        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
-        val storyService = retrofit.create(StoryInterface::class.java)
 
-        storyService.getComments(postId).enqueue(object : Callback<CommentResponse>{
-            override fun onResponse(call: Call<CommentResponse>, response: Response<CommentResponse>) {
-                Log.d("getLike_OnResponse","$response")
-                val resp = response.body()
-                commentView.onCommentSuccess(resp!!.status, resp.body)
-
-            }
-            override fun onFailure(call: Call<CommentResponse>, t: Throwable) {
-                Log.d("getLike_OnFailure","$t")
-            }
-        })
-    }
 
 }

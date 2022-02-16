@@ -47,7 +47,7 @@ class SearchStoryRVAdapter (private val myPageStoryList:ArrayList<Body>) : Recyc
             binding.itemMyPageStoryLikeTv.text= searchStory.totalLike.toString()
             binding.itemMyPageStoryCommentTv.text=searchStory.totalComment.toString()
             Glide.with(context)
-                .load(if(searchStory.user == null){
+                .load(if(searchStory.user!!.profileImgUrl == null){
                     "https://history-app-story-image.s3.ap-northeast-2.amazonaws.com/static/35dd9731-2e90-41ba-a47b-79c36e9c3435history_logo.png"
                 }else{
                     searchStory.user.profileImgUrl

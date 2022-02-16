@@ -16,7 +16,6 @@ class LoginActivity : AppCompatActivity(), AuthView {
     lateinit var mainActivity: MainActivity
     lateinit var binding: ActivityLoginBinding
     var token : String? = null
-    public val auth = "com.example.history"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -73,13 +72,14 @@ class LoginActivity : AppCompatActivity(), AuthView {
 
     private fun login(){
         if(binding.loginIdEt.text.toString().isEmpty() || binding.loginPwEt.text.toString().isEmpty()) {
-            Toast.makeText(this,"아이디나 비밀번호 입력", Toast.LENGTH_SHORT)?.show()
+            Log.d("toastCheck","toast")
+            Toast.makeText(this,"아이디나 비밀번호 입력", Toast.LENGTH_SHORT).show()
         }
         else {
             val authService = AuthService()
             authService.setAuthView(this)
             authService.login(binding.loginIdEt.text.toString(), binding.loginPwEt.text.toString())
-            val spf = getSharedPreferences("auto_login", Activity.MODE_PRIVATE)
+            val spf = getSharedPreferences("userSpf", Activity.MODE_PRIVATE)
             val editor = spf.edit()
             editor.putString("id",binding.loginIdEt.text.toString())
             editor.putString("password",binding.loginPwEt.text.toString())
@@ -102,6 +102,7 @@ class LoginActivity : AppCompatActivity(), AuthView {
     }
 
     private fun showToast(){
+        Log.d("toastCheck","toast")
         Toast.makeText(this,"아이디나 비밀번호를 확인해주세요",Toast.LENGTH_SHORT).show()
     }
     private fun hideKeyboard(editText: EditText){

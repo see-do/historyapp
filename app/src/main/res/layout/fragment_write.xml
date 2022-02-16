@@ -190,7 +190,7 @@
             android:id="@+id/write_category_warning_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/write_title"
+            android:text="@string/write_category"
             android:textColor="@color/red"
             android:textSize="11sp"
             android:layout_marginTop="5dp"
@@ -198,17 +198,41 @@
             android:visibility="invisible"
             app:layout_constraintStart_toEndOf="@id/write_category_warning_iv"
             app:layout_constraintTop_toBottomOf="@id/write_category_lo" />
-    <TextView
-        android:id="@+id/write_story_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/story"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_marginTop="26dp"
-        app:layout_constraintTop_toBottomOf="@id/write_category_lo"
-        app:layout_constraintStart_toStartOf="@id/write_write_tv"/>
+        <TextView
+            android:id="@+id/write_story_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/story"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="26dp"
+            app:layout_constraintTop_toBottomOf="@id/write_category_lo"
+            app:layout_constraintStart_toStartOf="@id/write_write_tv"/>
+        <ImageView
+            android:id="@+id/write_story_warning_iv"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/warning"
+            android:src="@drawable/ic_warning"
+            android:layout_marginStart="5dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@id/write_story_tv"
+            app:layout_constraintTop_toTopOf="@id/write_story_tv"
+            app:layout_constraintBottom_toBottomOf="@id/write_story_tv"/>
+        <TextView
+            android:id="@+id/write_story_warning_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/write_category"
+            android:textColor="@color/red"
+            android:textSize="11sp"
+            android:layout_marginStart="5dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@id/write_story_warning_iv"
+            app:layout_constraintTop_toTopOf="@id/write_story_warning_iv"
+            app:layout_constraintBottom_toBottomOf="@id/write_story_warning_iv"/>
     <androidx.cardview.widget.CardView
         android:id="@+id/write_story_cv"
         android:layout_width="match_parent"

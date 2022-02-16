@@ -45,6 +45,7 @@
     <string name="diff_password">비밀번호가 일치하지 않습니다</string>
     <string name="write_title">제목을 작성해주세요</string>
     <string name="write_category">주제를 선택해주세요</string>
+    <string name="write_story">내용을 작성해주세요</string>
     <string name="check_exist">중복 확인</string>
     <string name="plus">+</string>
 

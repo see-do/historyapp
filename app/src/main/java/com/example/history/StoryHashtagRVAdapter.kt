@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.history.databinding.ItemHashtagBinding
 
 
-class HashtagRVAdapter(private val hashtagList : ArrayList<String>) : RecyclerView.Adapter<HashtagRVAdapter.ViewHolder>(){
+class StoryHashtagRVAdapter(private val hashtagList : ArrayList<String>) : RecyclerView.Adapter<StoryHashtagRVAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemHashtagBinding
@@ -17,9 +17,6 @@ class HashtagRVAdapter(private val hashtagList : ArrayList<String>) : RecyclerVi
 
     override fun onBindViewHolder(holder : ViewHolder, position : Int){
         holder.bind(hashtagList[position])
-        holder.binding.itemHashtagTv.setOnClickListener {
-            removeHashtag(position)
-        }
     //holder.bind(hashtagList[position])
     }
 
@@ -27,11 +24,11 @@ class HashtagRVAdapter(private val hashtagList : ArrayList<String>) : RecyclerVi
     inner class ViewHolder(val binding : ItemHashtagBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(hashtag : String){
             binding.itemHashtagTv.text = hashtag
+            binding.itemHashtagIv.setImageResource(R.drawable.button_hashtag_detail)
+            binding.itemHashtagTv.setTextColor(Color.parseColor("#27316A"))
         }
+
     }
-    fun removeHashtag(position: Int){
-        hashtagList.removeAt(position)
-        notifyDataSetChanged()
-    }
+
 
 }

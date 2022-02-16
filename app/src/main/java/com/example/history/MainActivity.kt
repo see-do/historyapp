@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
 import com.example.history.databinding.ActivityMainBinding
@@ -85,11 +86,17 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
         } else {
             when (item.itemId) {
                 R.id.action_writing -> {
-                    Log.d("das","dasd")
-                    var writeFragment = WriteFragment()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fl_container, writeFragment, "write").commit()
-                    return true
+                    val spf = getSharedPreferences("token",MODE_PRIVATE)
+                    val token = spf.getString("accessToken", null)
+                    if(token == null){
+                        Toast.makeText(this,"글 작성을 위해 로그인을 해주세요",Toast.LENGTH_SHORT).show()
+                        return false
+                    }else{
+                        var writeFragment = WriteFragment()
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.fl_container, writeFragment, "write").commit()
+                        return true
+                    }
                 }
                 R.id.action_test -> {
                     Log.d("das","dasd")

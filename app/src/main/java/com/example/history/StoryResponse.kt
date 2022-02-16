@@ -27,7 +27,7 @@ data class OneStory(
     @SerializedName("createdDate") val createdDate : String,
     @SerializedName("lastModifedDate") val lastModifedDate : String,
     @SerializedName("postIdx") val postIdx : Int,
-    @SerializedName("user") val path : StoryGetUser?,
+    @SerializedName("user") val user : StoryGetUser?,
     @SerializedName("category") val category : String,
     @SerializedName("title") val title : String,
     @SerializedName("contents") val contents : String,
@@ -48,7 +48,7 @@ data class StoryGetUser(
     @SerializedName("createdDate") val createdDate : String,
     @SerializedName("lastModifedDate") val lastModifedDate : String,
     @SerializedName("userIdx") val userIdx : Int,
-    @SerializedName("userId") val userId : String,
+    @SerializedName("nickName") val nickName : String,
     @SerializedName("profileImgUrl") val profileImageUrl : String?,
     @SerializedName("authority") val authority : String
 )
@@ -65,26 +65,7 @@ data class DeleteResponse(
     @SerializedName("body") val body : Boolean
 )
 
-data class CommentResponse(
-    @SerializedName("status") val status : String,
-    @SerializedName("body") val body : List<Comment?>
-)
-data class Comment(
-    @SerializedName("createdDate") val createdDate : String,
-    @SerializedName("lastModifedDate") val lastModifedDate : String,
-    @SerializedName("commentIdx") val commentIdx : Int,
-    @SerializedName("user") val commentUser : CommentUser,
-    @SerializedName("contents") val contents : String
-)
-data class CommentUser(
-    @SerializedName("createdDate") val createdDate : String,
-    @SerializedName("lastModifedDate") val lastModifedDate : String,
-    @SerializedName("userIdx") val userIdx : Int,
-    @SerializedName("nickName") val nickName : String,
-    @SerializedName("userId") val userId : String,
-    @SerializedName("profileImgUrl") val profileImageUrl : String?,
-    @SerializedName("authority") val authority : String
-)
+
 data class WriteStory(
     @SerializedName("userId") val userId : String,
     @SerializedName("category") val category : String,

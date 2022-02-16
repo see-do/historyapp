@@ -45,15 +45,15 @@ class WriteFragment : Fragment() {
     ): View? {
         binding = FragmentWriteBinding.inflate(inflater, container, false)
         binding.writeHashtagRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.writeHashtagRv.adapter = HashtagRVAdapter(hashtagList, 0)
+        binding.writeHashtagRv.adapter = HashtagRVAdapter(hashtagList)
         var category = ""
         Log.d("category","$category")
         binding.writeCategoryRb.setOnCheckedChangeListener { _, id ->
             when (id){
                 R.id.write_category_korean_rb -> category = "KOREAN"
                 R.id.write_category_western_rb -> category = "WESTERN"
-                R.id.write_category_oriental_rb -> category = "oriental"
-                R.id.write_category_etc_rb -> category = "etc"
+                R.id.write_category_oriental_rb -> category = "ASIAN"
+                R.id.write_category_etc_rb -> category = "ETC"
             }
             hideWarning(binding.writeCategoryWarningIv,binding.writeCategoryWarningTv)
         }
@@ -69,6 +69,8 @@ class WriteFragment : Fragment() {
                         Log.d("hashTag","$hashtagList")
                         Log.d("pathFind","$uriList")
                     val storyService = StoryService()
+                    val idSpf = requireContext().getSharedPreferences("userSpf",AppCompatActivity.MODE_PRIVATE)
+                    val id = idSpf.getString("id",null)
                     if(uriList.isNotEmpty()) {
                         for(path in uriList) {
                             val file = File(absolutePath(path))
@@ -79,10 +81,11 @@ class WriteFragment : Fragment() {
                             pathList.add(body)
                         }
                         Log.d("pathFind","$pathList")
-
-                        storyService.writeStory(accessToken,pathList, category)
+                        Log.d("hashTag","$hashtagList")
+                        storyService.writeStory(accessToken,pathList, id!!, binding.writeTitleEt.text.toString(), category, binding.writeStoryEt.text.toString(), hashtagList)
                     } else {
-                        storyService.writeStory(accessToken, pathList, category)
+                        Log.d("pathFind","$pathList")
+                        storyService.writeStory(accessToken, pathList, id!!, binding.writeTitleEt.text.toString(), category, binding.writeStoryEt.text.toString(), hashtagList)
                     }
                     val spf = requireContext().getSharedPreferences("story", AppCompatActivity.MODE_PRIVATE)
                     val token = spf.edit()
@@ -90,8 +93,6 @@ class WriteFragment : Fragment() {
                     token.putString("story",binding.writeStoryEt.text.toString())
                     token.commit()
                     Log.d("title","${binding.writeTitleEt.text}")
-
-
 
                     Log.d("category", "$category")
                     (context as MainActivity).supportFragmentManager.beginTransaction()
@@ -125,7 +126,9 @@ class WriteFragment : Fragment() {
         }
         binding.writeHashtagEt.setOnEditorActionListener(object : TextView.OnEditorActionListener{
             override fun onEditorAction(p0: TextView?, p1: Int, p2: KeyEvent?): Boolean {
-                if (p1 == EditorInfo.IME_ACTION_DONE){
+                if(hashtagList.size == 10){
+
+                }else if (p1 == EditorInfo.IME_ACTION_DONE){
                     hideKeyboard(binding.writeHashtagEt)
                     addHashTag()
                     return true

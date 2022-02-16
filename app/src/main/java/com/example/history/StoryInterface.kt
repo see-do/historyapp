@@ -30,7 +30,7 @@ interface StoryInterface {
     @POST("/common/story")
     fun writeStory(
         @Header("Authorization") Authorization: String,
-        @Part imageList : List<MultipartBody.Part>?,
+        @Part imageList : List<MultipartBody.Part?>,
         @Part("postData") postData : RequestBody
     ) : Call<StoryResponse>
 
@@ -40,8 +40,5 @@ interface StoryInterface {
         @Path("storyIdx") storyIdx : Int
     ) : Call<DeleteResponse>
 
-    @GET("common/story/comment/{postId}")
-    fun getComments(
-        @Path("postId") postId : Int
-    ) : Call<CommentResponse>
+
 }
