@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.history.databinding.FragmentSearchBinding
 
-class SearchFragment : Fragment(), SearchView {
+class SearchFragment : Fragment(), SearchView, OneStoryView {
     lateinit var binding : FragmentSearchBinding
     private var storyDatas = ArrayList<Body>()
     var flag = 0
@@ -33,13 +33,7 @@ class SearchFragment : Fragment(), SearchView {
             }
             Log.d("searchTitle","change")
         }
-//        binding.searchSearchEt.onFocusChangeListener = View.OnFocusChangeListener{ p0, p1 ->
-//            if(p1){
-//            } else {
-//                searchTitle()
-//                hideKeyboard(binding.searchSearchEt)
-//            }
-//        }
+
         binding.searchSearchEt.setOnEditorActionListener(object : android.widget.TextView.OnEditorActionListener{
             override fun onEditorAction(p0: android.widget.TextView?, p1: Int, p2: android.view.KeyEvent?): Boolean {
                 if (p1 == EditorInfo.IME_ACTION_SEARCH){
@@ -50,12 +44,6 @@ class SearchFragment : Fragment(), SearchView {
                 return false
             }
         })
-//        storyDatas.apply {
-//            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex1,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
-//            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex2,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
-//            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex3,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
-//        }
-
 
         val dividerItemDecoration = DividerItemDecoration(binding.searchStoryRv.context, LinearLayoutManager(activity).orientation)
         binding.searchStoryRv.addItemDecoration(dividerItemDecoration)
@@ -66,6 +54,19 @@ class SearchFragment : Fragment(), SearchView {
         (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
             hideSoftInputFromWindow(editText.windowToken, 0)
         }
+    }
+
+    override fun onStoryFailure() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onStoryLoading() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onStorySuccess(status: String, body: OneStory?) {
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_container, StoryDetailFragment(body!!)).commitAllowingStateLoss()
     }
 
     override fun onSearchFailure() {
@@ -81,19 +82,26 @@ class SearchFragment : Fragment(), SearchView {
         if(searchBody!!.isNotEmpty()){
             storyDatas.clear()
             for(story in searchBody){
-                storyDatas.add(
-                    story
-                )
+                storyDatas.add(story)
             }
             binding.searchStoryRv.visibility = View.VISIBLE
             binding.searchNoneTv.visibility = View.GONE
             val searchStoryRVAdapter = SearchStoryRVAdapter(storyDatas)
             binding.searchStoryRv.adapter = searchStoryRVAdapter
-
+            searchStoryRVAdapter.searchItemClickListener(object : SearchStoryRVAdapter.SearchItemClickListener{
+                override fun onItemClick(story: Body) {
+                    getOneStory(story)
+                }
+            })
         } else {
             binding.searchStoryRv.visibility = View.GONE
             binding.searchNoneTv.visibility = View.VISIBLE
         }
+    }
+    private fun getOneStory(story:Body){
+        val storyService = StoryService()
+        storyService.setOneStoryView(this)
+        storyService.getStory(story.postIdx)
     }
     private fun searchTitle(){
         if(binding.searchSearchEt.text.isNotEmpty()){

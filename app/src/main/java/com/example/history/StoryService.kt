@@ -19,11 +19,14 @@ import org.json.*
 
 class StoryService {
     private lateinit var storyView : StoryView
-
+    private lateinit var oneStoryView : OneStoryView
     private lateinit var deleteView : DeleteView
 
     fun setStoryView(storyView : StoryView){
         this.storyView = storyView
+    }
+    fun setOneStoryView(oneStoryView: OneStoryView){
+        this.oneStoryView = oneStoryView
     }
 
     fun setDeleteView(deleteView : DeleteView){
@@ -81,14 +84,15 @@ class StoryService {
             }
         })
     }
-    fun getStory(){
+    fun getStory(postIdx : Int){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
 
-        storyService.getStory().enqueue(object : Callback<GetOneStoryResponse>{
+        storyService.getStory(postIdx).enqueue(object : Callback<GetOneStoryResponse>{
             override fun onResponse(call: Call<GetOneStoryResponse>, response: Response<GetOneStoryResponse>) {
                 Log.d("get_OnResponse","$response")
-
+                val resp = response.body()
+                oneStoryView.onStorySuccess(resp!!.status, resp.body)
             }
             override fun onFailure(call: Call<GetOneStoryResponse>, t: Throwable) {
                 TODO("Not yet implemented")

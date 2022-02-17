@@ -12,10 +12,16 @@ import com.example.history.databinding.ItemStoryBinding
 class SearchStoryRVAdapter (private val myPageStoryList:ArrayList<Body>) : RecyclerView.Adapter<SearchStoryRVAdapter.ViewHolder>(){
 
     lateinit var context:Context
-
+    private lateinit var sItemClickListener: SearchItemClickListener
+    interface SearchItemClickListener{
+        fun onItemClick(story : Body)
+    }
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         context = recyclerView.context
+    }
+    fun searchItemClickListener(searchItemClickListener: SearchItemClickListener){
+        sItemClickListener = searchItemClickListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,14 +32,13 @@ class SearchStoryRVAdapter (private val myPageStoryList:ArrayList<Body>) : Recyc
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(myPageStoryList[position])
-
+        holder.binding.storyLo.setOnClickListener {
+            sItemClickListener.onItemClick(myPageStoryList[position])
+        }
     }
 
     override fun getItemCount(): Int = myPageStoryList.size
 
-//    @SuppressLint("NotifyDataSetChanged")
-//    fun addStories()
-    //뷰홀더
 
     inner class ViewHolder(val binding: ItemMypageStoryBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(searchStory:Body){

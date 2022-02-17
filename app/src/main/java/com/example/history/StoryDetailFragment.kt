@@ -22,7 +22,7 @@ import com.bumptech.glide.Glide
 import com.example.history.databinding.FragmentStoryDetailBinding
 
 
-class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteView {
+class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteView, PostCommentView {
     lateinit var binding : FragmentStoryDetailBinding
     private var hashtagList = arrayListOf<String>()
     private var commentList = arrayListOf<Comment>()
@@ -48,8 +48,7 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
                     hideKeyboard(binding.storyCommentEt)
                     if(binding.storyCommentEt.text.isNotEmpty()){
                         postComment()
-                        (context as MainActivity).supportFragmentManager.beginTransaction()
-                            .replace(R.id.fl_container, StoryDetailFragment(story)).commitAllowingStateLoss()
+
                     }
                     return true
                 }
@@ -85,7 +84,15 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
         binding.storyCommentTv.text = story.totalComment.toString()
 
 
-
+        binding.storyLikeIv.setOnClickListener {
+            val userSpf = requireContext().getSharedPreferences("token",AppCompatActivity.MODE_PRIVATE)
+            val token = userSpf.getString("accessToken", null)
+            if(token == null){
+                Toast.makeText(requireContext(),"로그인이 되어 있지 않습니다", Toast.LENGTH_SHORT).show()
+            } else {
+                postLike(token, story.postIdx)
+            }
+        }
 
         binding.storySettingLo.setOnClickListener {
 
@@ -142,6 +149,7 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
             Toast.makeText(activity,"로그인이 되어있지 않습니다.",Toast.LENGTH_SHORT).show()
         } else{
             val commentService = CommentService()
+            commentService.postCommentView(this)
             commentService.postComment(token,story.postIdx, binding.storyCommentEt.text.toString())
         }
     }
@@ -154,6 +162,10 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
             binding.storyHashtagRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             binding.storyHashtagRv.adapter = StoryHashtagRVAdapter(hashtagList)
         }
+    }
+    private fun postLike(token : String, postIdx : Int){
+        val likeService = LikeService()
+        likeService.postLike(token, postIdx)
     }
 
     private fun hideKeyboard(editText: EditText){
@@ -195,5 +207,18 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.fl_container, HomeFragment())
             .commitAllowingStateLoss()
+    }
+
+    override fun postCommentFailure() {
+        TODO("Not yet implemented")
+    }
+
+    override fun postCommentLoading() {
+        TODO("Not yet implemented")
+    }
+
+    override fun postCommentSuccess() {
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_container, StoryDetailFragment(story)).commitAllowingStateLoss()
     }
 }

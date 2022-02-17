@@ -12,9 +12,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class CommentService {
     private lateinit var commentView : CommentView
+    private lateinit var postCommentView: PostCommentView
 
     fun setCommentView(commentView: CommentView){
         this.commentView = commentView
+    }
+
+    fun postCommentView(postCommentView: PostCommentView){
+        this.postCommentView = postCommentView
     }
 
     fun getComments(postId : Int){
@@ -42,8 +47,9 @@ class CommentService {
 
         commentService.postComment("Bearer $token", postId, comment).enqueue(object : Callback<StoryResponse> {
             override fun onResponse(call: Call<StoryResponse>, response: Response<StoryResponse>) {
-                Log.d("getLike_OnResponse","$response")
+                Log.d("postComment_OnResponse","$response")
                 val resp = response.body()
+                postCommentView.postCommentSuccess()
             }
             override fun onFailure(call: retrofit2.Call<StoryResponse>, t: Throwable) {
                 Log.d("getLike_OnFailure","$t")
