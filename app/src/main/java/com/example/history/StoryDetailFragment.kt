@@ -22,7 +22,7 @@ import com.bumptech.glide.Glide
 import com.example.history.databinding.FragmentStoryDetailBinding
 
 
-class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteView, PostCommentView {
+class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteView, PostCommentView, LikeView{
     lateinit var binding : FragmentStoryDetailBinding
     private var hashtagList = arrayListOf<String>()
     private var commentList = arrayListOf<Comment>()
@@ -35,6 +35,7 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
         binding = FragmentStoryDetailBinding.inflate(inflater, container, false)
         getHashTag()
         getComment()
+        checkLike()
 
         binding.storyCommentEt.onFocusChangeListener = View.OnFocusChangeListener{ _, p1 ->
             if(p1){
@@ -48,7 +49,6 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
                     hideKeyboard(binding.storyCommentEt)
                     if(binding.storyCommentEt.text.isNotEmpty()){
                         postComment()
-
                     }
                     return true
                 }
@@ -59,12 +59,11 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
         val builder = AlertDialog.Builder(activity)
         val dialogView = layoutInflater.inflate(R.layout.dialog_report, null)
         builder.setView(dialogView)
-
         val alertDialog = builder.create()
         val window = alertDialog.window
         window?.setGravity(Gravity.BOTTOM)
-
         builder.setView(dialogView)
+
         val profile = story.user
         binding.storyWriterNicknameTv.text = profile?.nickName
         Glide.with(requireContext()).load(if(profile?.profileImageUrl.isNullOrEmpty()){
@@ -85,17 +84,14 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
 
 
         binding.storyLikeIv.setOnClickListener {
-            val userSpf = requireContext().getSharedPreferences("token",AppCompatActivity.MODE_PRIVATE)
-            val token = userSpf.getString("accessToken", null)
-            if(token == null){
-                Toast.makeText(requireContext(),"로그인이 되어 있지 않습니다", Toast.LENGTH_SHORT).show()
-            } else {
-                postLike(token, story.postIdx)
-            }
+            postLike()
+        }
+
+        binding.storyLikeOnIv.setOnClickListener {
+            postLike()
         }
 
         binding.storySettingLo.setOnClickListener {
-
             alertDialog.show()
             alertDialog.findViewById<TextView>(R.id.dialog_report_tv).setOnClickListener {
                 report()
@@ -163,10 +159,33 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
             binding.storyHashtagRv.adapter = StoryHashtagRVAdapter(hashtagList)
         }
     }
-    private fun postLike(token : String, postIdx : Int){
-        val likeService = LikeService()
-        likeService.postLike(token, postIdx)
+    private fun postLike(){
+        val userSpf = requireContext().getSharedPreferences("token",AppCompatActivity.MODE_PRIVATE)
+        val token = userSpf.getString("accessToken", null)
+        if(token == null){
+            Toast.makeText(requireContext(),"로그인이 되어 있지 않습니다", Toast.LENGTH_SHORT).show()
+        } else {
+            val likeService = LikeService()
+            likeService.postLike(token, story.postIdx)
+            if(binding.storyLikeOnIv.visibility == View.VISIBLE){
+                binding.storyLikeOnIv.visibility = View.GONE
+                binding.storyLikeIv.visibility = View.VISIBLE
+            } else {
+                binding.storyLikeOnIv.visibility = View.VISIBLE
+                binding.storyLikeIv.visibility = View.GONE
+            }
+        }
     }
+    private fun checkLike(){
+        val userSpf = activity?.getSharedPreferences("token",AppCompatActivity.MODE_PRIVATE)
+        val token = userSpf?.getString("accessToken", null)
+        if(token != null){
+            val likeService = LikeService()
+            likeService.setLikeView(this)
+            likeService.checkLike(token, story.postIdx)
+        }
+    }
+
 
     private fun hideKeyboard(editText: EditText){
         (requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
@@ -220,5 +239,27 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
     override fun postCommentSuccess() {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.fl_container, StoryDetailFragment(story)).commitAllowingStateLoss()
+    }
+
+    override fun onLikeFailure() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onLikeLoading() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onLikeSuccess(body: Boolean) {
+        when(body){
+            true ->{
+                binding.storyLikeIv.visibility = View.GONE
+                binding.storyLikeOnIv.visibility = View.VISIBLE
+            }
+            else ->{
+                binding.storyLikeIv.visibility = View.VISIBLE
+                binding.storyLikeOnIv.visibility = View.GONE
+            }
+        }
+        postLike()
     }
 }

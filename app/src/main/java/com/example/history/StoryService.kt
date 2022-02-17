@@ -37,8 +37,7 @@ class StoryService {
                    category: String, contents: String, hashtagList : List<String>?){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
-        val token = "Bearer $token"
-        var jsonArray = arrayListOf<String>()
+        val jsonArray = arrayListOf<String>()
         if((hashtagList?.isNotEmpty())!!){
             for(hashtag in hashtagList){
                 jsonArray.add("\"$hashtag\"")
@@ -48,12 +47,12 @@ class StoryService {
         val emptyPart = MultipartBody.Part.createFormData("imageList","",body)
         val emptyList = arrayListOf<MultipartBody.Part>()
         emptyList.add(emptyPart)
-        Log.d("jsonArray","$jsonArray")
+
         val jsonObject = JSONObject("{\"userId\":\"${id}\",\"category\":\"${category}\",\"title\":\"${title}\",\"contents\":\"${contents}\",\"hashTags\":${jsonArray}}").toString()
         Log.d("write_","$jsonObject")
         val jsonBody = RequestBody.create(parse("application/json"),jsonObject)
-        Log.d("pathFind","$pathList")
-        storyService.writeStory(token, if(pathList.isEmpty()){
+
+        storyService.writeStory("Bearer $token", if(pathList.isEmpty()){
             emptyList
         } else{
               pathList
@@ -121,19 +120,23 @@ class StoryService {
         storyService.getStoriesAllOrderByLike().enqueue(object : Callback<GetAllStoryResponse>{
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
                 Log.d("getLike_OnResponse","$response")
+                val resp = response.body()
+                storyView.onStorySuccess(resp!!.status, resp.body)
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
                 Log.d("getLike_OnFailure","$t")
             }
         })
     }
-    fun getStoriesCategoryOrderByLike(){
+    fun getStoriesCategoryOrderByLike(category: String){
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
         val storyService = retrofit.create(StoryInterface::class.java)
-        //카테고리 수정 필요
-        storyService.getStoriesCategoryOrderByLike("KOREAN").enqueue(object : Callback<GetAllStoryResponse>{
+
+        storyService.getStoriesCategoryOrderByLike(category).enqueue(object : Callback<GetAllStoryResponse>{
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
                 Log.d("getLike_OnResponse","$response")
+                val resp = response.body()
+                storyView.onStorySuccess(resp!!.status, resp.body)
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
                 Log.d("getLike_OnFailure","$t")

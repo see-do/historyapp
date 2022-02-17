@@ -1,8 +1,10 @@
 package com.example.history
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +12,6 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,16 +27,29 @@ class SearchFragment : Fragment(), SearchView, OneStoryView {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
+
+        val builder = AlertDialog.Builder(activity)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_search, null)
+        builder.setView(dialogView)
+        val alertDialog = builder.create()
+        val window = alertDialog.window
+        window?.setGravity(Gravity.BOTTOM)
+        builder.setView(dialogView)
         binding.searchChangeIv.setOnClickListener {
-            flag = when (flag){
-                0 -> 1
-                else -> 0
+            alertDialog.show()
+            alertDialog.findViewById<TextView>(R.id.dialog_title_tv).setOnClickListener {
+                flag = 1
+                alertDialog.hide()
+            }
+            alertDialog.findViewById<TextView>(R.id.dialog_content_tv).setOnClickListener {
+                flag = 0
+                alertDialog.hide()
             }
             Log.d("searchTitle","change")
         }
 
-        binding.searchSearchEt.setOnEditorActionListener(object : android.widget.TextView.OnEditorActionListener{
-            override fun onEditorAction(p0: android.widget.TextView?, p1: Int, p2: android.view.KeyEvent?): Boolean {
+        binding.searchSearchEt.setOnEditorActionListener(object : TextView.OnEditorActionListener{
+            override fun onEditorAction(p0: TextView?, p1: Int, p2: KeyEvent?): Boolean {
                 if (p1 == EditorInfo.IME_ACTION_SEARCH){
                     searchTitle()
                     hideKeyboard(binding.searchSearchEt)

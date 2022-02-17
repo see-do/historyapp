@@ -1,11 +1,13 @@
 package com.example.history
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.history.databinding.FragmentAllBinding
@@ -20,8 +22,27 @@ class AllFragment: Fragment(), StoryView {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAllBinding.inflate(inflater,container,false)
-        initView()
+        initView(0)
 
+        val builder = AlertDialog.Builder(activity)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_align, null)
+        builder.setView(dialogView)
+        val alertDialog = builder.create()
+        val window = alertDialog.window
+        window?.setGravity(Gravity.BOTTOM)
+        builder.setView(dialogView)
+
+        binding.homeStoryAlignIv.setOnClickListener {
+            alertDialog.show()
+            alertDialog.findViewById<TextView>(R.id.dialog_like_tv).setOnClickListener {
+                alertDialog.hide()
+                initView(1)
+            }
+            alertDialog.findViewById<TextView>(R.id.dialog_recent_tv).setOnClickListener {
+                alertDialog.hide()
+                initView(0)
+            }
+        }
        return binding.root
     }
 
@@ -34,6 +55,7 @@ class AllFragment: Fragment(), StoryView {
     }
 
     override fun onStorySuccess(status: String, body: List<OneStory>) {
+        storyDatas.clear()
         for (story in body){
             storyDatas.add(
                 story
@@ -41,8 +63,7 @@ class AllFragment: Fragment(), StoryView {
             Log.d("testt","${storyDatas}")
         }
         binding.homeStoryRecyclerView.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
-        var storyRVAdapter = StoryRVAdapter(storyDatas)
-        //리사이클러뷰에 어댑터를 연결
+        val storyRVAdapter = StoryRVAdapter(storyDatas)
         storyRVAdapter.myItemClickListener(object : StoryRVAdapter.MyItemClickListener{
             override fun onItemClick(story: OneStory) {
                 changeFragment(story)
@@ -55,11 +76,13 @@ class AllFragment: Fragment(), StoryView {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .replace(R.id.fl_container, StoryDetailFragment(story)).commitAllowingStateLoss()
     }
-
-    private fun initView(){
+    private fun initView(flag : Int){
         val storyService = StoryService()
         storyService.setStoryView(this)
-        storyService.getStoriesAllOrderByRecent()
+        when(flag){
+            0 -> storyService.getStoriesAllOrderByRecent()
+            else -> storyService.getStoriesAllOrderByLike()
+        }
     }
 
 }

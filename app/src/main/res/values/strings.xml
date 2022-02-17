@@ -29,6 +29,8 @@
     <string name="straight_divider">&#160;&#160;|&#160;&#160;</string>
     <string name="slash_divider">&#160;&#160;&#160;/&#160;&#160;&#160;</string>
 
+    <string name="NEW">NEW</string>
+    <string name="read_story">새로운 이야기들을 읽어보세요!</string>
     <string name="confirm_term">확인을 누르면</string>
     <string name="agree">동의로 간주합니다</string>
     <string name="let_find_story">이야기를 찾아볼까요?</string>
@@ -48,6 +50,11 @@
     <string name="write_story">내용을 작성해주세요</string>
     <string name="check_exist">중복 확인</string>
     <string name="plus">+</string>
-
+    <string name="align_recent">최신순으로 정렬</string>
+    <string name="align_like">인기순으로 정렬</string>
+    <string name="story_delete">게시글 삭제하기</string>
+    <string name="story_report">게시글 신고하기</string>
+    <string name="search_title">제목에서 검색하기</string>
+    <string name="search_content">내용에서 검색하기</string>
 
 </resources>

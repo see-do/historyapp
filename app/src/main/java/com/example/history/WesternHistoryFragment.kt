@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.history.databinding.FragmentAllBinding
@@ -20,8 +21,27 @@ class WesternHistoryFragment: Fragment(), StoryView {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentWesternhistoryBinding.inflate(inflater,container,false)
-        initView()
-        Log.d("western_recycler","rer")
+        initView(0)
+
+        val builder = android.app.AlertDialog.Builder(activity)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_align, null)
+        builder.setView(dialogView)
+        val alertDialog = builder.create()
+        val window = alertDialog.window
+        window?.setGravity(android.view.Gravity.BOTTOM)
+        builder.setView(dialogView)
+
+        binding.westernStoryAlignIv.setOnClickListener {
+            alertDialog.show()
+            alertDialog.findViewById<TextView>(R.id.dialog_like_tv).setOnClickListener {
+                alertDialog.hide()
+                initView(1)
+            }
+            alertDialog.findViewById<TextView>(R.id.dialog_recent_tv).setOnClickListener {
+                alertDialog.hide()
+                initView(0)
+            }
+        }
 
         return binding.root
     }
@@ -39,6 +59,7 @@ class WesternHistoryFragment: Fragment(), StoryView {
     }
 
     override fun onStorySuccess(status: String, body: List<OneStory>) {
+        storyDatas.clear()
         for (story in body){
             storyDatas.add(
                 story
@@ -51,8 +72,7 @@ class WesternHistoryFragment: Fragment(), StoryView {
                 LinearLayoutManager.VERTICAL,
                 false
             )
-        var storyRVAdapter = StoryRVAdapter(storyDatas)
-        //리사이클러뷰에 어댑터를 연결
+        val storyRVAdapter = StoryRVAdapter(storyDatas)
         storyRVAdapter.myItemClickListener(object : StoryRVAdapter.MyItemClickListener{
             override fun onItemClick(story: OneStory) {
                 changeFragment(story)
@@ -62,10 +82,12 @@ class WesternHistoryFragment: Fragment(), StoryView {
 
     }
 
-    private fun initView(){
+    private fun initView(flag : Int){
         val storyService = StoryService()
         storyService.setStoryView(this)
-        storyService.getStoriesCategoryOrderByRecent("WESTERN")
-        Log.d("western_recyv","dasd")
+        when(flag){
+            0 -> storyService.getStoriesCategoryOrderByRecent("WESTERN")
+            else -> storyService.getStoriesCategoryOrderByLike("WESTERN")
+        }
     }
 }

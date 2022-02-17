@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toEndOf="@+id/story_writer_profile_iv"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="닉네임"
+                android:text="@string/nickname"
                 android:layout_marginTop="11dp"
                 android:layout_marginStart="16dp"
                 android:textSize="16sp"
@@ -107,7 +107,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="아아아아아아아아아아아아"
+                android:text="@string/write"
                 app:layout_constraintTop_toBottomOf="@id/story_writer_lo"
                 app:layout_constraintStart_toStartOf="parent"/>
             <HorizontalScrollView
@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="28dp"
                 android:textColor="@color/black"
-                android:text="어쩌구저쩌구"/>
+                android:text="@string/story"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/story_hashtag_rv"
@@ -156,7 +156,7 @@
                     android:id="@+id/story_like_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12"
+                    android:text="1"
                     android:textSize="14sp"
                     android:layout_marginEnd="15dp"/>
                 <ImageView
@@ -170,7 +170,7 @@
                     android:id="@+id/story_comment_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12"
+                    android:text="1"
                     android:textSize="14sp"/>
             </LinearLayout>
             <ImageView
@@ -213,6 +213,14 @@
                     android:layout_marginStart="37dp"
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_story_detail_like" />
+                <ImageView
+                    android:id="@+id/story_like_on_iv"
+                    android:layout_width="23dp"
+                    android:layout_height="21dp"
+                    android:layout_marginStart="37dp"
+                    android:visibility="gone"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/favorite" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
             <ImageView

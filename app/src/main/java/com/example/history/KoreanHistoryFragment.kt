@@ -1,10 +1,13 @@
 package com.example.history
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.history.databinding.FragmentKoreanhistoryBinding
 
@@ -18,17 +21,27 @@ class KoreanHistoryFragment: Fragment(), StoryView {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentKoreanhistoryBinding.inflate(inflater,container,false)
-        initView()
-        //데이터 리스트 생성 더미데이터
-//        storyDatas.apply {
-//            add(Story("클레오파트라는 정말 흑인이었을까?",R.drawable.story_cover_img_ex1,12,12))
-//            add(Story("클레오파트라는 정말 흑인이었을까?",R.drawable.story_cover_img_ex2,12,12))
-//            add(Story("클레오파트라는 정말 흑인이었을까?",R.drawable.story_cover_img_ex3,12,12))
-//            add(Story("클레오파트라는 정말 흑인이었을까?",R.drawable.story_cover_img_ex4,12,12))
-//        }
+        initView(0)
 
+        val builder = AlertDialog.Builder(activity)
+        val dialogView = layoutInflater.inflate(R.layout.dialog_align, null)
+        builder.setView(dialogView)
+        val alertDialog = builder.create()
+        val window = alertDialog.window
+        window?.setGravity(Gravity.BOTTOM)
+        builder.setView(dialogView)
 
-
+        binding.koreanStoryAlignIv.setOnClickListener {
+            alertDialog.show()
+            alertDialog.findViewById<TextView>(R.id.dialog_like_tv).setOnClickListener {
+                alertDialog.hide()
+                initView(1)
+            }
+            alertDialog.findViewById<TextView>(R.id.dialog_recent_tv).setOnClickListener {
+                alertDialog.hide()
+                initView(0)
+            }
+        }
 
         return binding.root
     }
@@ -47,16 +60,14 @@ class KoreanHistoryFragment: Fragment(), StoryView {
     }
 
     override fun onStorySuccess(status: String, body: List<OneStory>) {
+        storyDatas.clear()
         for (story in body){
             storyDatas.add(
                 story
             )
             Log.d("korean_recycler","${storyDatas}")
         }
-
-        //더미데이터랑 어댑터 연결
         val storyRVAdapter = StoryRVAdapter(storyDatas)
-        //리사이클러뷰에 어댑터를 연결
         storyRVAdapter.myItemClickListener(object : StoryRVAdapter.MyItemClickListener{
             override fun onItemClick(story: OneStory) {
                 changeFragment(story)
@@ -66,10 +77,12 @@ class KoreanHistoryFragment: Fragment(), StoryView {
 
     }
 
-    private fun initView(){
+    private fun initView(flag : Int){
         val storyService = StoryService()
         storyService.setStoryView(this)
-        storyService.getStoriesCategoryOrderByRecent("KOREAN")
-        Log.d("korean_recyv","dasd")
+        when(flag){
+            0 -> storyService.getStoriesCategoryOrderByRecent("KOREAN")
+            else -> storyService.getStoriesCategoryOrderByLike("KOREAN")
+        }
     }
 }
