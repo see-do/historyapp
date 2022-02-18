@@ -7,11 +7,12 @@
     android:tag="write"
     android:orientation="vertical"
     android:focusable="true"
+    android:overScrollMode="never"
     android:focusableInTouchMode="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/write_write_tv"
         android:layout_width="wrap_content"

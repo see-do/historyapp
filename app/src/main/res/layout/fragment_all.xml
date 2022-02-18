@@ -42,6 +42,7 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         tools:listitem="@layout/item_story"
+        android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
