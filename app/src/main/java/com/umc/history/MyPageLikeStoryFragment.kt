@@ -1,5 +1,6 @@
 package com.umc.history
 
+import android.graphics.Insets.add
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,41 +26,42 @@ class MyPageLikeStoryFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMypageLikestoryBinding.inflate(inflater,container,false)
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com/").addConverterFactory(GsonConverterFactory.create()).build()
-
-        val retrofitService = retrofit.create(LikedStoryInterface::class.java)
-        retrofitService.getLikedStory("userId").enqueue(object : Callback<LikedResponse> {
-            override fun onResponse(call: Call<LikedResponse>, response: Response<LikedResponse>) {
-                if (response.isSuccessful) {
-                    val body = response.body()
-                    body?.let {
-                        myPageStoryDatas.apply {
-                            add(MyPageStory(body.title,R.drawable.mypage_profile_img_ex1,body.likes,body.comments,body.content,body.nickname))
-                        }
-                        Log.d("Like_onResponse", response.toString())
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<LikedResponse>, t: Throwable) {
-                t.message?.let { Log.d("this is error", it) }
-            }
-        })
-
-
-
-        //데이터 리스트 생성 더미데이터
-        myPageStoryDatas.apply {
-            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex1,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
-            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex1,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
-            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex1,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
-        }
 
         //더미데이터랑 어댑터 연결
         val myPageStoryRVAdapter = MyPageStoryRVAdapter(myPageStoryDatas)
         //리사이클러뷰에 어댑터를 연결
         binding.myPageStoryRecyclerView.adapter = myPageStoryRVAdapter
+
+        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
+        val likedStoryService = retrofit.create(LikedStoryInterface::class.java)
+
+        likedStoryService.getLikedStory().enqueue(object : Callback<GetLikedStoryResponse>{
+            override fun onResponse(call: Call<GetLikedStoryResponse>, response: Response<GetLikedStoryResponse>) {
+                Log.d("getLikedStory_OnResponse","$response")
+               // response.body()?.body?.post?.title?.
+                myPageStoryDatas.apply {
+                    add(MyPageStory(response.body()?.body?.post?.title,response.body()?.body?.post?.user?.profileImageUrl,response.body()?.body?.post?.totalLike,response.body()?.body?.post?.totalComment,response.body()?.body?.post?.contents,response.body()?.body?.post?.user?.nickName))
+                        }
+                myPageStoryRVAdapter.notifyDataSetChanged()
+
+            }
+            override fun onFailure(call: Call<GetLikedStoryResponse>, t: Throwable) {
+                Log.d("getLikedStory_OnFailure","$t")
+            }
+        })
+
+
+
+
+
+//        //데이터 리스트 생성 더미데이터
+//        myPageStoryDatas.apply {
+//            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex1,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
+//            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex1,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
+//            add(MyPageStory("제에에에목",R.drawable.mypage_profile_img_ex1,12,12,"이런 식으로 내용이 보여지게 됩니다 어떻게 해야하지 무슨 내용을 적지 으아아아아아아아아","닉네임"))
+//        }
+
+
 
 
 
