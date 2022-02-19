@@ -1,5 +1,6 @@
 package com.umc.history
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.widget.CompoundButton
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.umc.history.databinding.FragmentMypageBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -33,11 +35,21 @@ class MyPageFragment : Fragment() {
         TabLayoutMediator(binding.myPageMenuTb, binding.myPageMenuVp) { tab, position ->
             tab.text = information[position]
         }.attach()
+        val spf = activity?.getSharedPreferences("token",AppCompatActivity.MODE_PRIVATE)
+        val token = spf?.getString("accessToken", null)
+        if(token == null){
+            var myPageLogoutFragment = MyPageLogoutFragment()
+            binding.myPageSettingLy.visibility = View.GONE
+            childFragmentManager.beginTransaction().replace(R.id.myPage_profile_ly, myPageLogoutFragment)
+                .commit()
+        } else {
+            var myPageLoginFragment = MyPageLoginFragment()
+            binding.myPageSettingLy.visibility = View.VISIBLE
+            childFragmentManager.beginTransaction().replace(R.id.myPage_profile_ly, myPageLoginFragment)
+                .commit()
+        }
 
 
-        var myPageLoginFragment = MyPageLoginFragment()
-        childFragmentManager.beginTransaction().replace(R.id.myPage_profile_ly, myPageLoginFragment)
-            .commit()
 
         fun toast(message: String) {
             Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()

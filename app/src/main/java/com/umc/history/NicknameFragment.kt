@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.umc.history.databinding.FragmentNicknameBinding
 
@@ -33,7 +34,16 @@ class NicknameFragment : Fragment(), ExistView {
         }
 
         binding.signupNicknameCheckTv.setOnClickListener {
-            checkExist()
+            val regex = Regex("[^A-Za-z0-9가-힣]")
+            val result = regex.replace(binding.signupNicknameEt.text.toString(), "")
+            result.filter { !it.isWhitespace() }
+            if(result != binding.signupNicknameEt.text.toString()){
+                showWarning("공백과 특수문자는 사용이 불가능합니다.")
+            }else if(binding.signupNicknameEt.length() < 2 || binding.signupNicknameEt.length() > 9){
+                showWarning("닉네임은 2글자 이상 10글자 미만이어야합니다.")
+            } else{
+                checkExist()
+            }
         }
         binding.signupNicknameEt.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
@@ -51,13 +61,12 @@ class NicknameFragment : Fragment(), ExistView {
         })
 
         binding.signupNicknameNextBtn.setOnClickListener {
+            binding.signupNicknameWarningTv.visibility = View.GONE
             if(existFlag){
                 showWarning("중복체크 버튼을 눌러주세요")
             } else
             if (binding.signupNicknameEt.text.toString().isEmpty()) {
                 showWarning("닉네임을 입력해주세요")
-            } else if (binding.signupNicknameEt.length() < 2){
-                showWarning("닉네임은 2글자 이상, 10글자 미만이어야합니다.")
             } else {
                 val idFragment = IdFragment()
                 val bundle = Bundle()
@@ -84,11 +93,11 @@ class NicknameFragment : Fragment(), ExistView {
     }
 
     override fun onAuthFailure() {
-        TODO("Not yet implemented")
+        Toast.makeText(activity,"인터넷 연결을 확인해주세요",Toast.LENGTH_SHORT).show()
     }
 
     override fun onAuthLoading() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onAuthSuccess(body: Boolean) {

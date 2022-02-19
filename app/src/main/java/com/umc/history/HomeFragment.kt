@@ -74,8 +74,6 @@ class HomeFragment: Fragment(){
         val userEditor = userInfo!!.edit()
         userEditor.clear()
         userEditor.commit()
-        val test = spf?.getString("token",null)
-        Log.d("tlltest","$test")
     }
 
 

@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity(), AuthView {
     }
 
     override fun onAuthLoading() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onAuthSuccess(tokenBody: TokenBody) {

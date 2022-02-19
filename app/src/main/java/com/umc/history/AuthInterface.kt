@@ -17,4 +17,7 @@ interface AuthInterface {
     @POST("/user/login")
     fun login(@Body login : Login) : Call<LoginResponse>
 
+    @POST("/user/reissue")
+    fun tokenReissue(@Body token : Token) : Call<LoginResponse>
+
 }

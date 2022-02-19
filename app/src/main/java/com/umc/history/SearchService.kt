@@ -22,10 +22,15 @@ class SearchService {
             override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
                 Log.d("search_onResponse", response.toString())
                 val resp = response.body()?.body
-                searchView.onSearchSuccess(resp)
-                Log.d("search_onResponse2","${resp}")
+                if(response.code() == 200 || response.code() == 202){
+                    searchView.onSearchSuccess(resp)
+                    Log.d("search_onResponse2","${resp}")
+                } else {
+                    searchView.onSearchFailure()
+                }
             }
             override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+                searchView.onSearchFailure()
                 Log.d("search_onFailure", t.message.toString())
             }
 
@@ -39,10 +44,15 @@ class SearchService {
             override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
                 Log.d("searchTitle_onResponse", response.toString())
                 val resp = response.body()?.body
-                searchView.onSearchSuccess(resp)
-                Log.d("searchTitle_onResponse2","${resp}")
+                if(response.code() == 200 || response.code() == 202){
+                    searchView.onSearchSuccess(resp)
+                    Log.d("searchTitle_onResponse2","${resp}")
+                } else {
+                    searchView.onSearchFailure()
+                }
             }
             override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+                searchView.onSearchFailure()
                 Log.d("searchTitle_onFailure", t.message.toString())
             }
 

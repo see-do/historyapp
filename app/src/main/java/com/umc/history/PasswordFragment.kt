@@ -30,16 +30,23 @@ class PasswordFragment : Fragment() {
         Log.d("nickname","$id")
 
         binding.signupPwdConfirmBtn.setOnClickListener {
-            when {
-                binding.signupPwdEt.text.toString().isEmpty() -> showWarning("비밀번호를 입력해주세요",0)
-                binding.signupPwdEt.length() < 4 -> showWarning("비밀번호는 4글자 이상 10글자 미만이어야합니다.",0)
-                binding.signupPwdCheckEt.text.toString() != binding.signupPwdEt.text.toString() -> showWarning("비밀번호가 일치하지 않습니다.",1)
-                else ->{
-                    val authService = AuthService()
-                    authService.signUp(nickname, id, binding.signupPwdEt.text.toString())
-
-                    val intent = Intent(activity, LoginActivity::class.java)
-                    startActivity(intent)
+            val regex = Regex("[^A-Za-z0-9]")
+            val result = regex.replace(binding.signupPwdEt.text.toString(), "")
+            result.filter { !it.isWhitespace() }
+            if(result != binding.signupPwdEt.text.toString()){
+                showWarning("공백과 특수문자, 한글은 사용이 불가능합니다.", 0)
+            }else if(binding.signupPwdEt.length() < 4 || binding.signupPwdEt.length() > 9){
+                showWarning("비밀번호는 4글자 이상 10글자 미만이어야합니다.", 0)
+            }else{
+                when {
+                    binding.signupPwdEt.text.toString().isEmpty() -> showWarning("비밀번호를 입력해주세요",0)
+                    binding.signupPwdCheckEt.text.toString() != binding.signupPwdEt.text.toString() -> showWarning("비밀번호가 일치하지 않습니다.",1)
+                    else ->{
+                        val authService = AuthService()
+                        authService.signUp(nickname, id, binding.signupPwdEt.text.toString())
+                        val intent = Intent(activity, LoginActivity::class.java)
+                        startActivity(intent)
+                    }
                 }
             }
 

@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.umc.history.databinding.FragmentAllBinding
 import com.umc.history.databinding.FragmentWesternhistoryBinding
 
 class WesternHistoryFragment: Fragment(), StoryView {
@@ -51,11 +51,11 @@ class WesternHistoryFragment: Fragment(), StoryView {
     }
 
     override fun onStoryFailure() {
-        TODO("Not yet implemented")
+        Toast.makeText(activity,"인터넷 연결을 확인해주세요",Toast.LENGTH_SHORT).show()
     }
 
     override fun onStoryLoading() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onStorySuccess(status: String, body: List<OneStory>) {

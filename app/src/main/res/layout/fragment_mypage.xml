@@ -34,7 +34,7 @@
 
         />
 </LinearLayout>
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/myPage_profile_img_iv"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="29dp"
         android:layout_marginTop="41dp"
-        android:src="@drawable/mypage_profile_img_ex1"
+        android:src="@drawable/history_logo"
         />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/myPage_profile_ly"

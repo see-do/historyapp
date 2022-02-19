@@ -20,3 +20,7 @@ data class LoginResponse(
     @SerializedName("status") val status : String,
     @SerializedName("body") val body : TokenBody
 )
+data class Token(
+    @SerializedName("accessToken") val accessToken : String,
+    @SerializedName("refreshToken") val refreshToken : String
+)

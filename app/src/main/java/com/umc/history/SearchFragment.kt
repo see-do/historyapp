@@ -12,6 +12,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,11 +72,11 @@ class SearchFragment : Fragment(), SearchView, OneStoryView {
     }
 
     override fun onStoryFailure() {
-        TODO("Not yet implemented")
+        Toast.makeText(activity,"인터넷 연결을 확인해주세요",Toast.LENGTH_SHORT).show()
     }
 
     override fun onStoryLoading() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onStorySuccess(status: String, body: OneStory?) {
@@ -84,11 +85,11 @@ class SearchFragment : Fragment(), SearchView, OneStoryView {
     }
 
     override fun onSearchFailure() {
-        TODO("Not yet implemented")
+        Toast.makeText(activity,"인터넷 연결을 확인해주세요",Toast.LENGTH_SHORT).show()
     }
 
     override fun onSearchLoading() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onSearchSuccess(searchBody : List<Body>?) {

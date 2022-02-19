@@ -112,6 +112,7 @@
                 app:layout_constraintTop_toBottomOf="@id/story_writer_lo"
                 app:layout_constraintStart_toStartOf="parent"/>
             <HorizontalScrollView
+                android:id="@+id/story_image_sv"
                 android:layout_marginTop="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="300dp"
@@ -230,7 +231,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/mypage_profile_img_ex1"/>
+                    android:src="@drawable/history_logo"/>
                 <EditText
                     android:id="@+id/story_comment_et"
                     android:layout_width="213dp"
@@ -239,6 +240,8 @@
                     android:inputType="text"
                     android:imeOptions="actionDone"
                     android:maxLength="50"
+                    android:textCursorDrawable="@drawable/text_cursor"
+                    android:backgroundTint="@color/primary_color"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="22dp"
                     android:paddingBottom="13dp"

@@ -69,11 +69,12 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
         Glide.with(requireContext()).load(if(profile?.profileImageUrl.isNullOrEmpty()){
             "https://history-app-story-image.s3.ap-northeast-2.amazonaws.com/static/419316de-3fac-4955-80ae-2ec2b3193191history_logo.png"
         } else {
-            profile
+            profile!!.profileImageUrl
         }).into(binding.storyWriterProfileIv)
         binding.storyTitleTv.text = story.title
 
         if(story.images.isNullOrEmpty()) {
+            binding.storyImageSv.visibility = View.GONE
             binding.storyImageIv.visibility = View.GONE
         } else {
             getImage(story.images!!.size)
@@ -195,11 +196,11 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
     }
 
     override fun onCommentFailure() {
-        TODO("Not yet implemented")
+        Toast.makeText(activity,"인터넷 연결을 확인해주세요",Toast.LENGTH_SHORT).show()
     }
 
     override fun onCommentLoading() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onCommentSuccess(status: String, body: List<Comment?>) {
@@ -220,7 +221,7 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
     }
 
     override fun onDeleteLoading() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onDeleteSuccess(response: Boolean) {
@@ -230,11 +231,11 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
     }
 
     override fun postCommentFailure() {
-        TODO("Not yet implemented")
+        Toast.makeText(activity,"인터넷 연결을 확인해주세요",Toast.LENGTH_SHORT).show()
     }
 
     override fun postCommentLoading() {
-        TODO("Not yet implemented")
+
     }
 
     override fun postCommentSuccess() {
@@ -243,11 +244,11 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
     }
 
     override fun onLikeFailure() {
-        TODO("Not yet implemented")
+        Toast.makeText(activity,"인터넷 연결을 확인해주세요",Toast.LENGTH_SHORT).show()
     }
 
     override fun onLikeLoading() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onLikeSuccess(body: Boolean) {

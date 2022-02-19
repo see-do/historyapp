@@ -79,7 +79,7 @@ class StoryService {
                 }
             }
             override fun onFailure(call: Call<DeleteResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+
             }
         })
     }
@@ -91,10 +91,15 @@ class StoryService {
             override fun onResponse(call: Call<GetOneStoryResponse>, response: Response<GetOneStoryResponse>) {
                 Log.d("get_OnResponse","$response")
                 val resp = response.body()
-                oneStoryView.onStorySuccess(resp!!.status, resp.body)
+                if(response.code() == 200 || response.code() == 202){
+                    oneStoryView.onStorySuccess(resp!!.status, resp.body)
+                } else {
+                    oneStoryView.onStoryFailure()
+                }
+
             }
             override fun onFailure(call: Call<GetOneStoryResponse>, t: Throwable) {
-                TODO("Not yet implemented")
+                oneStoryView.onStoryFailure()
             }
         })
     }
@@ -106,9 +111,14 @@ class StoryService {
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
                 Log.d("getRecent_OnResponse","$response")
                 val resp = response.body()
-                storyView.onStorySuccess(resp!!.status, resp.body)
+                if(response.code() == 200 || response.code() == 202) {
+                    storyView.onStorySuccess(resp!!.status, resp.body)
+                } else {
+                    storyView.onStoryFailure()
+                }
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
+                storyView.onStoryFailure()
                 Log.d("getRecent_OnFailure","$t")
             }
         })
@@ -121,9 +131,15 @@ class StoryService {
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
                 Log.d("getLike_OnResponse","$response")
                 val resp = response.body()
-                storyView.onStorySuccess(resp!!.status, resp.body)
+                if(response.code() == 200 || response.code() == 202){
+                    storyView.onStorySuccess(resp!!.status, resp.body)
+                } else {
+                    storyView.onStoryFailure()
+                }
+
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
+                storyView.onStoryFailure()
                 Log.d("getLike_OnFailure","$t")
             }
         })
@@ -136,9 +152,14 @@ class StoryService {
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
                 Log.d("getLike_OnResponse","$response")
                 val resp = response.body()
-                storyView.onStorySuccess(resp!!.status, resp.body)
+                if(response.code() == 200 || response.code() == 202){
+                    storyView.onStorySuccess(resp!!.status, resp.body)
+                } else {
+                    storyView.onStoryFailure()
+                }
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
+                storyView.onStoryFailure()
                 Log.d("getLike_OnFailure","$t")
             }
         })
@@ -151,9 +172,14 @@ class StoryService {
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
                 Log.d("getLike_OnResponse","$response")
                 val resp = response.body()
-                storyView.onStorySuccess(resp!!.status, resp.body)
+                if(response.code() == 200 || response.code() == 202){
+                    storyView.onStorySuccess(resp!!.status, resp.body)
+                } else {
+                    storyView.onStoryFailure()
+                }
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
+                storyView.onStoryFailure()
                 Log.d("getLike_OnFailure","$t")
             }
         })

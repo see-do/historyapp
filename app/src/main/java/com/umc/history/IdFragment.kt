@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -30,7 +31,17 @@ class IdFragment : Fragment(), ExistView {
         Log.d("nickname","$nickname")
 
         binding.signupIdCheckTv.setOnClickListener {
-            checkExist()
+            val regex = Regex("[^A-Za-z0-9]")
+            val result = regex.replace(binding.signupIdEt.text.toString(), "")
+            result.filter { !it.isWhitespace() }
+            if(result != binding.signupIdEt.text.toString()){
+                showWarning("공백과 특수문자, 한글은 사용이 불가능합니다.")
+            }else if(binding.signupIdEt.length() < 4 || binding.signupIdEt.length() > 14){
+                showWarning("아이디는 4글자 이상 15글자 미만이어야합니다.")
+            } else{
+                checkExist()
+            }
+
         }
         binding.signupIdEt.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
@@ -47,13 +58,11 @@ class IdFragment : Fragment(), ExistView {
             }
         })
         binding.signupIdNextBtn.setOnClickListener {
-            Log.d("onResponse","$existFlag")
-            if(existFlag){
+            binding.signupIdWarningTv.visibility = View.GONE
+             if(existFlag){
                 showWarning("중복체크 버튼을 눌러주세요")
             } else if (binding.signupIdEt.text.toString().isEmpty()) {
                 showWarning("아이디를 입력해주세요")
-            } else if(binding.signupIdEt.length() < 4) {
-                showWarning("아이디는 4글자 이상 15글자 미만이어야합니다.")
             } else {
                 var passwordFragment = PasswordFragment()
                 var bundle = Bundle()
@@ -88,11 +97,11 @@ class IdFragment : Fragment(), ExistView {
     }
 
     override fun onAuthFailure() {
-        TODO("Not yet implemented")
+        Toast.makeText(activity,"인터넷 연결을 확인해주세요",Toast.LENGTH_SHORT).show()
     }
 
     override fun onAuthLoading() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onAuthSuccess(body: Boolean) {

@@ -1,13 +1,11 @@
 package com.umc.history
 
-import android.media.session.MediaSession
 import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 class AuthService {
     private lateinit var existView: ExistView
@@ -26,10 +24,16 @@ class AuthService {
             override fun onResponse(call: Call<ExistResponse>, response: Response<ExistResponse>) {
                 Log.d("nickName_onResponse", response.toString())
                 val resp = response.body()
-                existView.onAuthSuccess(resp!!.body)
-                Log.d("nickName","${resp.toString()}")
+                if(response.code() == 200 || response.code() == 202){
+                    existView.onAuthSuccess(resp!!.body)
+                    Log.d("nickName","$resp")
+                } else {
+                    existView.onAuthFailure()
+                }
+
             }
             override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
+                existView.onAuthFailure()
                 Log.d("nickName_onFailure", t.message.toString())
             }
 
@@ -44,10 +48,15 @@ class AuthService {
             override fun onResponse(call: Call<ExistResponse>, response: Response<ExistResponse>){
                 Log.d("userId_onResponse", response.body()?.body.toString())
                 val resp = response.body()
-                existView.onAuthSuccess(resp!!.body)
-                Log.d("onExist_retrofit","$resp")
+                if(response.code() == 200 || response.code() == 202){
+                    existView.onAuthSuccess(resp!!.body)
+                    Log.d("nickName","$resp")
+                } else {
+                    existView.onAuthFailure()
+                }
             }
             override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
+                existView.onAuthFailure()
                 Log.d("userId_onFailure", t.message.toString())
             }
         })
@@ -70,18 +79,37 @@ class AuthService {
         val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com")
             .addConverterFactory(GsonConverterFactory.create()).build()
         val authService = retrofit.create(AuthInterface::class.java)
-        Log.d("break","break")
         authService.login(Login(id, password)).enqueue(object : Callback<LoginResponse>{
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 val resp = response.body()
-                if(response.code() == 401){
-                    authView.onAuthFailure()
+                if(response.code() == 200 || response.code() == 202){
+                    authView.onAuthSuccess(resp!!.body)
                 } else{
-                authView.onAuthSuccess(resp!!.body)
-//                authView.onAuthSuccess(TokenBody("test","test2","test3","dasd"))
-                Log.d("login_onResponse", response.body().toString())}
+                    authView.onAuthFailure()
+                    Log.d("login_onResponse", response.body().toString())}
             }
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                authView.onAuthFailure()
+                Log.d("login_onFailure", t.message.toString())
+            }
+        })
+    }
+
+    fun tokenReissue(accessToken : String, refreshToken : String){
+        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com")
+            .addConverterFactory(GsonConverterFactory.create()).build()
+        val authService = retrofit.create(AuthInterface::class.java)
+        authService.tokenReissue(Token(accessToken, refreshToken)).enqueue(object : Callback<LoginResponse>{
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                val resp = response.body()
+                if(response.code() == 200 || response.code() == 202){
+                    authView.onAuthSuccess(resp!!.body)
+                } else{
+                    authView.onAuthFailure()
+                    Log.d("login_onResponse", response.body().toString())}
+            }
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                authView.onAuthFailure()
                 Log.d("login_onFailure", t.message.toString())
             }
         })
