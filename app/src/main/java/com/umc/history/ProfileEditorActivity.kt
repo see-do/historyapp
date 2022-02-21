@@ -48,13 +48,11 @@ class ProfileEditorActivity: AppCompatActivity() {
                             body?.let {
 
                             }
-                            Log.d("Nickname_onResponse", response.toString())
                         }
                     }
 
                     override fun onFailure(call: Call<NicknameChangeResponse>, t: Throwable) {
                         t.message?.let {
-                            Log.d("nicknameChange error", it)
                         }
                     }
                 })

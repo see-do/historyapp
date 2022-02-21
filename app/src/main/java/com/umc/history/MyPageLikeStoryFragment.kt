@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,9 +17,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MyPageLikeStoryFragment: Fragment() {
+class MyPageLikeStoryFragment: Fragment(), OneStoryView {
     lateinit var binding: FragmentMypageLikestoryBinding
-    private var myPageStoryDatas = ArrayList<MyPageStory>()
+    private var myPageStoryDatas = ArrayList<LikedResponse>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,29 +27,48 @@ class MyPageLikeStoryFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMypageLikestoryBinding.inflate(inflater,container,false)
+        val spf = activity?.getSharedPreferences("token", AppCompatActivity.MODE_PRIVATE)
+        val token = spf?.getString("accessToken", null)
+        if(token == null){
+            binding.myPageStoryRecyclerView.visibility = View.GONE
+        } else {
 
-        //더미데이터랑 어댑터 연결
-        val myPageStoryRVAdapter = MyPageStoryRVAdapter(myPageStoryDatas)
-        //리사이클러뷰에 어댑터를 연결
-        binding.myPageStoryRecyclerView.adapter = myPageStoryRVAdapter
+            val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
+            val likedStoryService = retrofit.create(LikedStoryInterface::class.java)
 
-        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(GsonConverterFactory.create()).build()
-        val likedStoryService = retrofit.create(LikedStoryInterface::class.java)
-
-        likedStoryService.getLikedStory().enqueue(object : Callback<GetLikedStoryResponse>{
-            override fun onResponse(call: Call<GetLikedStoryResponse>, response: Response<GetLikedStoryResponse>) {
-                Log.d("getLikedStory_OnResponse","$response")
-               // response.body()?.body?.post?.title?.
-                myPageStoryDatas.apply {
-                    add(MyPageStory(response.body()?.body?.post?.title,response.body()?.body?.post?.user?.profileImageUrl,response.body()?.body?.post?.totalLike,response.body()?.body?.post?.totalComment,response.body()?.body?.post?.contents,response.body()?.body?.post?.user?.nickName))
+            likedStoryService.getLikedStory("Bearer $token").enqueue(object : Callback<GetLikedStoryResponse> {
+                override fun onResponse(
+                    call: Call<GetLikedStoryResponse>,
+                    response: Response<GetLikedStoryResponse>
+                ) {
+                    val resp = response.body()
+                    if (resp?.body != null) {
+                        myPageStoryDatas.clear()
+                        for (body in resp.body) {
+                            myPageStoryDatas.add(body)
                         }
-                myPageStoryRVAdapter.notifyDataSetChanged()
 
-            }
-            override fun onFailure(call: Call<GetLikedStoryResponse>, t: Throwable) {
-                Log.d("getLikedStory_OnFailure","$t")
-            }
-        })
+                    val myPageStoryLikeRVAdapter = MyPageStoryLikeRVAdapter(myPageStoryDatas)
+                    //리사이클러뷰에 어댑터를 연결
+                    binding.myPageStoryRecyclerView.adapter = myPageStoryLikeRVAdapter
+                    myPageStoryLikeRVAdapter.likeItemClickListener(object :
+                        MyPageStoryLikeRVAdapter.LikeItemClickListener {
+                        override fun onItemClick(story: LikedResponse) {
+                            getOneStory(Body(story.post!!.postIdx, story.post.totalLike, story.post.totalClick,
+                                story.post.totalComment, story.post.createdDate, story.post.lastModifedDate, story.post.category,
+                                story.post.title, User2(story.user.profileImageUrl, story.user.userId, story.user.nickName), story.post.contents))
+                        }
+                    })
+                    binding.myPageStoryRecyclerView.visibility = View.VISIBLE
+                    }
+                }
+
+                override fun onFailure(call: Call<GetLikedStoryResponse>, t: Throwable) {
+
+                }
+            })
+        }
+
 
 
 
@@ -74,5 +94,21 @@ class MyPageLikeStoryFragment: Fragment() {
 
         return binding.root
     }
+    private fun getOneStory(story:Body){
+        val storyService = StoryService()
+        storyService.setOneStoryView(this)
+        storyService.getStory(story.postIdx)
+    }
 
+    override fun onStoryFailure() {
+
+    }
+
+    override fun onStoryLoading() {
+    }
+
+    override fun onStorySuccess(status: String, body: OneStory?) {
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_container, StoryDetailFragment(body!!)).commitAllowingStateLoss()
+    }
 }

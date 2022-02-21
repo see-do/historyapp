@@ -22,11 +22,9 @@ class AuthService {
         val authService = retrofit.create(AuthInterface::class.java)
         authService.nickNameExist(nickname).enqueue(object : Callback<ExistResponse>{
             override fun onResponse(call: Call<ExistResponse>, response: Response<ExistResponse>) {
-                Log.d("nickName_onResponse", response.toString())
                 val resp = response.body()
                 if(response.code() == 200 || response.code() == 202){
                     existView.onAuthSuccess(resp!!.body)
-                    Log.d("nickName","$resp")
                 } else {
                     existView.onAuthFailure()
                 }
@@ -34,7 +32,6 @@ class AuthService {
             }
             override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
                 existView.onAuthFailure()
-                Log.d("nickName_onFailure", t.message.toString())
             }
 
 
@@ -46,18 +43,15 @@ class AuthService {
         val authService = retrofit.create(AuthInterface::class.java)
         authService.userIdExist(userId).enqueue(object : Callback<ExistResponse>{
             override fun onResponse(call: Call<ExistResponse>, response: Response<ExistResponse>){
-                Log.d("userId_onResponse", response.body()?.body.toString())
                 val resp = response.body()
                 if(response.code() == 200 || response.code() == 202){
                     existView.onAuthSuccess(resp!!.body)
-                    Log.d("nickName","$resp")
                 } else {
                     existView.onAuthFailure()
                 }
             }
             override fun onFailure(call: Call<ExistResponse>, t: Throwable) {
                 existView.onAuthFailure()
-                Log.d("userId_onFailure", t.message.toString())
             }
         })
     }
@@ -66,11 +60,10 @@ class AuthService {
         val authService = retrofit.create(AuthInterface::class.java)
         authService.signUp(User(id, nickname, password)).enqueue(object : Callback<AuthResponse>{
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-                Log.d("sign_onResponse", response.toString())
             }
 
             override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
-                Log.d("sign_onFailure",t.message.toString())
+
             }
         })
     }
@@ -86,11 +79,11 @@ class AuthService {
                     authView.onAuthSuccess(resp!!.body)
                 } else{
                     authView.onAuthFailure()
-                    Log.d("login_onResponse", response.body().toString())}
+
+                }
             }
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 authView.onAuthFailure()
-                Log.d("login_onFailure", t.message.toString())
             }
         })
     }
@@ -106,11 +99,10 @@ class AuthService {
                     authView.onAuthSuccess(resp!!.body)
                 } else{
                     authView.onAuthFailure()
-                    Log.d("login_onResponse", response.body().toString())}
+                }
             }
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 authView.onAuthFailure()
-                Log.d("login_onFailure", t.message.toString())
             }
         })
     }

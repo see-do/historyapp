@@ -26,8 +26,7 @@ class PasswordFragment : Fragment() {
         binding = FragmentPasswordBinding.inflate(inflater, container, false)
         val nickname = arguments?.getString("nickname")
         val id = arguments?.getString("id")
-        Log.d("nickname","$nickname")
-        Log.d("nickname","$id")
+
 
         binding.signupPwdConfirmBtn.setOnClickListener {
             val regex = Regex("[^A-Za-z0-9]")

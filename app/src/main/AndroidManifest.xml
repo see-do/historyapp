@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.1" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.umc.history">
 
@@ -17,10 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HiStory"
         android:usesCleartextTraffic="true">
-        <service
-            android:name=".LikedStoryService"
-            android:enabled="true"
-            android:exported="true"></service>
         <service
             android:name=".LockScreenService"
             android:enabled="true"

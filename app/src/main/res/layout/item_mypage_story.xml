@@ -13,7 +13,7 @@
         android:id="@+id/item_myPage_story_profile_img_iv"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/mypage_profile_img_ex1"
+        android:src="@drawable/history_logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
@@ -26,7 +26,7 @@
         android:text="닉네임"
         android:layout_marginTop="13dp"
         android:layout_marginStart="16dp"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textColor="@color/black"
         />
   <ImageView

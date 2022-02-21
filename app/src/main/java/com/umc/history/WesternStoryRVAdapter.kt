@@ -39,7 +39,6 @@ class WesternStoryRVAdapter(private val storyList:ArrayList<OneStory>) :Recycler
     }
 
     override fun getItemCount(): Int {
-        Log.d("recycler","${storyList.size}")
         return storyList.size
     }
 
@@ -48,17 +47,16 @@ class WesternStoryRVAdapter(private val storyList:ArrayList<OneStory>) :Recycler
 
     inner class ViewHolder(val binding:ItemStoryBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(story : OneStory){
-            Log.d("recycler","recycler")
             binding.itemStoryTitleTv.text=story.title
             binding.itemStoryLikeTv.text= story.totalLike.toString()
             binding.itemStoryCommentTv.text=story.totalComment.toString()
-            Glide.with(context)
-                .load(if(story.images.isNullOrEmpty()){
-                    "https://history-app-story-image.s3.ap-northeast-2.amazonaws.com/static/35dd9731-2e90-41ba-a47b-79c36e9c3435history_logo.png"
-                } else {
-                    story.images[0].imageUrl
-                })
-                .into(binding.itemStoryCoverImgIv)
+//            Glide.with(context)
+//                .load(if(story.images.isNullOrEmpty()){
+//                    "https://history-app-story-image.s3.ap-northeast-2.amazonaws.com/static/35dd9731-2e90-41ba-a47b-79c36e9c3435history_logo.png"
+//                } else {
+//                    story.images[0].imageUrl
+//                })
+//                .into(binding.itemStoryCoverImgIv)
 
         }
     }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.umc.history.databinding.ActivityTestBinding
 
@@ -24,20 +25,24 @@ class TestActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.testAllIv.setOnClickListener {
-            val intent = Intent(applicationContext,QuestionActivity::class.java)
-            startActivity(intent)
+            Toast.makeText(this,"현재 준비중인 기능입니다.",Toast.LENGTH_SHORT).show()
+//            val intent = Intent(applicationContext,QuestionActivity::class.java)
+//            startActivity(intent)
         }
         binding.testKoreanHistoryIv.setOnClickListener {
-            val intent = Intent(applicationContext,QuestionActivity::class.java)
-            startActivity(intent)
+            Toast.makeText(this,"현재 준비중인 기능입니다.",Toast.LENGTH_SHORT).show()
+//            val intent = Intent(applicationContext,QuestionActivity::class.java)
+//            startActivity(intent)
         }
         binding.testOrientalIv.setOnClickListener {
-            val intent = Intent(applicationContext,QuestionActivity::class.java)
-            startActivity(intent)
+            Toast.makeText(this,"현재 준비중인 기능입니다.",Toast.LENGTH_SHORT).show()
+//            val intent = Intent(applicationContext,QuestionActivity::class.java)
+//            startActivity(intent)
         }
         binding.testWesternIv.setOnClickListener {
-            val intent = Intent(applicationContext,QuestionActivity::class.java)
-            startActivity(intent)
+            Toast.makeText(this,"현재 준비중인 기능입니다.",Toast.LENGTH_SHORT).show()
+//            val intent = Intent(applicationContext,QuestionActivity::class.java)
+//            startActivity(intent)
         }
 
 

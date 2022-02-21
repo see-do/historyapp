@@ -54,7 +54,6 @@ class WriteFragment : Fragment() {
         binding.writeHashtagRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.writeHashtagRv.adapter = HashtagRVAdapter(hashtagList)
         var category = ""
-        Log.d("category","$category")
         binding.writeCategoryRb.setOnCheckedChangeListener { _, id ->
             when (id){
                 R.id.write_category_korean_rb -> category = "KOREAN"
@@ -68,30 +67,22 @@ class WriteFragment : Fragment() {
         binding.writeConfirmBtn.setOnClickListener {
             val spf = context?.getSharedPreferences("token", AppCompatActivity.MODE_PRIVATE)
             val accessToken = spf?.getString("accessToken", null)
-            Log.d("accessToken","$accessToken")
             when{
                 binding.writeTitleEt.text.isEmpty() -> showWarning(binding.writeTitleWarningIv, binding.writeTitleWarningTv)
                 category == "" -> showWarning(binding.writeCategoryWarningIv, binding.writeCategoryWarningTv)
                 else -> {
-                        Log.d("hashTag","$hashtagList")
-                        Log.d("pathFind","$uriList")
                     val storyService = StoryService()
-                    val idSpf = requireContext().getSharedPreferences("userSpf",AppCompatActivity.MODE_PRIVATE)
-                    val id = idSpf.getString("id",null)
+                    val id = spf?.getString("id",null)
                     if(uriList.isNotEmpty()) {
                         for(path in uriList) {
                             val file = File(absolutePath(path))
-                            Log.d("pathFind_List", "$file")
                             val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
                             val body =
                                 MultipartBody.Part.createFormData("imageList", file.name, requestFile)
                             pathList.add(body)
                         }
-                        Log.d("pathFind","$pathList")
-                        Log.d("hashTag","$hashtagList")
                         storyService.writeStory(accessToken,pathList, id!!, binding.writeTitleEt.text.toString(), category, binding.writeStoryEt.text.toString(), hashtagList)
                     } else {
-                        Log.d("pathFind","$pathList")
                         storyService.writeStory(accessToken, pathList, id!!, binding.writeTitleEt.text.toString(), category, binding.writeStoryEt.text.toString(), hashtagList)
                     }
                     val spf = requireContext().getSharedPreferences("story", AppCompatActivity.MODE_PRIVATE)
@@ -99,9 +90,7 @@ class WriteFragment : Fragment() {
                     token.putString("title",binding.writeTitleEt.text.toString())
                     token.putString("story",binding.writeStoryEt.text.toString())
                     token.commit()
-                    Log.d("title","${binding.writeTitleEt.text}")
 
-                    Log.d("category", "$category")
                     (context as MainActivity).supportFragmentManager.beginTransaction()
                         .replace(R.id.fl_container, HomeFragment())
                         .commit()
@@ -153,7 +142,6 @@ class WriteFragment : Fragment() {
 
 
     private fun addHashTag(){
-        //Log.d("공백","${binding.writeHashtagEt.text}")
         val text = binding.writeHashtagEt.text.toString().trim()
         hashtagList.add("#${text}")
         binding.writeHashtagEt.setText("")
@@ -175,7 +163,6 @@ class WriteFragment : Fragment() {
                 val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
                 imageList.add(Image(bitmap))
                 uriList.add(uri!!)
-                Log.d("pathFind","$uriList")
                 binding.writeImgRv.adapter?.notifyItemInserted(imageList.lastIndex)
             }
         }

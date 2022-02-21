@@ -19,9 +19,7 @@ class LikeService {
         val likeService = retrofit.create(LikeInterface::class.java)
         likeService.postLike("Bearer $token",postIdx).enqueue(object : Callback<DeleteResponse> {
             override fun onResponse(call: Call<DeleteResponse>, response: Response<DeleteResponse>) {
-                Log.d("post_LikeResponse","$response")
                 val resp = response.body()
-                Log.d("postLike_Response","${resp!!.body}")
             }
             override fun onFailure(call: Call<DeleteResponse>, t: Throwable) {
 
@@ -34,11 +32,9 @@ class LikeService {
         val likeService = retrofit.create(LikeInterface::class.java)
         likeService.postLike("Bearer $token",postIdx).enqueue(object : Callback<DeleteResponse> {
             override fun onResponse(call: Call<DeleteResponse>, response: Response<DeleteResponse>) {
-                Log.d("post_LikeResponse","$response")
                 val resp = response.body()
                 if(response.code() == 200 || response.code() == 202){
                     likeView.onLikeSuccess(resp!!.body)
-                    Log.d("postLike_Response","${resp.body}")
                 } else {
                     likeView.onLikeFailure()
                 }

@@ -1,8 +1,6 @@
 package com.umc.history
 
 import android.app.AlertDialog
-import android.app.AppComponentFactory
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -16,7 +14,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.umc.history.databinding.FragmentStoryDetailBinding
@@ -117,7 +114,6 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
         storyService.setDeleteView(this)
         val spf = activity?.getSharedPreferences("token",AppCompatActivity.MODE_PRIVATE)
         val token = spf?.getString("accessToken",null)
-        Log.d("dele","$token")
         if(token == null){
             Toast.makeText(activity,"로그인이 되어있지 않습니다.",Toast.LENGTH_SHORT).show()
         }else{
@@ -130,7 +126,7 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
         val intent = Intent(Intent.ACTION_SEND, Uri.fromParts("mailto", "example@gasd.com", null)).apply {
             type = "message/rfc822"
             putExtra(Intent.EXTRA_EMAIL, addressList)
-            putExtra(Intent.EXTRA_TEXT, "신고 게시글 제목:\n사유:")
+            putExtra(Intent.EXTRA_TEXT, "수신자: gyeondeo@gmail.com\n신고 게시글 제목:\n사유:")
         }
             //Uri.parse("mailto:")
         startActivity(Intent.createChooser(intent,"메일 전송하기"))
@@ -206,11 +202,8 @@ class StoryDetailFragment(story : OneStory) : Fragment(), CommentView, DeleteVie
     override fun onCommentSuccess(status: String, body: List<Comment?>) {
         if(body.isNotEmpty()){
             for(comment in body){
-                commentList.add(
-                    comment!!
-                )
+                commentList.add(comment!!)
             }
-            Log.d("Comment","$commentList")
         }
         binding.storyCommentRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.storyCommentRv.adapter = CommentRVAdapter(commentList)

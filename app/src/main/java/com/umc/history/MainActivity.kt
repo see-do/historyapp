@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
                             .replace(R.id.fl_container, writeFragment, "write").commit()
                     }
                     R.id.action_test -> {
-                        Log.d("das","dasd")
                         val intent = Intent(applicationContext, TestActivity::class.java)
                         startActivity(intent)
 
@@ -99,7 +98,6 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
                     }
                 }
                 R.id.action_test -> {
-                    Log.d("das","dasd")
                     val intent = Intent(applicationContext, TestActivity::class.java)
                     startActivity(intent)
                         return true

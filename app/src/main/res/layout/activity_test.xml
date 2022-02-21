@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="문제를 풀기 전,\n원하는 카테고리를 선택해주세요!"
+        android:text="현재 준비중인 기능입니다."
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"

@@ -1,11 +1,9 @@
 package com.umc.history
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.umc.history.databinding.ItemStoryBinding
@@ -39,7 +37,6 @@ class StoryRVAdapter(private val storyList:ArrayList<OneStory>) :RecyclerView.Ad
     }
 
     override fun getItemCount(): Int{
-        Log.d("recycler","${storyList.size}")
         return storyList.size}
 
 

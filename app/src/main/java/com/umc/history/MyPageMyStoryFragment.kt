@@ -16,9 +16,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MyPageMyStoryFragment: Fragment() {
+class MyPageMyStoryFragment: Fragment(), OneStoryView {
     lateinit var binding: FragmentMypageLikestoryBinding
-    private var myPageStoryDatas = ArrayList<MyPageStory>()
+    private var myPageStoryDatas = ArrayList<Body>()
     private var token : String? = null
 
     override fun onCreateView(
@@ -28,32 +28,57 @@ class MyPageMyStoryFragment: Fragment() {
     ): View? {
         binding = FragmentMypageLikestoryBinding.inflate(inflater,container,false)
         //더미데이터랑 어댑터 연결
-        val myPageStoryRVAdapter = MyPageStoryRVAdapter(myPageStoryDatas)
-        //리사이클러뷰에 어댑터를 연결
-        binding.myPageStoryRecyclerView.adapter = myPageStoryRVAdapter
-
-
-        val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(
-            GsonConverterFactory.create()).build()
-        val userWroteStoryService = retrofit.create(UserWroteStoryInterface::class.java)
-
         val spf = activity?.getSharedPreferences("token", AppCompatActivity.MODE_PRIVATE)
-        token = spf?.getString("accessToken", null)
+        val token = spf?.getString("accessToken", null)
+        if(token == null){
+            binding.myPageStoryRecyclerView.visibility = View.GONE
+        } else {
 
-        userWroteStoryService.getUserWroteStory(token).enqueue(object : Callback<GetUserWroteStoryResponse>{
-            override fun onResponse(call: Call<GetUserWroteStoryResponse>, response: Response<GetUserWroteStoryResponse>) {
-                Log.d("getUserWroteStory_OnResponse","$response")
-                // response.body()?.body?.post?.title?.
-                myPageStoryDatas.apply {
-                    add(MyPageStory(response.body()?.body?.title,response.body()?.body?.user?.profileImageUrl,response.body()?.body?.totalLike,response.body()?.body?.totalComment,response.body()?.body?.contents,response.body()?.body?.user?.nickName))
+
+
+            val retrofit = Retrofit.Builder().baseUrl("http://history-balancer-5405023.ap-northeast-2.elb.amazonaws.com").addConverterFactory(
+                GsonConverterFactory.create()).build()
+            val userWroteStoryService = retrofit.create(UserWroteStoryInterface::class.java)
+
+
+
+            userWroteStoryService.getUserWroteStory("Bearer $token").enqueue(object : Callback<SearchResponse>{
+                override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
+                    val resp = response.body()
+                    if(resp?.body != null){
+                        myPageStoryDatas.clear()
+                        for(body in resp.body) {
+                            myPageStoryDatas.add(body)
+                        }
+                        val myPageStoryRVAdapter = MyPageStoryRVAdapter(myPageStoryDatas)
+                        //리사이클러뷰에 어댑터를 연결
+                        binding.myPageStoryRecyclerView.adapter = myPageStoryRVAdapter
+                        myPageStoryRVAdapter.storyItemClickListener(object : MyPageStoryRVAdapter.StoryItemClickListener {
+                            override fun onItemClick(story: Body) {
+                                getOneStory(story)
+                            }
+                        })
+                        binding.myPageStoryRecyclerView.visibility = View.VISIBLE
+//                        myPageStoryDatas.apply {
+//                            add(MyPageStory(response.body()?.body?.title,response.body()?.body?.user?.profileImageUrl,response.body()?.body?.totalLike,response.body()?.body?.totalComment,response.body()?.body?.contents,response.body()?.body?.user?.nickName))
+//                        }
+                    }
+
+
+
                 }
-                myPageStoryRVAdapter.notifyDataSetChanged()
 
-            }
-            override fun onFailure(call: Call<GetUserWroteStoryResponse>, t: Throwable) {
-                Log.d("getUserWroteStory_OnFailure","$t")
-            }
-        })
+                override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+
+                }
+            })
+
+
+
+
+        }
+
+
 
 //        //데이터 리스트 생성 더미데이터
 //        myPageStoryDatas.apply {
@@ -72,6 +97,23 @@ class MyPageMyStoryFragment: Fragment() {
 
 
         return binding.root
+    }
+    private fun getOneStory(story:Body){
+        val storyService = StoryService()
+        storyService.setOneStoryView(this)
+        storyService.getStory(story.postIdx)
+    }
+
+    override fun onStoryFailure() {
+
+    }
+
+    override fun onStoryLoading() {
+    }
+
+    override fun onStorySuccess(status: String, body: OneStory?) {
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_container, StoryDetailFragment(body!!)).commitAllowingStateLoss()
     }
 
 }

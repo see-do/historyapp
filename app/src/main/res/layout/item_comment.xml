@@ -10,7 +10,7 @@
         android:id="@+id/item_comment_profile_iv"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:src="@drawable/mypage_profile_img_ex1"
+        android:src="@drawable/history_logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />

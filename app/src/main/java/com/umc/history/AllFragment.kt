@@ -2,7 +2,6 @@ package com.umc.history
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.history.databinding.FragmentAllBinding
 
-class AllFragment: Fragment(), StoryView {
+class AllFragment: Fragment(), StoryView, OneStoryView {
     lateinit var binding: FragmentAllBinding
     private var storyDatas = ArrayList<OneStory>()
 
@@ -64,16 +63,22 @@ class AllFragment: Fragment(), StoryView {
         val storyRVAdapter = StoryRVAdapter(storyDatas)
         storyRVAdapter.myItemClickListener(object : StoryRVAdapter.MyItemClickListener{
             override fun onItemClick(story: OneStory) {
-                changeFragment(story)
+                getOneStory(story.postIdx)
             }
         })
         binding.homeStoryRecyclerView.adapter = storyRVAdapter
     }
-
-    fun changeFragment(story: OneStory) {
-        (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_container, StoryDetailFragment(story)).commitAllowingStateLoss()
+    private fun getOneStory(story:Int){
+        val storyService = StoryService()
+        storyService.setOneStoryView(this)
+        storyService.getStory(story)
     }
+
+    override fun onStorySuccess(status: String, body: OneStory?) {
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_container, StoryDetailFragment(body!!)).commitAllowingStateLoss()
+    }
+
     private fun initView(flag : Int){
         val storyService = StoryService()
         storyService.setStoryView(this)
@@ -82,5 +87,7 @@ class AllFragment: Fragment(), StoryView {
             else -> storyService.getStoriesAllOrderByLike()
         }
     }
+
+
 
 }

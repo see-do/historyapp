@@ -25,7 +25,6 @@ class CommentService {
         val commentService = retrofit.create(CommentInterface::class.java)
         commentService.getComments(postId).enqueue(object : Callback<CommentResponse> {
             override fun onResponse(call: Call<CommentResponse>, response: Response<CommentResponse>) {
-                Log.d("getLike_OnResponse","$response")
                 val resp = response.body()
                 if(response.code() == 200 || response.code() == 202) {
                     commentView.onCommentSuccess(resp!!.status, resp.body)
@@ -35,7 +34,6 @@ class CommentService {
             }
             override fun onFailure(call: Call<CommentResponse>, t: Throwable) {
                 commentView.onCommentFailure()
-                Log.d("getLike_OnFailure","$t")
             }
         })
     }
@@ -46,7 +44,6 @@ class CommentService {
         val commentService = retrofit.create(CommentInterface::class.java)
         commentService.postComment("Bearer $token", postId, comment).enqueue(object : Callback<StoryResponse> {
             override fun onResponse(call: Call<StoryResponse>, response: Response<StoryResponse>) {
-                Log.d("postComment_OnResponse","$response")
                 if(response.code() == 200 || response.code() == 202){
                     postCommentView.postCommentSuccess()
                 } else {
@@ -55,7 +52,6 @@ class CommentService {
             }
             override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
                 postCommentView.postCommentFailure()
-                Log.d("getLike_OnFailure","$t")
             }
         })
     }

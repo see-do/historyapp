@@ -11,11 +11,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.umc.history.databinding.FragmentIdBinding
-import org.w3c.dom.Text
 
 
 class IdFragment : Fragment(), ExistView {
@@ -27,8 +24,7 @@ class IdFragment : Fragment(), ExistView {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentIdBinding.inflate(inflater, container, false)
-        var nickname = arguments?.getString("nickname")
-        Log.d("nickname","$nickname")
+        val nickname = arguments?.getString("nickname")
 
         binding.signupIdCheckTv.setOnClickListener {
             val regex = Regex("[^A-Za-z0-9]")
@@ -59,13 +55,13 @@ class IdFragment : Fragment(), ExistView {
         })
         binding.signupIdNextBtn.setOnClickListener {
             binding.signupIdWarningTv.visibility = View.GONE
-             if(existFlag){
+            if(existFlag){
                 showWarning("중복체크 버튼을 눌러주세요")
             } else if (binding.signupIdEt.text.toString().isEmpty()) {
                 showWarning("아이디를 입력해주세요")
             } else {
-                var passwordFragment = PasswordFragment()
-                var bundle = Bundle()
+                val passwordFragment = PasswordFragment()
+                val bundle = Bundle()
                 bundle.putString("nickname", nickname)
                 bundle.putString("id", binding.signupIdEt.text.toString())
                 passwordFragment.arguments = bundle
@@ -75,7 +71,7 @@ class IdFragment : Fragment(), ExistView {
             }
         }
 
-        binding.signupIdEt.onFocusChangeListener = View.OnFocusChangeListener{ p0, p1 ->
+        binding.signupIdEt.onFocusChangeListener = View.OnFocusChangeListener{ _, p1 ->
             if(p1){
 
             } else {
@@ -105,7 +101,6 @@ class IdFragment : Fragment(), ExistView {
     }
 
     override fun onAuthSuccess(body: Boolean) {
-        Log.d("onExist_Success","$body")
         existFlag = body
         when(existFlag){
             false ->{

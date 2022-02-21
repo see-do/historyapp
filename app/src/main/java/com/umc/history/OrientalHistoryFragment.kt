@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import com.umc.history.databinding.FragmentAllBinding
 import com.umc.history.databinding.FragmentOrientalhistoryBinding
 
-class OrientalHistoryFragment : Fragment(), StoryView {
+class OrientalHistoryFragment : Fragment(), StoryView, OneStoryView {
     lateinit var binding: FragmentOrientalhistoryBinding
     private var storyDatas = ArrayList<OneStory>()
 
@@ -46,9 +46,15 @@ class OrientalHistoryFragment : Fragment(), StoryView {
         return binding.root
     }
 
-    fun changeFragment(story: OneStory) {
+    private fun getOneStory(story:Int){
+        val storyService = StoryService()
+        storyService.setOneStoryView(this)
+        storyService.getStory(story)
+    }
+
+    override fun onStorySuccess(status: String, body: OneStory?) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_container, StoryDetailFragment(story)).commitAllowingStateLoss()
+            .replace(R.id.fl_container, StoryDetailFragment(body!!)).commitAllowingStateLoss()
     }
 
     override fun onStoryFailure() {
@@ -65,12 +71,12 @@ class OrientalHistoryFragment : Fragment(), StoryView {
             storyDatas.add(
                 story
             )
-            Log.d("asian_recycler","${storyDatas}")
+
         }
         val storyRVAdapter = StoryRVAdapter(storyDatas)
         storyRVAdapter.myItemClickListener(object : StoryRVAdapter.MyItemClickListener{
             override fun onItemClick(story: OneStory) {
-                changeFragment(story)
+                getOneStory(story.postIdx)
             }
         })
         binding.homeStoryRecyclerView.adapter = storyRVAdapter

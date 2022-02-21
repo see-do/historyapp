@@ -6,6 +6,6 @@ import retrofit2.http.Header
 
 interface UserWroteStoryInterface {
     @GET("/common/stories/byUser")
-    fun getUserWroteStory(@Header("Authorization") Authorization: String?): Call<GetUserWroteStoryResponse>
+    fun getUserWroteStory(@Header("Authorization") Authorization: String): Call<SearchResponse>
 
 }

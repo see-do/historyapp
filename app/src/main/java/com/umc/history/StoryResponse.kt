@@ -1,8 +1,6 @@
 package com.umc.history
 
-import android.net.Uri
 import com.google.gson.annotations.SerializedName
-import retrofit2.http.Url
 import java.sql.Timestamp
 
 data class StoryResponse(
@@ -12,12 +10,12 @@ data class StoryResponse(
     @SerializedName("message") val message : String,
     @SerializedName("path") val path : String
 )
-//nullable 수정 필요
+
 data class GetOneStoryResponse(
     @SerializedName("status") val status: String,
     @SerializedName("body") val body: OneStory?
 )
-//nullable 수정 필요
+
 data class GetAllStoryResponse(
     @SerializedName("status") val status: String,
     @SerializedName("body") val body : List<OneStory>
@@ -63,13 +61,4 @@ data class StoryGetHashtag(
 data class DeleteResponse(
     @SerializedName("status") val status : String,
     @SerializedName("body") val body : Boolean
-)
-
-
-data class WriteStory(
-    @SerializedName("userId") val userId : String,
-    @SerializedName("category") val category : String,
-    @SerializedName("title") val title : String,
-    @SerializedName("contents") val contents : String,
-    @SerializedName("hashTags") val hashTags:  String
 )

@@ -16,6 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.umc.history.databinding.FragmentMypageBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MyPageFragment : Fragment() {
@@ -47,7 +51,9 @@ class MyPageFragment : Fragment() {
             binding.myPageSettingLy.visibility = View.VISIBLE
             childFragmentManager.beginTransaction().replace(R.id.myPage_profile_ly, myPageLoginFragment)
                 .commit()
+
         }
+
 
 
 
@@ -84,17 +90,21 @@ class MyPageFragment : Fragment() {
 
         fun showDialog(){
             alertDialog.show()
-            alertDialog.findViewById<TextView>(R.id.dialog01_profile).setOnClickListener{
-                val intent = Intent(activity,ProfileEditorActivity::class.java)
-                startActivity(intent)
-            }
-            alertDialog.findViewById<TextView>(R.id.dialog01_lock_setting).setOnClickListener{
-                val intent = Intent(activity,LockSettingActivity::class.java)
-                startActivity(intent)
-            }
+//            alertDialog.findViewById<TextView>(R.id.dialog01_profile).setOnClickListener{
+//                val intent = Intent(activity,ProfileEditorActivity::class.java)
+//                startActivity(intent)
+//            }
+//            alertDialog.findViewById<TextView>(R.id.dialog01_lock_setting).setOnClickListener{
+//                val intent = Intent(activity,LockSettingActivity::class.java)
+//                startActivity(intent)
+//            }
 
             alertDialog.findViewById<TextView>(R.id.dialog01_logout).setOnClickListener{
-                val intent = Intent(activity,SettingLogoutActivity::class.java)
+                val spf = activity?.getSharedPreferences("token",AppCompatActivity.MODE_PRIVATE)
+                val editor = spf!!.edit()
+                editor.clear()
+                editor.commit()
+                val intent = Intent(activity,LoginActivity::class.java)
                 startActivity(intent)
             }
 

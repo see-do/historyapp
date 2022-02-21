@@ -46,7 +46,7 @@ class SearchFragment : Fragment(), SearchView, OneStoryView {
                 flag = 0
                 alertDialog.hide()
             }
-            Log.d("searchTitle","change")
+
         }
 
         binding.searchSearchEt.setOnEditorActionListener(object : TextView.OnEditorActionListener{
@@ -93,7 +93,6 @@ class SearchFragment : Fragment(), SearchView, OneStoryView {
     }
 
     override fun onSearchSuccess(searchBody : List<Body>?) {
-        Log.d("searchBody","$searchBody")
         if(searchBody!!.isNotEmpty()){
             storyDatas.clear()
             for(story in searchBody){

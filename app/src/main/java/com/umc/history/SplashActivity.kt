@@ -52,7 +52,6 @@ class SplashActivity:AppCompatActivity(), AuthView {
         editor.putString("accessToken", tokenBody.accessToken)
         editor.putString("refreshToken", tokenBody.refreshToken)
         editor.commit()
-        Log.d("reissue","token")
     }
 
 

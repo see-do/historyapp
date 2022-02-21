@@ -17,7 +17,6 @@ class StoryHashtagRVAdapter(private val hashtagList : ArrayList<String>) : Recyc
 
     override fun onBindViewHolder(holder : ViewHolder, position : Int){
         holder.bind(hashtagList[position])
-    //holder.bind(hashtagList[position])
     }
 
     override fun getItemCount(): Int = hashtagList.size

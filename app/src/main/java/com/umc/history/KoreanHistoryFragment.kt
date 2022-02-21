@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.umc.history.databinding.FragmentKoreanhistoryBinding
 
-class KoreanHistoryFragment: Fragment(), StoryView {
+class KoreanHistoryFragment: Fragment(), StoryView, OneStoryView {
     lateinit var binding: FragmentKoreanhistoryBinding
     private var storyDatas = ArrayList<OneStory>()
 
@@ -46,10 +46,15 @@ class KoreanHistoryFragment: Fragment(), StoryView {
 
         return binding.root
     }
+    private fun getOneStory(story:Int){
+        val storyService = StoryService()
+        storyService.setOneStoryView(this)
+        storyService.getStory(story)
+    }
 
-    fun changeFragment(story: OneStory) {
+    override fun onStorySuccess(status: String, body: OneStory?) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_container, StoryDetailFragment(story)).commitAllowingStateLoss()
+            .replace(R.id.fl_container, StoryDetailFragment(body!!)).commitAllowingStateLoss()
     }
 
     override fun onStoryFailure() {
@@ -63,15 +68,12 @@ class KoreanHistoryFragment: Fragment(), StoryView {
     override fun onStorySuccess(status: String, body: List<OneStory>) {
         storyDatas.clear()
         for (story in body){
-            storyDatas.add(
-                story
-            )
-            Log.d("korean_recycler","${storyDatas}")
+            storyDatas.add(story)
         }
         val storyRVAdapter = StoryRVAdapter(storyDatas)
         storyRVAdapter.myItemClickListener(object : StoryRVAdapter.MyItemClickListener{
             override fun onItemClick(story: OneStory) {
-                changeFragment(story)
+                getOneStory(story.postIdx)
             }
         })
         binding.homeStoryRecyclerView.adapter = storyRVAdapter

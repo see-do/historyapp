@@ -101,7 +101,6 @@ class NicknameFragment : Fragment(), ExistView {
     }
 
     override fun onAuthSuccess(body: Boolean) {
-        Log.d("onExist_Success","$body")
         existFlag = body
         when(existFlag){
             false ->{

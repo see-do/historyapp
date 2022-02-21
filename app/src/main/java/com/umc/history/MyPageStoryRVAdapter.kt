@@ -9,13 +9,19 @@ import com.bumptech.glide.Glide
 import com.umc.history.databinding.ItemMypageStoryBinding
 import com.umc.history.databinding.ItemStoryBinding
 
-class MyPageStoryRVAdapter (private val myPageStoryList:ArrayList<MyPageStory>) : RecyclerView.Adapter<MyPageStoryRVAdapter.ViewHolder>(){
+class MyPageStoryRVAdapter (private val myPageStoryList:ArrayList<Body>) : RecyclerView.Adapter<MyPageStoryRVAdapter.ViewHolder>(){
 
     lateinit var context:Context
-
+    private lateinit var mItemClickListener: StoryItemClickListener
+    interface StoryItemClickListener{
+        fun onItemClick(story : Body)
+    }
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         context = recyclerView.context
+    }
+    fun storyItemClickListener(storyItemClickListener: StoryItemClickListener ){
+        mItemClickListener = storyItemClickListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,7 +32,9 @@ class MyPageStoryRVAdapter (private val myPageStoryList:ArrayList<MyPageStory>) 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(myPageStoryList[position])
-
+        holder.binding.storyLo.setOnClickListener {
+            mItemClickListener.onItemClick(myPageStoryList[position])
+        }
     }
 
     override fun getItemCount(): Int = myPageStoryList.size
@@ -36,15 +44,15 @@ class MyPageStoryRVAdapter (private val myPageStoryList:ArrayList<MyPageStory>) 
     //뷰홀더
 
     inner class ViewHolder(val binding: ItemMypageStoryBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(myPageStory:MyPageStory){
+        fun bind(myPageStory:Body){
             binding.itemMyPageStoryTitleTv.text=myPageStory.title
-            binding.itemMyPageStoryDetailTv.text=myPageStory.detail
-            binding.itemMyPageStoryNickNameTv.text=myPageStory.nickName
-            binding.itemMyPageStoryLikeTv.text= myPageStory.likeNumber.toString()
-            binding.itemMyPageStoryCommentTv.text=myPageStory.commentNumber.toString()
-            Glide.with(context)
-                .load(myPageStory.profileImg)
-                .into(binding.itemMyPageStoryProfileImgIv)
+            binding.itemMyPageStoryDetailTv.text=myPageStory.contents
+            binding.itemMyPageStoryNickNameTv.text=myPageStory.user!!.nickName
+            binding.itemMyPageStoryLikeTv.text= myPageStory.totalLike.toString()
+            binding.itemMyPageStoryCommentTv.text=myPageStory.totalComment.toString()
+//            Glide.with(context)
+//                .load(myPageStory.user.profileImgUrl)
+//                .into(binding.itemMyPageStoryProfileImgIv)
         }
     }
 

@@ -24,7 +24,6 @@ class SignUpActivity : AppCompatActivity() {
         }
         val fragment = supportFragmentManager.findFragmentByTag("term")
         if (fragment != null && fragment.isVisible) {
-            Log.d("check","check")
             binding.signupExitIv.visibility = View.GONE
             binding.signupTermIv.visibility = View.VISIBLE
         }

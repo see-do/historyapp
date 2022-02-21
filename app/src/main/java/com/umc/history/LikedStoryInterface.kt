@@ -6,6 +6,6 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface LikedStoryInterface {
-    @GET("/stories/Liking")
-    fun getLikedStory():Call<GetLikedStoryResponse>
+    @GET("/common/stories/liking")
+    fun getLikedStory(@Header("Authorization") authorization : String):Call<GetLikedStoryResponse>
 }

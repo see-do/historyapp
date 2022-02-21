@@ -49,7 +49,6 @@ class StoryService {
         emptyList.add(emptyPart)
 
         val jsonObject = JSONObject("{\"userId\":\"${id}\",\"category\":\"${category}\",\"title\":\"${title}\",\"contents\":\"${contents}\",\"hashTags\":${jsonArray}}").toString()
-        Log.d("write_","$jsonObject")
         val jsonBody = RequestBody.create(parse("application/json"),jsonObject)
 
         storyService.writeStory("Bearer $token", if(pathList.isEmpty()){
@@ -58,10 +57,10 @@ class StoryService {
               pathList
               }, jsonBody).enqueue(object : Callback<StoryResponse>{
             override fun onResponse(call: Call<StoryResponse>, response: Response<StoryResponse>) {
-                Log.d("write_onResponse","$response")
+
             }
             override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
-                Log.d("write_onFail","$t")
+
             }
             })
     }
@@ -89,7 +88,6 @@ class StoryService {
 
         storyService.getStory(postIdx).enqueue(object : Callback<GetOneStoryResponse>{
             override fun onResponse(call: Call<GetOneStoryResponse>, response: Response<GetOneStoryResponse>) {
-                Log.d("get_OnResponse","$response")
                 val resp = response.body()
                 if(response.code() == 200 || response.code() == 202){
                     oneStoryView.onStorySuccess(resp!!.status, resp.body)
@@ -109,7 +107,6 @@ class StoryService {
 
         storyService.getStoriesAllOrderByRecent().enqueue(object : Callback<GetAllStoryResponse>{
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
-                Log.d("getRecent_OnResponse","$response")
                 val resp = response.body()
                 if(response.code() == 200 || response.code() == 202) {
                     storyView.onStorySuccess(resp!!.status, resp.body)
@@ -119,7 +116,6 @@ class StoryService {
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
                 storyView.onStoryFailure()
-                Log.d("getRecent_OnFailure","$t")
             }
         })
     }
@@ -129,7 +125,6 @@ class StoryService {
 
         storyService.getStoriesAllOrderByLike().enqueue(object : Callback<GetAllStoryResponse>{
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
-                Log.d("getLike_OnResponse","$response")
                 val resp = response.body()
                 if(response.code() == 200 || response.code() == 202){
                     storyView.onStorySuccess(resp!!.status, resp.body)
@@ -140,7 +135,6 @@ class StoryService {
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
                 storyView.onStoryFailure()
-                Log.d("getLike_OnFailure","$t")
             }
         })
     }
@@ -150,7 +144,6 @@ class StoryService {
 
         storyService.getStoriesCategoryOrderByLike(category).enqueue(object : Callback<GetAllStoryResponse>{
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
-                Log.d("getLike_OnResponse","$response")
                 val resp = response.body()
                 if(response.code() == 200 || response.code() == 202){
                     storyView.onStorySuccess(resp!!.status, resp.body)
@@ -160,7 +153,6 @@ class StoryService {
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
                 storyView.onStoryFailure()
-                Log.d("getLike_OnFailure","$t")
             }
         })
     }
@@ -170,7 +162,6 @@ class StoryService {
 
         storyService.getStoriesCategoryOrderByRecent(category).enqueue(object : Callback<GetAllStoryResponse>{
             override fun onResponse(call: Call<GetAllStoryResponse>, response: Response<GetAllStoryResponse>) {
-                Log.d("getLike_OnResponse","$response")
                 val resp = response.body()
                 if(response.code() == 200 || response.code() == 202){
                     storyView.onStorySuccess(resp!!.status, resp.body)
@@ -180,7 +171,6 @@ class StoryService {
             }
             override fun onFailure(call: Call<GetAllStoryResponse>, t: Throwable) {
                 storyView.onStoryFailure()
-                Log.d("getLike_OnFailure","$t")
             }
         })
     }

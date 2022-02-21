@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.umc.history.databinding.FragmentWesternhistoryBinding
 
-class WesternHistoryFragment: Fragment(), StoryView {
+class WesternHistoryFragment: Fragment(), StoryView, OneStoryView {
     lateinit var binding: FragmentWesternhistoryBinding
     private var storyDatas = ArrayList<OneStory>()
 
@@ -45,10 +45,6 @@ class WesternHistoryFragment: Fragment(), StoryView {
 
         return binding.root
     }
-    fun changeFragment(story: OneStory) {
-        (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_container, StoryDetailFragment(story)).commitAllowingStateLoss()
-    }
 
     override fun onStoryFailure() {
         Toast.makeText(activity,"인터넷 연결을 확인해주세요",Toast.LENGTH_SHORT).show()
@@ -64,7 +60,7 @@ class WesternHistoryFragment: Fragment(), StoryView {
             storyDatas.add(
                 story
             )
-            Log.d("western_recycler","${storyDatas}")
+
         }
         binding.westernStoryRecyclerView.layoutManager =
             LinearLayoutManager(
@@ -75,11 +71,21 @@ class WesternHistoryFragment: Fragment(), StoryView {
         val storyRVAdapter = StoryRVAdapter(storyDatas)
         storyRVAdapter.myItemClickListener(object : StoryRVAdapter.MyItemClickListener{
             override fun onItemClick(story: OneStory) {
-                changeFragment(story)
+                getOneStory(story.postIdx)
             }
         })
         binding.westernStoryRecyclerView.adapter = storyRVAdapter
 
+    }
+    private fun getOneStory(story:Int){
+        val storyService = StoryService()
+        storyService.setOneStoryView(this)
+        storyService.getStory(story)
+    }
+
+    override fun onStorySuccess(status: String, body: OneStory?) {
+        (context as MainActivity).supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_container, StoryDetailFragment(body!!)).commitAllowingStateLoss()
     }
 
     private fun initView(flag : Int){
