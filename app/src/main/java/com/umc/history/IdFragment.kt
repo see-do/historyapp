@@ -37,7 +37,6 @@ class IdFragment : Fragment(), ExistView {
             } else{
                 checkExist()
             }
-
         }
         binding.signupIdEt.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
