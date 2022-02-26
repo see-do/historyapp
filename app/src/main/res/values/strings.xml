@@ -18,6 +18,8 @@
     <string name="title">제목</string>
     <string name="topic">주제</string>
     <string name="back">뒤로가기</string>
+    <string name="exit">나가기</string>
+    <string name="test">과거시험</string>
     <string name="korean">한국사</string>
     <string name="oriental">동양사</string>
     <string name="western">서양사</string>
@@ -48,6 +50,7 @@
     <string name="write_title">제목을 작성해주세요</string>
     <string name="write_category">주제를 선택해주세요</string>
     <string name="write_story">내용을 작성해주세요</string>
+    <string name="test_category">문제를 풀기 전,\n원하는 카테고리를 선택해주세요!</string>
     <string name="check_exist">중복 확인</string>
     <string name="plus">+</string>
     <string name="align_recent">최신순으로 정렬</string>

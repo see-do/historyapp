@@ -24,14 +24,13 @@ class TestActivity : AppCompatActivity(), TestView {
         }
 
         binding.testAllIv.setOnClickListener {
-            Toast.makeText(this,"현재 준비중인 기능입니다.",Toast.LENGTH_SHORT).show()
-
             val spf = this.getSharedPreferences("token", MODE_PRIVATE)
             val token = spf?.getString("accessToken", null)
             when(token){
                 null -> Toast.makeText(this, "로그인을 해주세요", Toast.LENGTH_SHORT).show()
                 else -> {
                     val testService = TestService()
+                    testService.setTestView(this)
                     testService.getTest(token, "all")
                 }
             }
@@ -61,12 +60,13 @@ class TestActivity : AppCompatActivity(), TestView {
     }
 
     override fun onGetTestSuccess(body: List<Test>?) {
-        val quizList = arrayListOf<Test>()
-        quizList.clear()
+        val testList = arrayListOf<Test>()
+        testList.clear()
         for(i in body!!)
-            quizList.add(i)
-
-
+            testList.add(i)
+        val intent = Intent(this, QuestionActivity::class.java)
+        intent.putExtra("Test", testList)
+        startActivity(intent)
     }
     override fun onGetTestLoading() {
         TODO("Not yet implemented")

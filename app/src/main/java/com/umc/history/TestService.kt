@@ -23,6 +23,7 @@ class TestService {
             ) {
                 val resp = response.body()
                 testView.onGetTestSuccess(resp!!.body)
+                Log.d("test","${resp.body}")
             }
 
             override fun onFailure(call: Call<GetTestResponse>, t: Throwable) {
