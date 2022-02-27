@@ -50,9 +50,11 @@
     <string name="write_title">제목을 작성해주세요</string>
     <string name="write_category">주제를 선택해주세요</string>
     <string name="write_story">내용을 작성해주세요</string>
+    <string name="write_comment">댓글을 입력해보세요.</string>
     <string name="test_category">문제를 풀기 전,\n원하는 카테고리를 선택해주세요!</string>
     <string name="check_exist">중복 확인</string>
     <string name="plus">+</string>
+    <string name="blank"></string>
     <string name="align_recent">최신순으로 정렬</string>
     <string name="align_like">인기순으로 정렬</string>
     <string name="story_delete">게시글 삭제하기</string>
