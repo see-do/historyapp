@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.drawable.toDrawable
 
 import com.umc.history.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,16 +28,15 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
         binding.bnvMain.setOnNavigationItemSelectedListener(this)
         binding.bnvMain.itemIconTintList = null
         binding.bnvMain.selectedItemId= R.id.action_home
-        val intent = Intent(this, LockScreenService::class.java)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            this.startForegroundService(intent)
-        } else {
-            this.startService(intent)
-        }
+//        val intent = Intent(this, LockScreenService::class.java)
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            this.startForegroundService(intent)
+//        } else {
+//            this.startService(intent)
+//        }
 
 
     }
-
 
     fun basicAlert(item : Int){
         val builder = AlertDialog.Builder(this)

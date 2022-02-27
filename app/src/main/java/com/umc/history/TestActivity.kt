@@ -2,9 +2,6 @@ package com.umc.history
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.umc.history.databinding.ActivityTestBinding
@@ -22,39 +19,18 @@ class TestActivity : AppCompatActivity(), TestView {
             val intent = Intent(applicationContext,MainActivity::class.java)
             startActivity(intent)
         }
-
         binding.testAllIv.setOnClickListener {
-            val spf = this.getSharedPreferences("token", MODE_PRIVATE)
-            val token = spf?.getString("accessToken", null)
-            when(token){
-                null -> Toast.makeText(this, "로그인을 해주세요", Toast.LENGTH_SHORT).show()
-                else -> {
-                    val testService = TestService()
-                    testService.setTestView(this)
-                    testService.getTest(token, "all")
-                }
-            }
-//            val intent = Intent(applicationContext,QuestionActivity::class.java)
-//            startActivity(intent)
+            getTest("all")
         }
         binding.testKoreanHistoryIv.setOnClickListener {
-            Toast.makeText(this,"현재 준비중인 기능입니다.",Toast.LENGTH_SHORT).show()
-//            val intent = Intent(applicationContext,QuestionActivity::class.java)
-//            startActivity(intent)
+            getTest("KOREAN")
         }
         binding.testOrientalIv.setOnClickListener {
-            Toast.makeText(this,"현재 준비중인 기능입니다.",Toast.LENGTH_SHORT).show()
-//            val intent = Intent(applicationContext,QuestionActivity::class.java)
-//            startActivity(intent)
+            getTest("ASIAN")
         }
         binding.testWesternIv.setOnClickListener {
-            Toast.makeText(this,"현재 준비중인 기능입니다.",Toast.LENGTH_SHORT).show()
-//            val intent = Intent(applicationContext,QuestionActivity::class.java)
-//            startActivity(intent)
+            getTest("WESTERN")
         }
-
-
-
 
 
     }
@@ -69,10 +45,23 @@ class TestActivity : AppCompatActivity(), TestView {
         startActivity(intent)
     }
     override fun onGetTestLoading() {
-        TODO("Not yet implemented")
+
     }
     override fun onGetTestFailure() {
-        TODO("Not yet implemented")
+        Toast.makeText(this,"퀴즈를 불러오는데 실패했습니다.",Toast.LENGTH_SHORT).show()
+    }
+
+    private fun getTest(category: String){
+        val spf = this.getSharedPreferences("token", MODE_PRIVATE)
+        val token = spf?.getString("accessToken", null)
+        when(token){
+            null -> Toast.makeText(this, "로그인 후에 사용할 수 있는 기능입니다.", Toast.LENGTH_SHORT).show()
+            else -> {
+                val testService = TestService()
+                testService.setTestView(this)
+                testService.getTest(token, category)
+            }
+        }
     }
 
 

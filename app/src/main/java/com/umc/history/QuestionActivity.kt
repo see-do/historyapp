@@ -18,7 +18,7 @@ class QuestionActivity: AppCompatActivity(){
         val intent  = intent
         var answer = true
         var select = true
-        var testList = intent?.getParcelableArrayListExtra<Test>("Test")
+        val testList = intent?.getParcelableArrayListExtra<Test>("Test")
         val answerIntent = Intent(this, QuestionAnswerActivity::class.java)
         if(testList!!.isNotEmpty()){
             binding.questionQuestionTv.text = "Q. ${testList[0].question}"
@@ -28,18 +28,12 @@ class QuestionActivity: AppCompatActivity(){
             answerIntent.putExtra("test",testList)
         }
         binding.questionAnswerNotselectedOIv.setOnClickListener {
-            binding.questionAnswerSelectedOIv.visibility = View.VISIBLE
-            binding.questionAnswerNotselectedOIv.visibility = View.GONE
-            binding.questionAnswerSelectedXIv.visibility = View.GONE
-            binding.questionAnswerNotselectedXIv.visibility = View.VISIBLE
             select = true
+            selectAnswer(select)
         }
         binding.questionAnswerNotselectedXIv.setOnClickListener {
-            binding.questionAnswerNotselectedXIv.visibility = View.GONE
-            binding.questionAnswerSelectedXIv.visibility = View.VISIBLE
-            binding.questionAnswerSelectedOIv.visibility = View.GONE
-            binding.questionAnswerNotselectedOIv.visibility = View.VISIBLE
             select = false
+            selectAnswer(select)
         }
 
         binding.questionNextIv.setOnClickListener {
@@ -51,8 +45,24 @@ class QuestionActivity: AppCompatActivity(){
         }
 
         binding.questionExitLy.setOnClickListener{
-            val intent = Intent(applicationContext,TestActivity::class.java)
-            startActivity(intent)
+            val exitIntent = Intent(applicationContext,TestActivity::class.java)
+            startActivity(exitIntent)
+        }
+    }
+    private fun selectAnswer(answer : Boolean){
+        when(answer){
+            true -> {
+                binding.questionAnswerSelectedOIv.visibility = View.VISIBLE
+                binding.questionAnswerNotselectedOIv.visibility = View.GONE
+                binding.questionAnswerSelectedXIv.visibility = View.GONE
+                binding.questionAnswerNotselectedXIv.visibility = View.VISIBLE
+            }
+            false -> {
+                binding.questionAnswerNotselectedXIv.visibility = View.GONE
+                binding.questionAnswerSelectedXIv.visibility = View.VISIBLE
+                binding.questionAnswerSelectedOIv.visibility = View.GONE
+                binding.questionAnswerNotselectedOIv.visibility = View.VISIBLE
+            }
         }
     }
 }

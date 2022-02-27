@@ -2,24 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_writing"
-        android:icon="@drawable/ic_menu_writing"
-        android:title=" " />
+        android:icon="@drawable/navigation_write_selector"
+        android:title="@string/blank" />
     <item
         android:id="@+id/action_test"
         android:icon="@drawable/ic_menu_test"
-        android:title=" " />
+        android:title="@string/blank" />
     <item
         android:id="@+id/action_home"
         android:icon="@drawable/ic_menu_home"
-        android:title=" "
+        android:title="@string/blank"
         />
     <item
         android:id="@+id/action_search"
-        android:icon="@drawable/ic_menu_search"
-        android:title="" />
+        android:icon="@drawable/navigation_search_selector"
+        android:title="@string/blank" />
     <item
         android:id="@+id/action_myPage"
-        android:icon="@drawable/ic_menu_my"
-        android:title="" />
+        android:icon="@drawable/navigation_my_selector"
+        android:title="@string/blank" />
 
 </menu>

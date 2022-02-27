@@ -1,11 +1,6 @@
 package com.umc.history
 
-import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
-import com.google.gson.internal.Streams.parse
-import okhttp3.MediaType
+
 import okhttp3.MediaType.parse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

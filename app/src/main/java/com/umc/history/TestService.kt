@@ -1,6 +1,5 @@
 package com.umc.history
 
-import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -9,6 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class TestService {
     private lateinit var testView : TestView
+
     fun setTestView(testView: TestView){
         this.testView = testView
     }
@@ -22,12 +22,13 @@ class TestService {
                 response: Response<GetTestResponse>
             ) {
                 val resp = response.body()
-                testView.onGetTestSuccess(resp!!.body)
-                Log.d("test","${resp.body}")
+                when(response.code()){
+                    200 -> testView.onGetTestSuccess(resp!!.body)
+                    else -> testView.onGetTestFailure()
+                }
             }
-
             override fun onFailure(call: Call<GetTestResponse>, t: Throwable) {
-
+                testView.onGetTestFailure()
             }
         })
     }

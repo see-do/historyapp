@@ -44,15 +44,18 @@ class CommentService {
         val commentService = retrofit.create(CommentInterface::class.java)
         commentService.postComment("Bearer $token", postId, comment).enqueue(object : Callback<StoryResponse> {
             override fun onResponse(call: Call<StoryResponse>, response: Response<StoryResponse>) {
-                if(response.code() == 200 || response.code() == 202){
-                    postCommentView.postCommentSuccess()
-                } else {
-                    postCommentView.postCommentFailure()
+                when(response.code()){
+                    200 or 202 -> postCommentView.postCommentSuccess()
+                    else -> postCommentView.postCommentFailure()
                 }
             }
             override fun onFailure(call: Call<StoryResponse>, t: Throwable) {
                 postCommentView.postCommentFailure()
             }
         })
+    }
+
+    fun deleteComment(){
+
     }
 }
