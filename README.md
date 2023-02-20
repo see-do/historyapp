@@ -1,4 +1,9 @@
 # HiStory Introduction
+<A href = "https://bit.ly/3xYqn07"> Notion Page </A> | <A href = "https://play.google.com/store/apps/details?id=com.umc.history&pli=1"> Google Play Store </A>
+<br>
+
+<img src="https://user-images.githubusercontent.com/90203250/216499152-1c8a667c-ef09-403a-82ad-1d7723173802.png" width="600" height="500">
+<br>
 <img width="722" alt="history 런칭" src="https://user-images.githubusercontent.com/97431902/211139998-5a5f95b4-c8de-421e-ab7b-dec39d88fa0f.PNG">
 
 UMC 1기 앱런칭 프로젝트로 런칭까지 진행한 프로젝트입니다.
@@ -23,10 +28,7 @@ PM이(서경덕) 300여개의 중고등학교에서 강연을 다니며 학생�
 * 우규리 
 
 # Tools
-### Communication
-* Figma : 디자인 에셋 공유
-* Noiton : 멤버간 진행상황, 일정 공유
-* Slack : 회의 진행, 각종 이슈에 대한 소통
+
 ### Android
 * Android Studio
   * Glide(4.11.0)
@@ -34,3 +36,16 @@ PM이(서경덕) 300여개의 중고등학교에서 강연을 다니며 학생�
   * Retrofit2(2.9.0)
   * ViewBinding
 * Postman : API 테스트
+
+### Server
+* Spring boot version 2.6.2
+* Gradle 
+* Spring boot Security jwt
+* Spring boot JPA data
+* AWS EC2, RDS Mysql, S3
+* Docker, Github Action
+
+### Communication
+* Figma : 디자인 에셋 공유
+* Noiton : 멤버간 진행상황, 일정 공유
+* Slack : 회의 진행, 각종 이슈에 대한 소통
